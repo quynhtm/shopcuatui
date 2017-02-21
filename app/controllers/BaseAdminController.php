@@ -52,6 +52,17 @@ class BaseAdminController extends BaseController
             ),
         );
 
+        /*Quản lý hệ thống bán hàng*/
+        $menu[] = array(
+            'name'=>'Thông kê bán hàng',
+            'link'=>'javascript:void(0)',
+            'icon'=>'fa fa-bar-chart',
+            'arr_link_sub'=>array('admin.managerOrderView'),
+            'sub'=>array(
+                array('name'=>'Thông kê bán hàng', 'RouteName'=>'admin.managerOrderView', 'icon'=>'fa fa-bar-chart icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'managerOrder_full'),
+            ),
+        );
+
         $menu[] = array(
             'name'=>'Setting site',
             'link'=>'javascript:void(0)',

@@ -95,6 +95,10 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('typeSetting/deleteTypeSetting', array('as' => 'admin.deltete_typeSetting','uses' => 'ActionSettingController@deleteTypeSetting'));//ajax
     Route::post('typeSetting/updateStatusTypeSetting', array('as' => 'admin.status_typeSetting','uses' => 'ActionSettingController@updateStatusTypeSetting'));//ajax
 
+    /*Quan Ly hệ thống đơn hàng*/
+    Route::get('managerOrder/view',array('as' => 'admin.managerOrderView','uses' => 'ManagerOrderController@view'));
+    Route::post('managerOrder/deleteOrder', array('as' => 'admin.deleteOrder','uses' => 'ManagerOrderController@deleteOrder'));
+
     /*Quản lý Department*/
     Route::get('department/view',array('as' => 'admin.department_list','uses' => 'DepartmentController@view'));
     Route::get('department/getDepartment/{id?}', array('as' => 'admin.department_edit','uses' => 'DepartmentController@getDepartment'))->where('id', '[0-9]+');

@@ -148,6 +148,12 @@ class CGlobal{
     const ITEMS_BLOCK = 0;
     const ITEMS_NOT_BLOCK = 1;
 
+    //order
+    const ORDER_STATUS_DELETE = 0;
+    const ORDER_STATUS_NEW = 1;
+    const ORDER_STATUS_CHECKED = 2;
+    const ORDER_STATUS_SUCCESS = 3;
+    const ORDER_STATUS_CANCEL = 4;
 
     //banner
     const BANNER_NOT_RUN_TIME = 0;
