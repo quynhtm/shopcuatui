@@ -26,7 +26,6 @@ class SiteHomeController extends BaseSiteController{
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
     	
     	$this->header();
-        $this->slider();
         $this->layout->content = View::make('site.SiteLayouts.Home');
         $this->footer();
     }
@@ -34,7 +33,6 @@ class SiteHomeController extends BaseSiteController{
 		return Redirect::route('site.home');
 	}
     public function pageContact(){
-        return Redirect::route('site.home');
         //Meta title
         $meta_title='';
         $meta_keywords='';
@@ -97,9 +95,6 @@ class SiteHomeController extends BaseSiteController{
         }
 
         $this->header();
-        $this->slider();
-        $this->left();
-        $this->right();
         $this->layout->content = View::make('site.SiteLayouts.pageContact')
                                 ->with('info', $info)
                                 ->with('messages', $messages);

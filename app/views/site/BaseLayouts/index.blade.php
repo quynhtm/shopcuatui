@@ -33,32 +33,13 @@
 		{{$header}}
 	</div>
 	@endif
-	 
 	<div id="content">
 		<div class="line-content">
-			<div class="container">
-				<div class="wraps">
-					@if(isset($slider))
-						{{$slider}}
-					@endif
-					<div class="line">
-						@if(isset($left))
-							{{$left}}
-						@endif
-
-						@if(isset($content))
-							{{$content}}
-						@endif
-
-						@if(isset($right))
-							{{$right}}
-						@endif
-					</div>
-				</div>
-			</div>
+			@if(isset($content))
+				{{$content}}
+			@endif
 		</div>
 	</div>
-	
 	@if(isset($footer))
 	<div id="footer">
 		{{$footer}}
