@@ -1,38 +1,31 @@
-<div class="head-banner">
+<div id="top">
 	<div class="container">
-		<div class="flash">
-	        @if(sizeof($arrBannerHead) > 0)
-				<?php $i=0; ?>
-				@foreach($arrBannerHead as $item)
-					<?php $i++; ?>
-					@if($i == 1)
-						@if($item->banner_image != '')
-							<a class="banner-img" @if($item->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($item->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif href="@if($item->banner_link != '') {{$item->banner_link}} @else javascript:void(0) @endif" title="{{$item->banner_name}}">
-								<img src="{{ThumbImg::thumbImageBannerNormal($item->banner_id,$item->banner_parent_id, $item->banner_image, CGlobal::sizeImage_1000,CGlobal::sizeImage_200, $item->banner_name,true,true)}}" alt="{{$item->banner_name}}" />
-							</a>
-						@endif
-					@endif
-				@endforeach
-			@endif
-	    </div>
-		<div class="bg-menu">
-			<div class="container">
-				<ul class="menu">
-					<li><a class="aline" href="{{URL::route('site.home')}}">Trang chủ</a></li>
-					@if(!empty($menuCategoriessAll))
-                        <?php $i=1; ?>
-						@foreach($menuCategoriessAll as $cat)
-							@if($i <= 7)
-								@if($cat['category_show_top'] == CGlobal::status_show)
-                                    <?php $i++; ?>
-									<li><a class="aline @if(isset($catid) && $catid == $cat['category_id']) act @endif" href="{{FunctionLib::buildLinkCategory($cat['category_id'], $cat['category_name'])}}" title="{{$cat['category_name']}}">{{$cat['category_name']}}</a></li>
-								@endif
-							@endif
-						@endforeach
-					@endif
-					<li><a href="{{URL::route('site.pageContact')}}" title="Liên hệ">Liên hệ</a></li>
-				</ul>
-			</div>
-		</div>
+		<ul class="ul">
+			<li><i class="bg icon-cskh"></i> <span>CSKH: </span><b>0904 332 781</b></li>
+			<li><i class="bg icon-yahoo"></i><span>Hỗ trợ trực tuyến</span></li>
+			<li class="nomar-r">
+				<a href="" class="bg icon-fb" target="_blank"></a>
+				<a href="" class="bg icon-yo" target="_blank"></a>
+				<a href="" class="bg icon-tw" target="_blank"></a>
+				<a href="" class="bg icon-go" target="_blank"></a>
+			</li>
+			<li class="list-hot-news-top"><i class="bg icon-news"></i><a href="">Tin tức nổi bật</a></li>
+		</ul>
 	</div>
+</div>
+<div id="middle">
+    <div class="container">
+        <a href="/" id="logo"><img src="http://www.ankhang.vn//media/banner/logo_Ankhang-sieu-thi-may-tinh-chinh-hang.png" alt="Ankhang Siêu thị máy tính chính hãng"></a>
+        <div class="banner-header">
+            <a href="" target="_blank" rel="nofollow">
+                <img src="http://www.ankhang.vn/media/banner/banner_9a115815.png" alt="" border="0" height="80" width="720">
+            </a>
+        </div>
+        <di class="header-right">
+            <div class="login-header">
+                <i class="bg icon-user"></i><a href="" rel="nofollow">Tài khoản</a>
+            </div>
+            <div id="cart"><i class="bg icon-cart"></i> Giỏ hàng (<span class="count-shopping-cart-store">0</span>)</div>
+        </di>
+    </div>
 </div>
