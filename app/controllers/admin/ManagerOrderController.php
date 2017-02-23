@@ -50,6 +50,7 @@ class ManagerOrderController extends BaseAdminController
         ///$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
         $data = Order::searchByCondition($search, $limit, $offset,$total);
+        FunctionLib::debug($data);
         $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
 
         $arrStatusOrder = array(-1 => '---- Trạng thái đơn hàng ----',

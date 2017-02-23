@@ -18,6 +18,10 @@ class Order extends Eloquent
         'order_customer_name', 'order_customer_phone', 'order_customer_email', 'order_customer_address', 'order_customer_note',
         'order_quality_buy', 'order_user_shop_id', 'order_user_shop_name', 'order_status', 'order_time');
 
+    public function orderItem(){
+        return $this->hasMany('OrderItem','order_id');
+    }
+
     public static function getByID($id) {
         $admin = Order::where('order_id', $id)->first();
         return $admin;
@@ -52,44 +56,60 @@ class Order extends Eloquent
     }
 
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
-
         try{
-            $query = Order::where('order_id','>',0);
+            $tbl_OrderItem = with(new OrderItem())->getTable();
+            $tbl_Order = with(new Order())->getTable();
+            $query = DB::table($tbl_Order);
+            //$query->join($tbl_OrderItem,$tbl_Order . '.order_id', '=', $tbl_OrderItem . '.order_id');
+
             if (isset($dataSearch['order_product_name']) && $dataSearch['order_product_name'] != '') {
-                $query->where('order_product_name','LIKE', '%' . $dataSearch['order_product_name'] . '%');
+                $query->where($tbl_Order.'.order_product_name','LIKE', '%' . $dataSearch['order_product_name'] . '%');
             }
             if (isset($dataSearch['order_customer_name']) && $dataSearch['order_customer_name'] != '') {
-                $query->where('order_customer_name','LIKE', '%' . $dataSearch['order_customer_name'] . '%');
+                $query->where($tbl_Order.'.order_customer_name','LIKE', '%' . $dataSearch['order_customer_name'] . '%');
             }
             if (isset($dataSearch['order_customer_phone']) && $dataSearch['order_customer_phone'] != '') {
-                $query->where('order_customer_phone','LIKE', '%' . $dataSearch['order_customer_phone'] . '%');
+                $query->where($tbl_Order.'.order_customer_phone','LIKE', '%' . $dataSearch['order_customer_phone'] . '%');
             }
             if (isset($dataSearch['order_customer_email']) && $dataSearch['order_customer_email'] != '') {
-                $query->where('order_customer_email','LIKE', '%' . $dataSearch['order_customer_email'] . '%');
+                $query->where($tbl_Order.'.order_customer_email','LIKE', '%' . $dataSearch['order_customer_email'] . '%');
             }
             if (isset($dataSearch['time_start_time']) && $dataSearch['time_start_time'] != '') {
-                $query->where('order_time','>=' . strtotime($dataSearch['time_start_time']));
+                $query->where($tbl_Order.'.order_time','>=' . strtotime($dataSearch['time_start_time']));
             }
             if (isset($dataSearch['time_end_time']) && $dataSearch['time_end_time'] != '') {
-                $query->where('order_time','<=' . strtotime($dataSearch['time_end_time']));
+                $query->where($tbl_Order.'.order_time','<=' . strtotime($dataSearch['time_end_time']));
             }
             if (isset($dataSearch['order_status']) && $dataSearch['order_status'] != -1) {
-                $query->where('order_status', $dataSearch['order_status']);
+                $query->where($tbl_Order.'.order_status', $dataSearch['order_status']);
             }
             if (isset($dataSearch['order_user_shop_id']) && $dataSearch['order_user_shop_id'] != -1) {
-                $query->where('order_user_shop_id', $dataSearch['order_user_shop_id']);
+                $query->where($tbl_Order.'.order_user_shop_id', $dataSearch['order_user_shop_id']);
             }
-            $total = $query->count();
-            $query->orderBy('order_id', 'desc');
+            if (isset($dataSearch['order_user_shop_id']) && $dataSearch['order_user_shop_id'] != -1) {
+                $query->where($tbl_Order.'.order_user_shop_id', $dataSearch['order_user_shop_id']);
+            }
 
+            $total = $query->count();
+            $query->orderBy($tbl_Order.'.order_id', 'desc');
+
+            $fields = array(
+                $tbl_Order.'.*',
+            );
             //get field can lay du lieu
-            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): $fields;
             if(!empty($fields)){
                 $result = $query->take($limit)->skip($offset)->get($fields);
             }else{
                 $result = $query->take($limit)->skip($offset)->get();
             }
 
+            if($result){
+                foreach($result as &$val){
+                    //$val->orderItem;
+                    $val = OrderItem::find(1)->orderItem;
+                }
+            }
             return $result;
 
         }catch (PDOException $e){

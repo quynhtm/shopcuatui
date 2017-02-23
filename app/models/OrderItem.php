@@ -19,6 +19,11 @@ class OrderItem extends Eloquent
         'order_item_status','order_item_time_creater',
         'order_item_pay', 'order_item_time_pay');
 
+    public function order()
+    {
+        return $this->belongsTo('Order');
+    }
+
     public static function getByID($id) {
         $admin = Order::where('order_item_id', $id)->first();
         return $admin;
