@@ -38,6 +38,21 @@ class Order extends Eloquent
         return array();
     }
 
+    public static function getOrderById($id){
+        try {
+            $orders = Order::find($id);
+            if ($orders) {
+                $orders->orderitem;
+                return $orders;
+            } else {
+                return false;
+            }
+        } catch (\PDOException $e) {
+            throw new PDOException();
+            return false;
+        }
+    }
+
     public static function countOrderOfShopId($shop_id) {
         if($shop_id > 0){
             return $total_order = Order::where('order_user_shop_id', $shop_id)
@@ -60,7 +75,7 @@ class Order extends Eloquent
             $tbl_OrderItem = with(new OrderItem())->getTable();
             $tbl_Order = with(new Order())->getTable();
             $query = DB::table($tbl_Order);
-            //$query->join($tbl_OrderItem,$tbl_Order . '.order_id', '=', $tbl_OrderItem . '.order_id');
+            $query->join($tbl_OrderItem,$tbl_Order . '.order_id', '=', $tbl_OrderItem . '.order_id');
 
             if (isset($dataSearch['order_product_name']) && $dataSearch['order_product_name'] != '') {
                 $query->where($tbl_Order.'.order_product_name','LIKE', '%' . $dataSearch['order_product_name'] . '%');
@@ -92,10 +107,12 @@ class Order extends Eloquent
 
             $total = $query->count();
             $query->orderBy($tbl_Order.'.order_id', 'desc');
+            $query->groupBy($tbl_Order.'.order_id');
 
             $fields = array(
                 $tbl_Order.'.*',
             );
+
             //get field can lay du lieu
             $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): $fields;
             if(!empty($fields)){
@@ -103,15 +120,7 @@ class Order extends Eloquent
             }else{
                 $result = $query->take($limit)->skip($offset)->get();
             }
-
-            if($result){
-                foreach($result as &$val){
-                    //$val->orderItem;
-                    $val = OrderItem::find(1)->orderItem;
-                }
-            }
             return $result;
-
         }catch (PDOException $e){
             throw new PDOException();
         }
