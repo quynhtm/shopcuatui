@@ -74,7 +74,7 @@
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
-                            <th width="30%">Thông tin sản phẩm</th>
+                            <th width="30%">Thông tin đơn hàng</th>
                             <th width="30%" class="text-left">Thông tin khách hàng</th>
                             <th width="8%" class="text-center">Ngày đặt</th>
                             <th width="12%" class="text-center">Tình trạng ĐH</th>
@@ -84,12 +84,12 @@
                         @foreach ($data as $key => $item)
                             <tr>
                                 <td class="text-center text-middle">{{ $stt + $key+1 }}</td>
-                                <td>[<b>{{ $item->order_product_id }}</b>]
-                                    <a href="#" target="_blank" title="Chi tiết sản phẩm">
-                                         {{ $item->order_product_name }}
-                                    </a>
-                                    <br/>Giá bán: <b class="red">{{ FunctionLib::numberFormat($item->order_product_price_sell) }} đ</b>
-                                    <br/>SL: <b>{{ $item->order_quality_buy }}</b> sản phẩm
+                                <td>
+                                    Mã ĐH: {{ $item->order_id }}
+                                    <br/>Mã SP: {{ $item->order_product_id }}
+                                    <br/>Tổng tiền: <b class="red">{{ FunctionLib::numberFormat($item->order_total_money) }} đ</b>
+                                    <br/>Phí ship: <b class="red">{{ FunctionLib::numberFormat($item->order_money_ship) }} đ</b>
+                                    <br/>Tổng SL: <b>{{ $item->order_total_buy }}</b> sản phẩm
                                 </td>
                                 <td>
                                     @if($item->order_customer_name != '')Tên KH: <b>{{ $item->order_customer_name }}</b><br/>@endif
@@ -98,7 +98,7 @@
                                     @if($item->order_customer_address != '')Địa chỉ: {{ $item->order_customer_address }}<br/>@endif
                                     @if($item->order_customer_note != '')<span class="red">**Ghi chú: {{ $item->order_customer_note }}</span>@endif
                                 </td>
-                                <td class="text-center text-middle">{{ date ('d-m-Y H:i:s',$item->order_time) }}</td>
+                                <td class="text-center text-middle">{{ date ('d-m-Y H:i:s',$item->order_time_creater) }}</td>
                                 <td class="text-center text-middle">
                                     @if(isset($arrStatus[$item->order_status])){{$arrStatus[$item->order_status]}}@else --- @endif
                                     @if($is_root)
