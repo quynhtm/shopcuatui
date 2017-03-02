@@ -117,6 +117,14 @@ class CGlobal{
         self::NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
     );
 
+    const TYPE_LANGUAGE_VIET = 1;
+    const TYPE_LANGUAGE_LAO = 2;
+    const TYPE_LANGUAGE_ENG = 3;
+    public static $arrLanguage= array(
+        self::TYPE_LANGUAGE_VIET => 'Viet Nam',
+        self::TYPE_LANGUAGE_LAO => 'Lao',
+        self::TYPE_LANGUAGE_ENG => 'English',
+    );
 
 
     const IMAGE_ERROR = 133;

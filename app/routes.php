@@ -95,6 +95,14 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('typeSetting/deleteTypeSetting', array('as' => 'admin.deltete_typeSetting','uses' => 'ActionSettingController@deleteTypeSetting'));//ajax
     Route::post('typeSetting/updateStatusTypeSetting', array('as' => 'admin.status_typeSetting','uses' => 'ActionSettingController@updateStatusTypeSetting'));//ajax
 
+    ///*Quản lý Size image*/
+    Route::any('sizeImage/view',array('as' => 'admin.sizeImageView','uses' => 'SizeImageController@view'));
+    Route::get('sizeImage/edit/{id?}', array('as' => 'admin.sizeImageEdit','uses' => 'SizeImageController@getItem'))->where('id', '[0-9]+');
+    Route::post('sizeImage/edit/{id?}', array('as' => 'admin.sizeImageEdit','uses' => 'SizeImageController@postItem'))->where('id', '[0-9]+');
+    Route::get('sizeImage/copy/{id?}', array('as' => 'admin.sizeImageCopy','uses' => 'SizeImageController@getItem'))->where('id', '[0-9]+');
+    Route::post('sizeImage/copy/{id?}', array('as' => 'admin.sizeImageCopy','uses' => 'SizeImageController@postItem'))->where('id', '[0-9]+');
+    Route::post('sizeImage/deleteSizeImage', array('as' => 'admin.deleteSizeImage','uses' => 'SizeImageController@deleteSizeImage'));//ajax
+
     /*Quan Ly hệ thống đơn hàng*/
     Route::get('managerOrder/view',array('as' => 'admin.managerOrderView','uses' => 'ManagerOrderController@view'));
     Route::post('managerOrder/deleteOrder', array('as' => 'admin.deleteOrder','uses' => 'ManagerOrderController@deleteOrder'));
@@ -165,6 +173,18 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('banner/copy/{id?}', array('as' => 'admin.bannerCopy','uses' => 'BannerController@getBanner'))->where('id', '[0-9]+');
     Route::post('banner/copy/{id?}', array('as' => 'admin.bannerCopy','uses' => 'BannerController@postBanner'))->where('id', '[0-9]+');
     Route::post('banner/deleteBanner', array('as' => 'admin.deleteBanner','uses' => 'BannerController@deleteBanner'));//ajax
+
+    /*Quản lý Video*/
+    Route::any('video/view',array('as' => 'admin.videoView','uses' => 'VideoController@view'));
+    Route::get('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@getItem'))->where('id', '[0-9]+');
+    Route::post('video/edit/{id?}', array('as' => 'admin.videoEdit','uses' => 'VideoController@postItem'))->where('id', '[0-9]+');
+    Route::post('video/deleteVideo', array('as' => 'admin.deleteVideo','uses' => 'VideoController@deleteVideo'));//ajax
+
+    ///*Quản lý Thư viện ảnh*/
+    Route::any('libraryImage/view',array('as' => 'admin.libraryImageView','uses' => 'LibraryImageController@view'));
+    Route::get('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@getItem'))->where('id', '[0-9]+');
+    Route::post('libraryImage/edit/{id?}', array('as' => 'admin.libraryImageEdit','uses' => 'LibraryImageController@postItem'))->where('id', '[0-9]+');
+    Route::post('libraryImage/deleteLibraryImage', array('as' => 'admin.deleteLibraryImage','uses' => 'LibraryImageController@deleteLibraryImage'));//ajax
 
     //Thong tin cau hinh chung: hotline, thong tin chan trang...
     Route::get('info/view', array('as' => 'admin.info','uses' => 'InfoController@listView'));

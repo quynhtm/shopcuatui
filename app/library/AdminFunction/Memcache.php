@@ -41,6 +41,10 @@ class Memcache{
     //tin tức
     const CACHE_NEW_ID    = 'cache_news_id_';
 
+    //size image
+    const CACHE_SIZE_IMAGE_ID    = 'cache_size_image_id_';
+    const CACHE_SIZE_IMAGE    = 'cache_list_size_image';
+
     //share
     const CACHE_SHARE_OBJECT_ID    = 'cache_share_object_id_';
 
@@ -48,12 +52,23 @@ class Memcache{
     const CACHE_BANNER_ID    = 'cache_banner_id_';
     const CACHE_BANNER_ADVANCED    = 'cache_banner_advanced';
 
+    //video
+    const CACHE_VIDEO_ID    = 'cache_video_id_';
+
+    //thu vien anh
+    const CACHE_IMAGE_ID    = 'cache_image_id_';
+
     //Tinh thanh
     const CACHE_ALL_PROVICE = 'cache_all_provice';
     const CACHE_PROVICE_ID = 'cache_provice_id_';
-    //Thong tin co ban: hotline, dia chi chan trang...
+    //Info
     const CACHE_INFO_ID    = 'cache_info_id_';
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
+    const CACHE_INFO_TYPEINFO_TYPELANGUAGE    = 'cache_info_typeinfo_typelanguage_';
+    //Lang
+    const CACHE_LANG_ID    = 'cache_lang_id_';
+    const CACHE_LANG_KEYWORD_LANGUAGE    = 'cache_info_keyword_language_';
+
     //Thung rac
     const CACHE_TRASH_ID    = 'cache_trash_id_';
 
