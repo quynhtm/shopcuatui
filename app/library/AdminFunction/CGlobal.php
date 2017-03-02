@@ -127,7 +127,18 @@ class CGlobal{
     const FOLDER_INFORSEO = 'inforSeo';
 	
 	const FOLDER_INFO = 'info';
+
     //shop
+    const SHOP_FREE = 1;
+    const SHOP_NOMAL = 2;
+    const SHOP_VIP = 3;
+    const SHOP_ONLINE = 1;
+    const SHOP_OFFLINE = 0;
+    const SHOP_NUMBER_PRODUCT_FREE = 5;
+    const SHOP_NUMBER_PRODUCT_NOMAL = 100;
+    const SHOP_NUMBER_PRODUCT_VIP = 5000;
+
+    //customer
     const CUSTOMER_FREE = 1;
     const CUSTOMER_NOMAL = 2;
     const CUSTOMER_VIP = 3;
@@ -140,13 +151,16 @@ class CGlobal{
     const ITEMS_TYPE_ACTION_1 = 1; //1: Cần bán/ Tuyển sinh,
     const ITEMS_TYPE_ACTION_2 = 2; //2:Cần mua/ Tuyển dụng
 
+    //product
     const TYPE_PRICE_NUMBER = 1;
     const TYPE_PRICE_CONTACT = 2;
-    const ITEMS_NOMAL = 1;
-    const ITEMS_HOT = 2;
-    const ITEMS_SELLOFF = 3;
-    const ITEMS_BLOCK = 0;
-    const ITEMS_NOT_BLOCK = 1;
+    const PRODUCT_NOMAL = 1;
+    const PRODUCT_HOT = 2;
+    const PRODUCT_SELLOFF = 3;
+    const PRODUCT_BLOCK = 0;
+    const PRODUCT_NOT_BLOCK = 1;
+    const PRODUCT_IS_SALE = 1;//con hàng
+    const PRODUCT_NOT_IS_SALE = 0;//het hàng
 
     //order
     const ORDER_STATUS_DELETE = 0;

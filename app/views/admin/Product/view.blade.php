@@ -140,7 +140,7 @@
                                         @endif
                                     @endif
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )
-                                        <a href="{{URL::route('admin.product_edit',array('id' => $item->product_id))}}" title="Sửa sản phẩm"><i class="fa fa-edit fa-2x"></i></a>
+                                        <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" title="Sửa sản phẩm"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     <span class="img_loading" id="img_loading_{{$item->product_id}}"></span>
                                 </td>

@@ -882,4 +882,17 @@ class FunctionLib {
             return "no";
         }
     }
+    /**
+     * @param int $pro_id
+     * @param string $pro_name
+     * @param string $cat_name
+     * @return string
+     */
+    static function buildLinkDetailProduct($pro_id = 0,$pro_name = 'sản phẩm',$cat_name = 'danh mục'){
+        return '#';
+        if($pro_id > 0){
+            return URL::route('site.detailProduct', array('cat'=>strtolower(FunctionLib::safe_title($cat_name)),'name'=>strtolower(FunctionLib::safe_title($pro_name)),'id'=>$pro_id));
+        }
+        return '#';
+    }
 }

@@ -31,7 +31,7 @@ class ProductController extends BaseAdminController
     public function __construct()
     {
         parent::__construct();
-        $this->arrShop = UserShop::getShopAll();
+        //$this->arrShop = UserShop::getShopAll();
         //Include style.
         FunctionLib::link_css(array(
             'lib/upload/cssUpload.css',

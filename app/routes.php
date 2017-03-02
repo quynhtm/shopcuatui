@@ -130,6 +130,19 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('customer/updateStatusCustomer', array('as' => 'admin.customerStatus','uses' => 'UserCustomerController@updateStatusCustomer'));//ajax
     Route::post('customer/setIsCustomer', array('as' => 'admin.setIsCustomer','uses' => 'UserCustomerController@setIsCustomer'));//ajax
 
+    //Quản lý nhà cung cấp
+    Route::get('provider/view',array('as' => 'admin.providerView','uses' => 'ProviderController@view'));
+    Route::get('provider/edit/{id?}', array('as' => 'admin.providerEdit','uses' => 'ProviderController@getProvider'))->where('id', '[0-9]+');
+    Route::post('provider/edit/{id?}', array('as' => 'admin.providerEdit','uses' => 'ProviderController@postProvider'))->where('id', '[0-9]+');
+    Route::post('provider/deleteProvider', array('as' => 'admin.deltete_provider','uses' => 'ProviderController@deleteProvider'));//ajax
+
+    /*Quản lý San Pham*/
+    Route::get('product/view',array('as' => 'admin.productView','uses' => 'ProductController@view'));
+    Route::get('product/productEdit/{id}', array('as' => 'admin.productEdit','uses' => 'ProductController@getProduct'))->where('id', '[0-9]+');
+    Route::post('product/productEdit/{id}', array('as' => 'admin.productEdit','uses' => 'ProductController@postProduct'))->where('id', '[0-9]+');
+    Route::post('product/setStastusBlockProduct', array('as' => 'admin.setStastusBlockProduct','uses' => 'ProductController@setStastusBlockProduct'));//ajax
+    Route::post('product/deleteMultiProduct', array('as' => 'admin.deleteMultiProduct','uses' => 'ProductController@deleteMultiProduct'));//ajax
+
     /*Quản lý tin đăng*/
     Route::get('items/view',array('as' => 'admin.itemsView','uses' => 'ItemsController@view'));
     Route::get('items/getItems/{id}', array('as' => 'admin.itemsEdit','uses' => 'ItemsController@getItems'))->where('id', '[0-9]+');
@@ -172,7 +185,7 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('contract/deleteContract', array('as' => 'admin.deleteContract','uses' => 'ContactController@deleteContact'));//ajax
 
     //Tinh thanh
-    Route::get('province/view', array('as' => 'admin.province','uses' => 'ProvinceController@listView'));
+    Route::get('province/view', array('as' => 'admin.provinceView','uses' => 'ProvinceController@listView'));
     Route::get('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@getItem'))->where('id', '[0-9]+');
     Route::post('province/edit/{id?}', array('as' => 'admin.provinceEdit','uses' => 'ProvinceController@postItem'))->where('id', '[0-9]+');
     Route::post('province/deleteProvince', array('as' => 'admin.deleteProvince','uses' => 'ProvinceController@deleteProvince'));//ajax

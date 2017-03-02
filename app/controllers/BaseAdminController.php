@@ -52,6 +52,28 @@ class BaseAdminController extends BaseController
             ),
         );
 
+        $menu[] = array(
+            'name'=>'Setting site',
+            'link'=>'javascript:void(0)',
+            'icon'=>'fa fa-cogs',
+            'arr_link_sub'=>array('admin.typeSettingView'),
+            'sub'=>array(
+                array('name'=>'Type Setting', 'RouteName'=>'admin.typeSettingView', 'icon'=>'fa fa-wrench icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'setting_site_full'),
+            ),
+        );
+
+        $menu[] = array(
+            'name'=>'QL Sản phẩm',
+            'link'=>'javascript:void(0)',
+            'icon'=>'fa fa-gift',
+            'arr_link_sub'=>array('admin.productView','admin.providerView',),
+            'sub'=>array(
+                array('name'=>'Sản phẩm', 'RouteName'=>'admin.productView', 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1, 'showMenu'=>1,'permission'=>'product_full'),
+                array('name'=>'Danh mục sản phẩm', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'category_full'),
+                array('name'=>'QL nhà cung cấp', 'RouteName'=>'admin.providerView', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'provider_full'),
+            ),
+        );
+
         /*Quản lý hệ thống bán hàng*/
         $menu[] = array(
             'name'=>'Thông kê bán hàng',
@@ -64,16 +86,6 @@ class BaseAdminController extends BaseController
         );
 
         $menu[] = array(
-            'name'=>'Setting site',
-            'link'=>'javascript:void(0)',
-            'icon'=>'fa fa-cogs',
-            'arr_link_sub'=>array('admin.typeSettingView'),
-            'sub'=>array(
-                array('name'=>'Type Setting', 'RouteName'=>'admin.typeSettingView', 'icon'=>'fa fa-wrench icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'setting_site_full'),
-            ),
-        );
-
-        $menu[] = array(
             'name'=>'QL site',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-location-arrow',
@@ -81,7 +93,6 @@ class BaseAdminController extends BaseController
             'sub'=>array(
                 array('name'=>'Liên hệ quản trị', 'RouteName'=>'admin.contract', 'icon'=>'fa fa-envelope-o icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'contract_view'),
                 array('name'=>'Thông tin chung', 'RouteName'=>'admin.info', 'icon'=>'fa fa-cogs icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'abc'),
-                //array('name'=>'Thùng rác', 'RouteName'=>'admin.trash', 'icon'=>'fa fa-trash icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'abc', 'clear'=>1),
             ),
         );
 
@@ -100,11 +111,11 @@ class BaseAdminController extends BaseController
             'name'=>'QL nội dung',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-book',
-            'arr_link_sub'=>array('admin.newsView','admin.bannerView','admin.viewClickShare',),
+            'arr_link_sub'=>array('admin.newsView','admin.bannerView','admin.provinceView',),
             'sub'=>array(
                 array('name'=>'Tin tức', 'RouteName'=>'admin.newsView', 'icon'=>'fa fa-book icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'news_full'),
                 array('name'=>'Banner quảng cáo', 'RouteName'=>'admin.bannerView', 'icon'=>'fa fa-globe icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'banner_full'),
-                //array('name'=>'Lượt Share', 'RouteName'=>'admin.viewClickShare', 'icon'=>'fa fa-thumbs-o-up icon-4x', 'showcontent'=>1, 'showMenu'=>1,'permission'=>'toolsCommon_full'),
+                array('name'=>'Tỉnh/Thành', 'RouteName'=>'admin.provinceView', 'icon'=>'fa fa-map-marker icon-4x', 'showcontent'=>1, 'permission'=>'province_full'),
             ),
         );
         return $menu;
