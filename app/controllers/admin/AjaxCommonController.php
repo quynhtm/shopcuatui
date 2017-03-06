@@ -172,24 +172,59 @@ class AjaxCommonController extends BaseSiteController
         $key = trim(Request::get('key',''));
         $aryData = array();
         $aryData['intIsOK'] = -1;
-       	
+
         if($item_id > 0 && $nameImage != '' && $key != ''){
             switch( $type ){
                 case 1:
-                	//img news
-                	$inforNews = News::getNewByID($item_id);
+                    //img news
+                    $inforNews = News::getNewByID($item_id);
+                    if(sizeof($inforNews) >0){
+                        $arrImagOther = unserialize($inforNews->news_image_other);
+                        if(!empty($arrImagOther)){
+                            foreach($arrImagOther as $k=>$v){
+                                if($v == $nameImage){
+                                    unset($arrImagOther[$k]);
+                                    //xoa anh upload
+                                    FunctionLib::deleteFileUpload($nameImage,$item_id,CGlobal::FOLDER_NEWS);
+
+                                    //xóa anh thumb
+                                    $arrSizeThumb = CGlobal::$arrSizeImage;
+                                    foreach($arrSizeThumb as $k=>$size){
+                                        $sizeThumb = $size['w'].'x'.$size['h'];
+                                        FunctionLib::deleteFileThumb($nameImage,$item_id,CGlobal::FOLDER_NEWS,$sizeThumb);
+                                    }
+                                }
+                            }
+                        }
+                        $proUpdate['news_image_other'] = serialize($arrImagOther);
+                        News::updateData($item_id,$proUpdate);
+                    }
+                    $aryData['intIsOK'] = 1;
+                    break;
+                case 5:
+                	//img thu vien anh
+                	$inforNews = LibraryImage::getById($item_id);
                 	if(sizeof($inforNews) >0){
-                		$arrImagOther = unserialize($inforNews->news_image_other);
-                		if(!empty($arrImagOther)){
-                			foreach($arrImagOther as $k=>$v){
-                				if($v == $nameImage){
-                					unset($arrImagOther[$k]);
-                				}
-                			}
-                		}
-                		$proUpdate['news_image_other'] = serialize($arrImagOther);
-                		News::updateData($item_id,$proUpdate);
-                	}
+                        $arrImagOther = unserialize($inforNews->image_image_other);
+                        if(!empty($arrImagOther)){
+                            foreach($arrImagOther as $k=>$v){
+                                if($v == $nameImage){
+                                    unset($arrImagOther[$k]);
+                                    //xoa anh upload
+                                    FunctionLib::deleteFileUpload($nameImage,$item_id,CGlobal::FOLDER_LIBRARY_IMAGE);
+
+                                    //xóa anh thumb
+                                    $arrSizeThumb = CGlobal::$arrSizeImage;
+                                    foreach($arrSizeThumb as $k=>$size){
+                                        $sizeThumb = $size['w'].'x'.$size['h'];
+                                        FunctionLib::deleteFileThumb($nameImage,$item_id,CGlobal::FOLDER_LIBRARY_IMAGE,$sizeThumb);
+                                    }
+                                }
+                            }
+                        }
+                        $proUpdate['image_image_other'] = serialize($arrImagOther);
+                        LibraryImage::updateData($item_id,$proUpdate);
+                    }
                 	$aryData['intIsOK'] = 1;
                 	break;
                 case 3 ://xoa anh banner
@@ -224,7 +259,7 @@ class AjaxCommonController extends BaseSiteController
                             }
                         }
                         //End Remove Img
-                         $aryData['intIsOK'] = 1;
+                        $aryData['intIsOK'] = 1;
                     }
                     break;
                 default:
