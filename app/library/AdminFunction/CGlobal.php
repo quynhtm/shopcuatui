@@ -133,7 +133,8 @@ class CGlobal{
     const FOLDER_PRODUCT = 'product';
     const FOLDER_CATEGORY = 'category';
     const FOLDER_INFORSEO = 'inforSeo';
-	
+    const FOLDER_LIBRARY_IMAGE = 'libraryImage';
+
 	const FOLDER_INFO = 'info';
 
     //shop
