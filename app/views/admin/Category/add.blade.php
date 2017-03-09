@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.category_list')}}"> Danh sách danh mục</a></li>
+            <li><a href="{{URL::route('admin.categoryView',array('category_type'=>$category_type))}}"> Danh sách danh mục</a></li>
             <li class="active">@if($id > 0)Cập nhật danh mục @else Tạo mới danh mục @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
@@ -33,17 +33,19 @@
                     <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
-                            <label for="name" class="control-label">Thuộc Khoa - trung tâm</label>
-                            <select name="category_depart_id" id="category_depart_id" class="form-control input-sm">
-                                {{$optionCategoryDepart}}
+                            <label for="name" class="control-label">Loại danh mục</label>
+                            <select name="category_type" id="category_type" class="form-control input-sm" readonly>
+                                {{$optionTypeCategory}}
                             </select>
                         </div>
                     </div>
+
                     <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
-                            <label for="name" class="control-label">Danh mục cha</label>
+                            <label for="name" class="control-label">Thuộc danh mục cha</label>
                             <select name="category_parent_id" id="category_parent_id" class="form-control input-sm">
+                                <option value="0">--- Chọn danh mục cha ---</option>
                                 {{$optionCategoryParent}}
                             </select>
                         </div>
@@ -67,52 +69,19 @@
 
                     <div class="clearfix"></div>
                     <div class="form-group col-sm-12 text-left">
-                        <a class="btn btn-warning" href="{{URL::route('admin.category_list')}}"><i class="fa fa-reply"></i> Trở lại</a>
+                        <a class="btn btn-warning" href="{{URL::route('admin.categoryView')}}"><i class="fa fa-reply"></i> Trở lại</a>
                         <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
                     </div>
                     <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 </div>
 
                 <div style="float: left; width: 50%">
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="display: none">
                         <div class="form-group">
                             <label for="name" class="control-label">Hiển thị menu header</label>
                             <select name="category_show_top" id="category_show_top" class="form-control input-sm">
                                 @foreach ($arrShowHide as $key_top => $category_show_top)
                                     <option value="{{$key_top}}" @if(isset($data['category_show_top']) && $data['category_show_top'] == $key_top) selected @endif>{{$category_show_top}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Hiển thị menu bên trái</label>
-                            <select name="category_show_left" id="category_show_left" class="form-control input-sm">
-                                @foreach ($arrShowHide as $key_left => $category_show_left)
-                                    <option value="{{$key_left}}" @if(isset($data['category_show_left']) && $data['category_show_left'] == $key_left) selected @endif>{{$category_show_left}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Hiển thị menu phải</label>
-                            <select name="category_show_right" id="category_show_right" class="form-control input-sm">
-                                @foreach ($arrShowHide as $key_right => $category_show_right)
-                                    <option value="{{$key_right}}" @if(isset($data['category_show_right']) && $data['category_show_right'] == $key_right) selected @endif>{{$category_show_right}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Hiển thị nội dung giữa</label>
-                            <select name="category_show_center" id="category_show_center" class="form-control input-sm">
-                                @foreach ($arrShowHide as $key_center => $category_show_center)
-                                    <option value="{{$key_center}}" @if(isset($data['category_show_center']) && $data['category_show_center'] == $key_center) selected @endif>{{$category_show_center}}</option>
                                 @endforeach
                             </select>
                         </div>

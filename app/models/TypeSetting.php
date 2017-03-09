@@ -23,7 +23,7 @@ class TypeSetting extends Eloquent
         return $data;
     }
 
-    public static function getTypeSettingWithGroup($group_type){
+    public static function getTypeSettingWithGroup($group_type,$key_id = false){
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_GROUP_TYPE_SETTING.$group_type) : array();
         if (sizeof($data) == 0) {
             $department = TypeSetting::where('type_id', '>', 0)
@@ -32,7 +32,12 @@ class TypeSetting extends Eloquent
                 ->orderBy('type_order','asc')->get();
             if($department){
                 foreach($department as $itm) {
-                    $data[$itm['type_keyword']] = $itm['type_title'];
+                    if($key_id){
+                        $data[$itm['type_id']] = $itm['type_title'];
+                    }else{
+                        $data[$itm['type_keyword']] = $itm['type_title'];
+                    }
+
                 }
             }
             if($data && Memcache::CACHE_ON){

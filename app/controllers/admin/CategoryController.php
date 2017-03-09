@@ -14,17 +14,16 @@ class CategoryController extends BaseAdminController
     private $arrStatus = array(-1 => '----Chọn trạng thái----', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $arrShowHide = array(CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện thị');
 
+    private $arrTypeCategory = array();
     private $arrCategoryParent = array(-1 => '---Chọn danh mục cha----');
-    private $arrCategoryDepart = array(-1 => '---Chọn khoa - trung tâm----');
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->arrCategoryParent = Category::getAllParentCategoryId();
-
-        $userDepar = explode(',',$this->user_group_depart);
-        $this->arrCategoryDepart = Department::getDepartWithUser($userDepar,$this->is_root);
+        $this->arrTypeCategory = TypeSetting::getTypeSettingWithGroup('group_category',true);
+        $category_type = (int)Request::get('category_type', 0);
+        $this->arrCategoryParent = Category::getAllParentCateWithType($category_type);
     }
 
     public function view() {
@@ -42,32 +41,28 @@ class CategoryController extends BaseAdminController
         $search['category_name'] = addslashes(Request::get('category_name',''));
         $search['category_status'] = (int)Request::get('category_status',-1);
         $search['category_depart_id'] = (int)Request::get('category_depart_id',-1);
+        $search['category_type'] = $category_type = (int)Request::get('category_type',0);
 
         $dataSearch = Category::searchByCondition($search, 500, $offset,$total);
-        $paging = '';
         if(!empty($dataSearch)){
-            if($search['category_status'] == -1 && $search['category_name'] == '' ){
-                $data = Category::getTreeCategory($dataSearch);
-            }else{
-                $data = $dataSearch;
-            }
+            $data = Category::getTreeCategory($dataSearch);
+            $data = !empty($data)? $data :$dataSearch;
         }
+        $paging = '';
 
         //FunctionLib::debug($dataSearch);
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['category_status']);
-        $optionCategoryDepart = FunctionLib::getOption(array(0=>'--- Chọn khoa-trung tâm ---')+$this->arrCategoryDepart, $search['category_depart_id']);
+        $this->arrCategoryParent = Category::getAllParentCateWithType($category_type);
         $this->layout->content = View::make('admin.Category.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
             ->with('total', $total)
             ->with('data', $data)
             ->with('search', $search)
+            ->with('category_type', $category_type)
             ->with('optionStatus', $optionStatus)
-            ->with('optionCategoryDepart', $optionCategoryDepart)
 
-            ->with('arrCategoryDepart', $this->arrCategoryDepart)
             ->with('arrCategoryParent', $this->arrCategoryParent)
-
             ->with('is_root', $this->is_root)//dùng common
             ->with('is_boss', $this->is_boss)//dùng common
             ->with('permission_full', in_array($this->permission_full, $this->permission) ? 1 : 0)//dùng common
@@ -81,18 +76,23 @@ class CategoryController extends BaseAdminController
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
         $data = array();
+        $type = -1;
         if($id > 0) {
             $data = Category::find($id);
+            $type = isset($data['category_type'])?$data['category_type']:-1;
         }
-
-        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : -1);
-        $optionCategoryParent = FunctionLib::getOption(array(0=>'--- Chọn danh mục cha ---')+$this->arrCategoryParent, isset($data['category_parent_id'])? $data['category_parent_id'] : -1);
-        $optionCategoryDepart = FunctionLib::getOption($this->arrCategoryDepart, isset($data['category_depart_id'])? $data['category_depart_id'] : -1);
+        $category_type = (int)Request::get('category_type', $type);
+        $this->arrCategoryParent = Category::getAllParentCateWithType($category_type);
+        //FunctionLib::debug($data);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : CGlobal::status_show);
+        $optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, isset($data['category_parent_id'])? $data['category_parent_id'] : -1);
+        $optionTypeCategory = FunctionLib::getOption($this->arrTypeCategory, isset($data['category_type'])? $data['category_type'] : $category_type);
         $this->layout->content = View::make('admin.Category.add')
             ->with('id', $id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
-            ->with('optionCategoryDepart', $optionCategoryDepart)
+            ->with('category_type', $category_type)
+            ->with('optionTypeCategory', $optionTypeCategory)
             ->with('arrShowHide', $this->arrShowHide)
         	->with('optionCategoryParent', $optionCategoryParent);
     }
@@ -102,54 +102,36 @@ class CategoryController extends BaseAdminController
             return Redirect::route('admin.dashboard',array('error'=>1));
         }
 
-        $dataSave['category_name'] = addslashes(Request::get('category_name'));
-        $dataSave['category_status'] = (int)Request::get('category_status', 0);
-        $dataSave['category_parent_id'] = (int)Request::get('category_parent_id', 0);
-        $dataSave['category_order'] = (int)Request::get('category_order', 0);
-        $dataSave['category_depart_id'] = (int)Request::get('category_depart_id', 0);
-        $dataSave['category_show_top'] = (int)Request::get('category_show_top', CGlobal::status_hide);
-        $dataSave['category_show_left'] = (int)Request::get('category_show_left', CGlobal::status_hide);
-        $dataSave['category_show_right'] = (int)Request::get('category_show_right', CGlobal::status_hide);
-        $dataSave['category_show_center'] = (int)Request::get('category_show_center', CGlobal::status_hide);
+        $data['category_name'] = addslashes(Request::get('category_name'));
+        $data['category_status'] = (int)Request::get('category_status', 0);
+        $data['category_parent_id'] = (int)Request::get('category_parent_id', 0);
+        $data['category_order'] = (int)Request::get('category_order', 0);
+        $data['category_depart_id'] = (int)Request::get('category_depart_id', 0);
+        $data['category_type'] = (int)Request::get('category_type', 0);
+        $data['category_level'] = 1;
 
-        /*$file = Input::file('image');
-        if($file){
-            $filename = $file->getClientOriginalName();
-            $destinationPath = Config::get('config.DIR_ROOT').'/uploads/'.CGlobal::FOLDER_CATEGORY.'/'. $id;
-            $upload  = Input::file('image')->move($destinationPath, $filename);
-            $dataSave['category_image_background'] = $filename;
-        }else{
-            $dataSave['category_image_background'] = Request::get('category_image_background', '');
-        }*/
-
-        if($this->valid($dataSave) && empty($this->error)) {
+        if($this->valid($data) && empty($this->error)) {
             if($id > 0) {
-                //cap nhat
-                $dataSave['category_date_update'] = time();
-                $dataSave['category_user_id_update'] = $this->user['user_id'];
-                $dataSave['category_user_name_update'] = $this->user['user_name'];
-                if(Category::updateData($id, $dataSave)) {
-                    return Redirect::route('admin.category_list',array('category_depart_id'=>$dataSave['category_depart_id']));
+                if(Category::updateData($id, $data)) {
+                    return Redirect::route('admin.categoryView',array('category_type'=>$data['category_type']));
                 }
             } else {
                 //them moi
-                $dataSave['category_date_creater'] = time();
-                $dataSave['category_user_id_creater'] = $this->user['user_id'];
-                $dataSave['category_user_name_creater'] = $this->user['user_name'];
-                if(Category::addData($dataSave)) {
-                    return Redirect::route('admin.category_list',array('category_depart_id'=>$dataSave['category_depart_id']));
+                if(Category::addData($data)) {
+                    return Redirect::route('admin.categoryView',array('category_type'=>$data['category_type']));
                 }
             }
         }
-        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($dataSave['category_status'])? $dataSave['category_status'] : -1);
-        $optionCategoryParent = FunctionLib::getOption(array(0=>'--- Chọn danh mục cha ---')+$this->arrCategoryParent, isset($dataSave['category_parent_id'])? $dataSave['category_parent_id'] : -1);
-        $optionCategoryDepart = FunctionLib::getOption($this->arrCategoryDepart, isset($dataSave['category_depart_id'])? $dataSave['category_depart_id'] : -1);
-
+        $this->arrCategoryParent = Category::getAllParentCateWithType($data['category_type']);
+        $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : CGlobal::status_show);
+        $optionCategoryParent = FunctionLib::getOption(array(0=>'--- Chọn danh mục cha ---')+$this->arrCategoryParent, isset($data['category_parent_id'])? $data['category_parent_id'] : -1);
+        $optionTypeCategory = FunctionLib::getOption($this->arrTypeCategory, isset($data['category_type'])? $data['category_type'] : -1);
         $this->layout->content =  View::make('admin.Category.add')
             ->with('id', $id)
-            ->with('data', $dataSave)
+            ->with('data', $data)
             ->with('optionStatus', $optionStatus)
-            ->with('optionCategoryDepart', $optionCategoryDepart)
+            ->with('category_type', $data['category_type'])
+            ->with('optionTypeCategory', $optionTypeCategory)
             ->with('error', $this->error)
             ->with('arrShowHide', $this->arrShowHide)
         	->with('optionCategoryParent', $optionCategoryParent);
@@ -193,8 +175,8 @@ class CategoryController extends BaseAdminController
         }
 
         if ($id > 0) {
-            $dataSave['category_status'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
-            if(Category::updateData($id, $dataSave)) {
+            $data['category_status'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
+            if(Category::updateData($id, $data)) {
                 $result['isIntOk'] = 1;
             }
         }
@@ -215,23 +197,23 @@ class CategoryController extends BaseAdminController
         if ($id > 0) {
             switch( $position ){
                 case 1://top
-                    $dataSave['category_show_top'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
+                    $data['category_show_top'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
                     break;
                 case 2://left
-                    $dataSave['category_show_left'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
+                    $data['category_show_left'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
                     break;
                 case 3://right
-                    $dataSave['category_show_right'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
+                    $data['category_show_right'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
                     break;
                 case 4://center
-                    $dataSave['category_show_center'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
+                    $data['category_show_center'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
                     break;
                 default:
-                    $dataSave['category_show_top'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
+                    $data['category_show_top'] = ($category_status == CGlobal::status_hide)? CGlobal::status_show : CGlobal::status_hide;
                     break;
             }
 
-            if(Category::updateData($id, $dataSave)) {
+            if(Category::updateData($id, $data)) {
                 $result['isIntOk'] = 1;
             }
         }

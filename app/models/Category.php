@@ -5,15 +5,14 @@
  */
 class Category extends Eloquent
 {
-    protected $table = 'web_category_new';
+    protected $table = 'web_category';
     protected $primaryKey = 'category_id';
     public $timestamps = false;
 
     //cac truong trong DB
     protected $fillable = array('category_id','category_name', 'category_depart_id','category_parent_id',
-        'category_show_top', 'category_show_left', 'category_show_right', 'category_show_center',
-        'category_status', 'category_order', 'category_date_creater', 'category_user_id_creater', 'category_user_name_creater',
-        'category_date_update', 'category_user_id_update', 'category_user_name_update');
+        'category_type', 'category_level', 'category_image_background', 'category_icons',
+        'category_status', 'category_order');
 
     public static function getByID($id) {
         $category = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_ID.$id) : array();
@@ -78,6 +77,26 @@ class Category extends Eloquent
         return $data;
     }
 
+    public static function getAllParentCateWithType($category_type) {
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_PARENT_CATEGORY.'_'.$category_type) : array();
+        if (sizeof($data) == 0) {
+            $category = Category::where('category_id', '>', 0)
+                ->where('category_parent_id',0)
+                ->where('category_status',CGlobal::status_show)
+                ->where('category_type',$category_type)
+                ->orderBy('category_order','asc')->get();
+            if($category){
+                foreach($category as $itm) {
+                    $data[$itm['category_id']] = $itm['category_name'];
+                }
+            }
+            if($data && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_ALL_PARENT_CATEGORY.'_'.$category_type, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+            }
+        }
+        return $data;
+    }
+
     public static function getAllChildCategoryIdByParentId($parentId = 0) {
         $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CHILD_CATEGORY_BY_PARENT_ID.$parentId) : array();
         if (sizeof($data) == 0 && $parentId > 0) {
@@ -109,6 +128,9 @@ class Category extends Eloquent
             if (isset($dataSearch['category_depart_id']) && $dataSearch['category_depart_id'] != -1) {
                 $query->where('category_depart_id', $dataSearch['category_depart_id']);
             }
+            if (isset($dataSearch['category_type']) && $dataSearch['category_type'] > 0) {
+                $query->where('category_type', $dataSearch['category_type']);
+            }
             if (isset($dataSearch['string_depart_id']) && $dataSearch['string_depart_id'] != '') {
                 $query->whereIn('category_depart_id', explode(',',$dataSearch['string_depart_id']));
             }
@@ -125,6 +147,7 @@ class Category extends Eloquent
             return $result;
 
         }catch (PDOException $e){
+            return $e->getMessage();
             throw new PDOException();
         }
     }
@@ -148,13 +171,14 @@ class Category extends Eloquent
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
                 if(isset($data->category_id) && $data->category_id > 0){
-                    self::removeCache($data->category_id);
+                    self::removeCache($data->category_id,$data);
                 }
                 return $data->category_id;
             }
             DB::connection()->getPdo()->commit();
             return false;
         } catch (PDOException $e) {
+            return $e->getMessage();
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
         }
@@ -175,12 +199,13 @@ class Category extends Eloquent
             if (!empty($dataInput)){
                 $dataSave->update($dataInput);
                 if(isset($dataSave->category_id) && $dataSave->category_id > 0){
-                    self::removeCache($dataSave->category_id);
+                    self::removeCache($dataSave->category_id,$dataSave);
                 }
             }
             DB::connection()->getPdo()->commit();
             return true;
         } catch (PDOException $e) {
+            return $e->getMessage();
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
         }
@@ -199,7 +224,7 @@ class Category extends Eloquent
             $dataSave = Category::find($id);
             $dataSave->delete();
             if(isset($dataSave->category_id) && $dataSave->category_id > 0){
-                self::removeCache($dataSave->category_id);
+                self::removeCache($dataSave->category_id,$dataSave);
             }
             DB::connection()->getPdo()->commit();
             return true;
@@ -209,13 +234,14 @@ class Category extends Eloquent
         }
     }
 
-    public static function removeCache($id = 0){
+    public static function removeCache($id = 0,$data){
         if($id > 0){
             Cache::forget(Memcache::CACHE_CATEGORY_ID.$id);
             Cache::forget(Memcache::CACHE_ALL_CHILD_CATEGORY_BY_PARENT_ID.$id);
         }
         Cache::forget(Memcache::CACHE_ALL_CATEGORY);
         Cache::forget(Memcache::CACHE_ALL_PARENT_CATEGORY);
+        Cache::forget(Memcache::CACHE_ALL_PARENT_CATEGORY.'_'.$data->category_type);
         Cache::forget(Memcache::CACHE_ALL_SHOW_CATEGORY_FRONT);
     }
 
@@ -229,10 +255,10 @@ class Category extends Eloquent
                         'category_name'=>$itm->category_name,
                         'category_depart_id'=>$itm->category_depart_id,
                         'category_parent_id'=>$itm->category_parent_id,
-                        'category_show_top'=>$itm->category_show_top,
-                        'category_show_left'=>$itm->category_show_left,
-                        'category_show_right'=>$itm->category_show_right,
-                        'category_show_center'=>$itm->category_show_center,
+                        'category_type'=>$itm->category_type,
+                        'category_level'=>$itm->category_level,
+                        'category_image_background'=>$itm->category_image_background,
+                        'category_icons'=>$itm->category_icons,
                         'category_status'=>$itm->category_status,
                         'category_order'=>$itm->category_order);
                 }
@@ -263,10 +289,10 @@ class Category extends Eloquent
                     'category_id'=>$value->category_id,
                     'category_depart_id'=>$value->category_depart_id,
                     'category_parent_id'=>$value->category_parent_id,
-                    'category_show_top'=>$value->category_show_top,
-                    'category_show_left'=>$value->category_show_left,
-                    'category_show_right'=>$value->category_show_right,
-                    'category_show_center'=>$value->category_show_center,
+                    'category_type'=>$value->category_type,
+                    'category_level'=>$value->category_level,
+                    'category_image_background'=>$value->category_image_background,
+                    'category_icons'=>$value->category_icons,
                     'category_order'=>$value->category_order,
                     'category_status'=>$value->category_status,
                     'category_name'=>$value->category_name);
