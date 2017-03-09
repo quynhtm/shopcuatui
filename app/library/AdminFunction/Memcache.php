@@ -41,6 +41,9 @@ class Memcache{
     //tin tức
     const CACHE_NEW_ID    = 'cache_news_id_';
 
+    //tin tức
+    const CACHE_PRODUCT_ID    = 'cache_product_id_';
+
     //size image
     const CACHE_SIZE_IMAGE_ID    = 'cache_size_image_id_';
     const CACHE_SIZE_IMAGE    = 'cache_list_size_image';

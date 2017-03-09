@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.product_list')}}"> Danh sách sản phẩm</a></li>
+            <li><a href="{{URL::route('admin.productView')}}"> Danh sách sản phẩm</a></li>
             <li class="active">@if($id > 0)Cập nhật sản phẩm @else Tạo mới sản phẩm @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>
@@ -184,16 +184,14 @@
                 <div class="clearfix"></div>
 
                 <div class="form-group col-sm-12 text-left">
-                    <!--<button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>-->
+                    <a class="btn btn-warning" href="{{URL::route('admin.productView')}}"><i class="fa fa-reply"></i> Trở lại</a>
+                    <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
                 </div>
                 <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 {{ Form::close() }}
-                        <!-- PAGE CONTENT ENDS -->
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
-    </div><!-- /.page-content -->
+    </div>
 </div>
 
 

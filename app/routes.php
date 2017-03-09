@@ -122,9 +122,9 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('categoryDepart/updateStatusCategoryDepart', array('as' => 'admin.status_categoryDepart_post','uses' => 'CategoryDepartController@updateStatusCategoryDepart'));//ajax
 
     /*Quản lý danh mục SP*/
-    Route::get('category/view',array('as' => 'admin.category_list','uses' => 'CategoryController@view'));
-    Route::get('category/edit/{id?}', array('as' => 'admin.category_edit','uses' => 'CategoryController@getItem'))->where('id', '[0-9]+');
-    Route::post('category/edit/{id?}', array('as' => 'admin.category_edit','uses' => 'CategoryController@postItem'))->where('id', '[0-9]+');
+    Route::get('category/view',array('as' => 'admin.categoryView','uses' => 'CategoryController@view'));
+    Route::get('category/edit/{id?}', array('as' => 'admin.categoryEdit','uses' => 'CategoryController@getItem'))->where('id', '[0-9]+');
+    Route::post('category/edit/{id?}', array('as' => 'admin.categoryEdit','uses' => 'CategoryController@postItem'))->where('id', '[0-9]+');
     Route::post('category/deleteCategory', array('as' => 'admin.deltete_category_post','uses' => 'CategoryController@deleteCategory'));//ajax
     Route::post('category/updateStatusCategory', array('as' => 'admin.status_category_post','uses' => 'CategoryController@updateStatusCategory'));//ajax
     Route::post('category/updatePositionStatusCategory', array('as' => 'admin.status_category_position','uses' => 'CategoryController@updatePositionStatusCategory'));//ajax

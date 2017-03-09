@@ -21,16 +21,6 @@ class CategoryController extends BaseAdminController
     {
         parent::__construct();
 
-       /* //Include style.
-        FunctionLib::link_css(array(
-            'lib/cssUpload.css',
-        ));
-
-        //Include javascript.
-        FunctionLib::link_js(array(
-            'lib/jquery.uploadfile.js',
-        ));*/
-        
         $this->arrCategoryParent = Category::getAllParentCategoryId();
 
         $userDepar = explode(',',$this->user_group_depart);
@@ -52,11 +42,8 @@ class CategoryController extends BaseAdminController
         $search['category_name'] = addslashes(Request::get('category_name',''));
         $search['category_status'] = (int)Request::get('category_status',-1);
         $search['category_depart_id'] = (int)Request::get('category_depart_id',-1);
-        if(!$this->is_root){
-            $search['string_depart_id'] = $this->user_group_depart;
-        }
-        
-        $dataSearch = ($search['category_depart_id'] > 0)?Category::searchByCondition($search, 500, $offset,$total): array();
+
+        $dataSearch = Category::searchByCondition($search, 500, $offset,$total);
         $paging = '';
         if(!empty($dataSearch)){
             if($search['category_status'] == -1 && $search['category_name'] == '' ){

@@ -67,10 +67,10 @@ class BaseAdminController extends BaseController
             'name'=>'QL Sản phẩm',
             'link'=>'javascript:void(0)',
             'icon'=>'fa fa-gift',
-            'arr_link_sub'=>array('admin.productView','admin.providerView',),
+            'arr_link_sub'=>array('admin.productView','admin.providerView','admin.categoryView',),
             'sub'=>array(
                 array('name'=>'Sản phẩm', 'RouteName'=>'admin.productView', 'icon'=>'fa fa-users icon-4x', 'showcontent'=>1, 'showMenu'=>1,'permission'=>'product_full'),
-                array('name'=>'Danh mục sản phẩm', 'RouteName'=>'admin.category_list', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'category_full'),
+                array('name'=>'Danh mục sản phẩm', 'RouteName'=>'admin.categoryView', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'category_full'),
                 array('name'=>'QL nhà cung cấp', 'RouteName'=>'admin.providerView', 'icon'=>'fa fa-indent icon-4x', 'showcontent'=>1,'showMenu'=>1, 'permission'=>'provider_full'),
             ),
         );
