@@ -29,7 +29,7 @@
                     </div>
                     <div class="panel-footer text-right">
                         @if($is_root || $permission_full ==1 || $permission_create == 1)
-                        <span class="">
+                            <span class="">
                             <a class="btn btn-danger btn-sm" href="{{URL::route('admin.newsEdit')}}">
                                 <i class="ace-icon fa fa-plus-circle"></i>
                                 Thêm mới
@@ -48,12 +48,11 @@
                     <table class="table table-bordered table-hover">
                         <thead class="thin-border-bottom">
                         <tr class="">
-                            <th width="2%" class="text-center">TT</th>
-                            <th width="8%" class="text-center">Ảnh</th>
-                            <th width="435">Tên bài viết</th>
-                            <th width="18%">Danh mục tin</th>
-                            <th width="18%">Thuộc khoa - trung tâm</th>
-                            <th width="8%" class="text-center">Trạng thái</th>
+                            <th width="5%" class="text-center">STT</th>
+                            <th width="5%" class="text-center">Ảnh</th>
+                            <th width="55%">Tên bài viết</th>
+                            <th width="15%" class="text-center">Danh mục tin</th>
+                            <th width="10%" class="text-center">Trạng thái</th>
                             <th width="10%" class="text-center">Thao tác</th>
                         </tr>
                         </thead>
@@ -62,30 +61,34 @@
                             <tr>
                                 <td class="text-center">{{ $stt + $key+1 }}</td>
                                 <td class="text-center">
-                                   @if($item->news_image != '')
-                                    <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item->news_id, $item->news_image, CGlobal::sizeImage_100,  '', true, CGlobal::type_thumb_image_banner, false)}}">
+                                    @if($item->news_image != '')
+                                        <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_NEWS, $item->news_id, $item->news_image, CGlobal::sizeImage_80,  '', true, CGlobal::type_thumb_image_banner, false)}}">
                                     @endif
                                 </td>
                                 <td>
-                                    [<b>{{ $item['news_id'] }}</b>]<a href="#" target="_blank">{{ $item['news_title'] }}</a>
+                                    [<b>{{ $item['news_id'] }}</b>]<a href="{{FunctionLib::buildLinkDetailNews($item['news_id'],$item['news_title'])}}" target="_blank">{{ $item['news_title'] }}</a>
                                 </td>
-                                <td>@if(isset($arrCategoryNew[$item['news_category_id']])){{ $arrCategoryNew[$item['news_category_id']] }}@else --- @endif</td>
-                                <td>@if(isset($arrDepart[$item['news_depart_id']])){{ $arrDepart[$item['news_depart_id']] }}@else --- @endif</td>
+                                <td class="text-center">
+                                    @if(isset($arrCategoryNew[$item->news_category]))
+                                        {{$arrCategoryNew[$item->news_category]}}
+                                    @else
+                                        ----
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     @if($item['news_status'] == 1)
-                                        <a href="javascript:void(0);" onclick="Admin.updateStatusItem({{$item['news_id']}},{{$item['news_status']}},5)"title="Hiện"><i class="fa fa-check fa-2x"></i></a>
+                                        <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
                                     @else
-                                        <a href="javascript:void(0);" onclick="Admin.updateStatusItem({{$item['news_id']}},{{$item['news_status']}},5)"style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
+                                        <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
                                     @endif
-                                    <span class="img_loading" id="img_loading_{{$item['news_id']}}"></span>
                                 </td>
                                 <td class="text-center">
                                     @if($is_root || $permission_full ==1|| $permission_edit ==1  )
                                         <a href="{{URL::route('admin.newsEdit',array('id' => $item['news_id']))}}" title="Sửa item"><i class="fa fa-edit fa-2x"></i></a>
                                     @endif
                                     @if($is_root || $permission_full ==1 || $permission_delete == 1)
-                                       &nbsp;&nbsp;&nbsp;
-                                       <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item['news_id']}},1)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a href="javascript:void(0);" onclick="Admin.deleteItem({{$item['news_id']}},1)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
                                     @endif
                                     <span class="img_loading" id="img_loading_{{$item['news_id']}}"></span>
                                 </td>
@@ -100,7 +103,7 @@
                     <div class="alert">
                         Không có dữ liệu
                     </div>
-                @endif
+                    @endif
                             <!-- PAGE CONTENT ENDS -->
             </div>
             <!-- /.col -->

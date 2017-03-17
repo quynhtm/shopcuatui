@@ -10,9 +10,10 @@ class News extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('news_id','news_title', 'news_desc_sort','news_depart_id',
-        'news_content', 'news_image', 'news_image_other','news_create','news_order','news_common_page','news_show_cate_id',
-        'news_type', 'news_category_id','news_category_name', 'news_status');
+    protected $fillable = array('news_id','news_title', 'news_desc_sort',
+        'news_content', 'news_image', 'news_image_other','news_create',
+        'meta_title', 'meta_keywords', 'meta_description',
+        'news_type', 'news_category', 'news_status');
 
     public static function getNewByID($id) {
         $new = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_NEW_ID.$id) : array();
@@ -34,11 +35,11 @@ class News extends Eloquent
             if (isset($dataSearch['news_status']) && $dataSearch['news_status'] != -1) {
                 $query->where('news_status', $dataSearch['news_status']);
             }
-            if (isset($dataSearch['news_category_id']) && $dataSearch['news_category_id'] > 0) {
-                $query->where('news_category_id', $dataSearch['news_category_id']);
+            if (isset($dataSearch['news_category']) && $dataSearch['news_category'] > 0) {
+                $query->where('news_category', $dataSearch['news_category']);
             }
-            if (isset($dataSearch['string_depart_id']) && $dataSearch['string_depart_id'] != '') {
-                $query->whereIn('news_depart_id', explode(',',$dataSearch['string_depart_id']));
+            if (isset($dataSearch['news_type']) && $dataSearch['news_type'] > 0) {
+                $query->where('news_type', $dataSearch['news_type']);
             }
             if (isset($dataSearch['not_news_id']) && $dataSearch['not_news_id'] > 0) {
                 $query->where('news_id','<>', $dataSearch['not_news_id']);
@@ -112,7 +113,6 @@ class News extends Eloquent
             DB::connection()->getPdo()->commit();
             return true;
         } catch (PDOException $e) {
-            //return $e->getMessage();
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
         }
@@ -131,33 +131,6 @@ class News extends Eloquent
             $dataSave = News::find($id);
             $dataSave->delete();
             if(isset($dataSave->news_id) && $dataSave->news_id > 0){
-                if($dataSave->news_image != ''){//xoa anh c?
-                    //xoa anh upload
-                    FunctionLib::deleteFileUpload($dataSave->news_image,$dataSave->news_id,CGlobal::FOLDER_NEWS);
-                    //x?a anh thumb
-                    $arrSizeThumb = CGlobal::$arrSizeImage;
-                    foreach($arrSizeThumb as $k=>$size){
-                        $sizeThumb = $size['w'].'x'.$size['h'];
-                        FunctionLib::deleteFileThumb($dataSave->news_image,$dataSave->news_id,CGlobal::FOLDER_NEWS,$sizeThumb);
-                    }
-                }
-                //x?a ?nh kh?c
-                if(!empty($dataSave->news_image_other)){
-                    $arrImagOther = unserialize($dataSave->news_image_other);
-                    if(sizeof($arrImagOther) > 0){
-                        foreach($arrImagOther as $k=>$val){
-                            //xoa anh upload
-                            FunctionLib::deleteFileUpload($val,$id,CGlobal::FOLDER_NEWS);
-                            //x?a anh thumb
-                            $arrSizeThumb = CGlobal::$arrSizeImage;
-                            foreach($arrSizeThumb as $k=>$size){
-                                $sizeThumb = $size['w'].'x'.$size['h'];
-                                FunctionLib::deleteFileThumb($val,$id,CGlobal::FOLDER_NEWS,$sizeThumb);
-                            }
-
-                        }
-                    }
-                }
                 self::removeCache($dataSave->news_id);
             }
             DB::connection()->getPdo()->commit();
@@ -175,26 +148,26 @@ class News extends Eloquent
     }
     //get news same
     public static function getSameNews($dataField='', $catid=0, $id=0, $limit=10){
-    	try{
-    		$result = array();
-    		
-    		if($catid>0 && $id>0 && $limit>0){
-	    		$query = News::where('news_id','<>', $id);
-	    		$query->where('news_category_id', $catid);
-	    		$query->where('news_status', CGlobal::status_show);
-	    		$query->orderBy('news_id', 'desc');
-	    
-	    		$fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
-	    		if(!empty($fields)){
-	    			$result = $query->take($limit)->get($fields);
-	    		}else{
-	    			$result = $query->take($limit)->get();
-	    		}
-    		}
-    		return $result;
-    
-    	}catch (PDOException $e){
-    		throw new PDOException();
-    	}
+        try{
+            $result = array();
+
+            if($catid>0 && $id>0 && $limit>0){
+                $query = News::where('news_id','<>', $id);
+                $query->where('news_category', $catid);
+                $query->where('news_status', CGlobal::status_show);
+                $query->orderBy('news_id', 'desc');
+
+                $fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
+                if(!empty($fields)){
+                    $result = $query->take($limit)->get($fields);
+                }else{
+                    $result = $query->take($limit)->get();
+                }
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
     }
 }
