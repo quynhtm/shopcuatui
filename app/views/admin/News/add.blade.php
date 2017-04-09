@@ -33,49 +33,24 @@
                 </div>
 
                 <div style="float: left;width: 30%">
-                    <div class="clearfix"></div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Thuộc khoa - trung tâm<span class="red"> (*) </span></label>
-                            <div class="form-group">
-                                <select class="form-control input-sm" name="news_depart_id"id="news_depart_id" onchange="Admin.getCategoryWithDepart();">
-                                    <?php echo $optionDepart;?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="clearfix"></div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label for="name" class="control-label">Danh mục<span class="red"> (*) </span></label>
                             <div class="form-group">
-                                <select class="form-control input-sm" name="news_category_id" id="news_category_id">
-                                        {{$optionCategory}}
+                                <select class="form-control input-sm" name="news_category" id="news_category">
+                                    {{$optionCategory}}
                                 </select>
                             </div>
                         </div>
                     </div>
-
-                    <div class="clearfix"></div>
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="name" class="control-label">Tiêu đề tin hiển thị ở menu danh mục</label>
+                            <label for="name" class="control-label">Kiểu tin</label>
                             <div class="form-group">
-                                <select class="form-control input-sm" name="news_show_cate_id" id="news_show_cate_id">
-                                        {{$optionCategoryShow}}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label for="name" class="control-label">Loại tin</label>
-                            <div class="form-group">
-                                <select class="form-control input-sm" name="news_common_page">
-                                        {{$optionCommonPage}}
+                                <select class="form-control input-sm" name="news_type">
+                                    {{$optionType}}
                                 </select>
                             </div>
                         </div>
@@ -122,7 +97,7 @@
                                                         <img src="{{$imgNew['src_img_other']}}" height='100' width='100'>
                                                         <input type="hidden" id="img_other_{{$key}}" name="img_other[]" value="{{$imgNew['img_other']}}" class="sys_img_other">
                                                         <div class='clear'></div>
-                                                        <input type="radio" id="checked_image_{{$key}}" name="checked_image" value="{{$key}}" @if(isset($imagePrimary) && $imagePrimary == $imgNew['img_other'] ) checked="checked" @endif onclick="Admin.checkedImage('{{$imgNew['img_other']}}','{{$key}}');">
+                                                        <input type="radio" id="checked_image_{{$key}}" name="checked_image" value="{{$key}}" @if(isset($imageOrigin) && $imageOrigin == $imgNew['img_other'] ) checked="checked" @endif onclick="Admin.checkedImage('{{$imgNew['img_other']}}','{{$key}}');">
                                                         <label for="checked_image_{{$key}}" style='font-weight:normal'>Ảnh đại diện</label>
                                                         <div class="clearfix"></div>
                                                         <a href="javascript:void(0);" onclick="Admin.removeImage({{$key}},{{$id}},'{{$imgNew['img_other']}}', 1);">Xóa ảnh</a>
@@ -153,19 +128,36 @@
                     </div>
                 </div>
 
-
                 <div class="clearfix"></div>
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label for="name" class="control-label">Mô tả ngắn</label>
                         <textarea class="form-control input-sm" rows="8" name="news_desc_sort">@if(isset($data['news_desc_sort'])){{$data['news_desc_sort']}}@endif</textarea>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Meta title</label>
+                        <textarea class="form-control input-sm" rows="8" name="meta_title">@if(isset($data['meta_title'])){{$data['meta_title']}}@endif</textarea>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Meta Keywords</label>
+                        <textarea class="form-control input-sm" rows="8" name="meta_keywords">@if(isset($data['meta_keywords'])){{$data['meta_keywords']}}@endif</textarea>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Meta Description</label>
+                        <textarea class="form-control input-sm" rows="8" name="meta_description">@if(isset($data['meta_description'])){{$data['meta_description']}}@endif</textarea>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="name" class="control-label">Nội dung chi tiết</label>
+                        <label for="name" class="control-label">Nội dung chi tiết<span class="red"> (*) </span></label>
                         <div class="form-group">
                             <div class="controls"><button type="button" onclick="Admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
                             <textarea class="form-control input-sm"  name="news_content">@if(isset($data['news_content'])){{$data['news_content']}}@endif</textarea>
@@ -180,7 +172,7 @@
                 </div>
                 <input type="hidden" id="id_hiden" name="id_hiden" value="{{$id}}"/>
                 {{ Form::close() }}
-                <!-- PAGE CONTENT ENDS -->
+                        <!-- PAGE CONTENT ENDS -->
             </div>
             <!-- /.col -->
         </div>
@@ -199,16 +191,16 @@
             </div>
             <div class="modal-body">
                 <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
-                <div class="form_group">
-                    <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
-                    <div id="status"></div>
+                    <div class="form_group">
+                        <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+                        <div id="status"></div>
 
-                    <div class="clearfix"></div>
-                    <div class="clearfix" style='margin: 5px 10px; width:100%;'>
-                        <div id="div_image"></div>
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image"></div>
+                        </div>
                     </div>
-                </div>
-               </form>
+                </form>
             </div>
         </div>
     </div>
@@ -239,16 +231,16 @@
 <script>
     CKEDITOR.replace('news_content', {height:800});
     /*CKEDITOR.replace(
-            'news_content',
-            {
-                toolbar: [
-                    { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
-                    { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-                    { name: 'colors',      items : [ 'TextColor','BGColor' ] },
-                ],
-            },
-            {height:600}
-    );*/
+     'news_content',
+     {
+     toolbar: [
+     { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+     { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+     { name: 'colors',      items : [ 'TextColor','BGColor' ] },
+     ],
+     },
+     {height:600}
+     );*/
 </script>
 
 <script type="text/javascript">

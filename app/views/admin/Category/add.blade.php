@@ -33,20 +33,33 @@
                     <div class="clearfix"></div>
                     <div class="col-sm-10">
                         <div class="form-group">
-                            <label for="name" class="control-label">Loại danh mục</label>
-                            <select name="category_type" id="category_type" class="form-control input-sm" readonly>
-                                {{$optionTypeCategory}}
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <div class="col-sm-10">
-                        <div class="form-group">
                             <label for="name" class="control-label">Thuộc danh mục cha</label>
                             <select name="category_parent_id" id="category_parent_id" class="form-control input-sm">
                                 <option value="0">--- Chọn danh mục cha ---</option>
                                 {{$optionCategoryParent}}
+                            </select>
+                        </div>
+                    </div>
+
+                    @if($category_type == CGlobal::category_product)
+                        <div class="clearfix"></div>
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label for="name" class="control-label">Thuộc chuyên mục</label>
+                                <select name="category_depart_id" id="category_depart_id" class="form-control input-sm">
+                                    <option value="0">--- Chọn chuyên mục ---</option>
+                                    {{$optionCategoryDepart}}
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Loại danh mục</label>
+                            <select name="category_type" id="category_type" class="form-control input-sm" readonly>
+                                {{$optionTypeCategory}}
                             </select>
                         </div>
                     </div>

@@ -10,11 +10,13 @@ class Product extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('product_id','product_code', 'product_name', 'category_name', 'category_id','provider_id',
+    protected $fillable = array('product_id','product_code', 'product_name', 'category_name', 'depart_id','category_id','provider_id',
         'product_price_sell', 'product_price_market', 'product_price_input', 'product_price_provider_sell','product_type_price','product_selloff',
         'product_is_hot', 'product_sort_desc', 'product_content','product_image','product_image_hover','product_image_other',
         'product_order', 'quality_input','quality_out','product_status','is_block','is_sale',
-        'user_shop_id', 'user_shop_name', 'is_shop','shop_province','time_created', 'time_update');
+        'user_shop_id', 'user_shop_name', 'is_shop','province_id',
+        'time_created','user_id_creater','user_name_creater',
+        'time_update','user_id_update','user_name_update');
 
     /**
      * @param $product_id
@@ -51,6 +53,17 @@ class Product extends Eloquent
     public static function getListProductOfShopId($shop_id = 0, $field_get = array()) {
         if($shop_id > 0){
             $query = Product::where('user_shop_id','=',$shop_id);
+            return $result = (!empty($field_get)) ? $query->get($field_get) : $query->get();
+        }
+        return array();
+    }
+
+    public static function getProductByArrayProId($arrProId = array(),$field_get = array()) {
+        if(!empty($arrProId)){
+            $query = Product::where('product_id','>',0);
+            $query->where('product_status','=',CGlobal::status_show);
+            $query->where('is_block','=',CGlobal::PRODUCT_NOT_BLOCK);
+            $query->whereIn('product_id',$arrProId);
             return $result = (!empty($field_get)) ? $query->get($field_get) : $query->get();
         }
         return array();

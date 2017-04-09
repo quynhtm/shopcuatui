@@ -12,12 +12,10 @@ class OrderItem extends Eloquent
     public $timestamps = false;
 
     //cac truong trong DB
-    protected $fillable = array('order_item_id','order_id', 'order_product_name',
+    protected $fillable = array('order_item_id','order_id',
         'product_id', 'product_name', 'product_price_sell',
         'product_price_input', 'product_image', 'product_category_id',
-        'product_category_name', 'product_type_price', 'product_province', 'product_provider', 'number_buy',
-        'order_item_status','order_item_time_creater',
-        'order_item_pay', 'order_item_time_pay');
+        'product_category_name', 'product_type_price', 'product_province', 'product_provider', 'number_buy');
 
     public function order()
     {
@@ -25,31 +23,13 @@ class OrderItem extends Eloquent
     }
 
     public static function getByID($id) {
-        $admin = Order::where('order_item_id', $id)->first();
+        $admin = OrderItem::where('order_item_id', $id)->first();
         return $admin;
     }
-    public static function getOrderByShopId($shop_id,$order_item_id) {
-        if($order_item_id > 0){
-            $order = Order::getByID($order_item_id);
-            if (sizeof($order) > 0) {
-                if(isset($order->order_user_shop_id) && (int)$order->order_user_shop_id == $shop_id){
-                    return $order;
-                }
-            }
-        }
-        return array();
-    }
 
-    public static function countOrderOfShopId($shop_id) {
-        if($shop_id > 0){
-            return $total_order = Order::where('order_user_shop_id', $shop_id)
-                ->where('order_status', CGlobal::ORDER_STATUS_NEW)->count();
-        }
-        return 0;
-    }
 
     public static function getOrderAll() {
-        $categories = Order::where('order_item_id', '>', 0)->get();
+        $categories = OrderItem::where('order_item_id', '>', 0)->get();
         $data = array();
         foreach($categories as $itm) {
             $data[$itm['order_item_id']] = $itm['order_product_name'];
@@ -60,7 +40,7 @@ class OrderItem extends Eloquent
     public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
 
         try{
-            $query = Order::where('order_item_id','>',0);
+            $query = OrderItem::where('order_item_id','>',0);
             if (isset($dataSearch['order_product_name']) && $dataSearch['order_product_name'] != '') {
                 $query->where('order_product_name','LIKE', '%' . $dataSearch['order_product_name'] . '%');
             }
@@ -113,7 +93,7 @@ class OrderItem extends Eloquent
     {
         try {
             DB::connection()->getPdo()->beginTransaction();
-            $data = new Order();
+            $data = new OrderItem();
             if (is_array($dataInput) && count($dataInput) > 0) {
                 foreach ($dataInput as $k => $v) {
                     $data->$k = $v;
@@ -142,7 +122,7 @@ class OrderItem extends Eloquent
     {
         try {
             DB::connection()->getPdo()->beginTransaction();
-            $dataSave = Order::find($id);
+            $dataSave = OrderItem::find($id);
             if (!empty($dataInput)){
                 $dataSave->update($dataInput);
             }
@@ -164,7 +144,7 @@ class OrderItem extends Eloquent
     public static function deleteData($id){
         try {
             DB::connection()->getPdo()->beginTransaction();
-            $dataSave = Order::find($id);
+            $dataSave = OrderItem::find($id);
             $dataSave->delete();
             DB::connection()->getPdo()->commit();
             return true;

@@ -14,12 +14,12 @@ class CGlobal{
     public static $extraFooterJS = '';
     public static $extraMeta = '';
     public static $pageAdminTitle = 'Dashboard Admin';
-    public static $pageShopTitle = 'CĐSPTW Admin';
+    public static $pageShopTitle = 'HaiChau Admin';
 
-    const web_name = 'Cdsptw.edu.vn';
-    const web_keywords= 'Cao đẳng Trung ương';
-    const web_description= 'Cao đẳng Trung ương';
-    public static $pageTitle = 'Cao đẳng Trung ương';
+    const web_name = 'Haichau.com.vn';
+    const web_keywords= 'Bánh kẹo Hải Châu';
+    const web_description= 'Bánh kẹo Hải Châu';
+    public static $pageTitle = 'Bánh kẹo Hải Châu';
     
     const num_scroll_page = 2;
     const number_limit_show = 30;
@@ -91,6 +91,28 @@ class CGlobal{
     const status_hide = 0;
     const status_block = -1;
 
+    /****************************************************************************
+     * ĐỊnh nghĩa đơn hàng
+     * **************************************************************************
+     */
+    const order_cod_chuagiao = 0;//chưa chuyển hàng
+    const order_cod_da_gan = 1;//đã gán COD
+    const order_cod_danggiao = 2;//COD dang chuyển hàng
+    const order_cod_da_giaohang = 3;//đã giao hàng
+    const order_cod_hoantra = 4;//hoàn trả hàng
+
+    const order_status_new = 1;//1: đơn hàng mới
+    const order_status_confirm = 2;// đơn hàng đã xác nhận
+    const order_status_succes = 3;//đơn hàng hoàn thành
+    const order_status_remove = 4;// đơn hàng bị hủy
+
+    const order_type_site = 0;// đặt hàng từ site
+    const order_type_shop = 1;// đặt hàng từ hệ thống
+
+    /****************************************************************************
+     * END đơn hàng
+     * **************************************************************************
+     */
     const category_product = 5;
     const category_new = 6;
 

@@ -46,15 +46,7 @@
                                 <input type="text" class="form-control" id="time_end_time" name="time_end_time"  data-date-format="dd-mm-yyyy" value="@if(isset($data['time_end_time'])){{date('d-m-Y',$data['time_end_time'])}}@endif">
                             </div>
                         </div>
-                        <div class="form-group col-lg-3">
-                            <label for="order_user_shop_id">ĐH của Shop</label>
-                            <select name="order_user_shop_id" id="order_user_shop_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên shop">
-                                <option value=""></option>
-                                @foreach($arrShop as $shop_id => $shopName)
-                                    <option value="{{$shop_id}}" @if($search['order_user_shop_id'] == $shop_id) selected="selected" @endif>{{$shopName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="form-group col-lg-3">
                             <label for="order_status">Trạng thái</label>
                             <select name="order_status" id="order_status" class="form-control input-sm">
@@ -62,6 +54,12 @@
                             </select>
                         </div>
                         <div class="form-group col-lg-12 text-right">
+                            @if($is_root || $permission_full ==1 || $permission_create == 1)
+                                <a class="btn btn-success btn-sm" href="{{URL::route('admin.addOrder')}}">
+                                    <i class="ace-icon fa fa-plus-circle"></i>
+                                    Bán hàng tại shop
+                                </a>
+                            @endif
                             <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> Tìm kiếm</button>
                         </div>
                     </div>
@@ -74,10 +72,15 @@
                         <thead class="thin-border-bottom">
                         <tr class="">
                             <th width="5%" class="text-center">STT</th>
-                            <th width="30%">Thông tin đơn hàng</th>
-                            <th width="30%" class="text-left">Thông tin khách hàng</th>
-                            <th width="8%" class="text-center">Ngày đặt</th>
-                            <th width="12%" class="text-center">Tình trạng ĐH</th>
+                            <th width="15%">Thông tin đơn hàng</th>
+                            <th width="8%" class="text-right">Phí ship</th>
+                            <th width="10%" class="text-right">Tổng tiền</th>
+                            <th width="25%" class="text-left">Thông tin khách hàng</th>
+                            <th width="6%" class="text-center">Ngày đặt</th>
+
+                            <th width="6%" class="text-center">Trạng thái</th>
+                            <th width="6%" class="text-center">Vận chuyển</th>
+                            <th width="10%" class="text-center">Tình trạng ĐH</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -85,26 +88,104 @@
                             <tr>
                                 <td class="text-center text-middle">{{ $stt + $key+1 }}</td>
                                 <td>
-                                    Mã ĐH: {{ $item->order_id }}
-                                    <br/>Mã SP: {{ $item->order_product_id }}
-                                    <br/>Tổng tiền: <b class="red">{{ FunctionLib::numberFormat($item->order_total_money) }} đ</b>
-                                    <br/>Phí ship: <b class="red">{{ FunctionLib::numberFormat($item->order_money_ship) }} đ</b>
-                                    <br/>Tổng SL: <b>{{ $item->order_total_buy }}</b> sản phẩm
+                                    Mã ĐH: <b>{{ $item->order_id }}</b>
+                                    <br/>Mã SP: <b>{{ $item->order_product_id }}</b>
+                                    <br/>Tổng SL: <b>{{ $item->order_total_buy }}</b> sp
+                                </td>
+                                <td class="text-right">
+                                    <b class="red">{{ FunctionLib::numberFormat($item->order_money_ship) }} đ</b>
+                                </td>
+                                <td class="text-right">
+                                    <b class="red">{{ FunctionLib::numberFormat($item->order_total_money) }} đ</b>
                                 </td>
                                 <td>
-                                    @if($item->order_customer_name != '')Tên KH: <b>{{ $item->order_customer_name }}</b><br/>@endif
-                                    @if($item->order_customer_phone != '')Phone: {{ $item->order_customer_phone }}<br/>@endif
-                                    @if($item->order_customer_email != '')Email: {{ $item->order_customer_email }}<br/>@endif
-                                    @if($item->order_customer_address != '')Địa chỉ: {{ $item->order_customer_address }}<br/>@endif
+                                    @if($item->order_customer_name != '')N: <b>{{ $item->order_customer_name }}</b><br/>@endif
+                                    @if($item->order_customer_phone != '')P: {{ $item->order_customer_phone }}<br/>@endif
+                                    @if($item->order_customer_email != '')E: {{ $item->order_customer_email }}<br/>@endif
+                                    @if($item->order_customer_address != '')Add: {{ $item->order_customer_address }}<br/>@endif
                                     @if($item->order_customer_note != '')<span class="red">**Ghi chú: {{ $item->order_customer_note }}</span>@endif
                                 </td>
-                                <td class="text-center text-middle">{{ date ('d-m-Y H:i:s',$item->order_time_creater) }}</td>
                                 <td class="text-center text-middle">
-                                    @if(isset($arrStatus[$item->order_status])){{$arrStatus[$item->order_status]}}@else --- @endif
-                                    @if($is_root)
-                                         <br/><a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->order_id}},8)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
+                                    @if($item->order_type == CGlobal::order_type_site)
+                                        <a href="javascript:void(0);" title="Đặt hàng online-{{$item->order_type}}">
+                                            <i class="fa fa-shopping-cart fa-2x"></i>
+                                        </a><br/>
+                                    @endif
+                                    @if($item->order_type == CGlobal::order_type_shop)
+                                        <a href="javascript:void(0);" title="Đặt hàng từ shop-{{$item->order_type}}">
+                                            <i class="fa fa-home fa-2x"></i>
+                                        </a><br/>
+                                    @endif
+                                    {{ date ('H:i:s d-m-Y',$item->order_time_creater) }}
+                                </td>
+
+                                <!--Trạng thái-->
+                                <td class="text-center text-middle">
+                                    @if($item->order_status == CGlobal::order_status_new)
+                                        <a href="javascript:void(0);" title="Đơn hàng mới -{{$item->order_status}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/new.png">
+                                        </a>
+                                    @endif
+                                    @if($item->order_status == CGlobal::order_status_confirm)
+                                        <a href="javascript:void(0);" title="Đơn hàng đã xác nhận -{{$item->order_status}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/da-xac-nhan.png">
+                                        </a>
+                                    @endif
+                                    @if($item->order_status == CGlobal::order_status_succes)
+                                        <a href="javascript:void(0);" title="Đơn hàng hoàn thành -{{$item->order_status}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/hoan-thanh.png">
+                                        </a>
+                                    @endif
+                                    @if($item->order_status == CGlobal::order_status_remove)
+                                        <a href="javascript:void(0);" title="Đơn hàng hủy -{{$item->order_status}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/huy.png">
+                                        </a>
+                                    @endif
+                                </td>
+
+                                <!--Vận chuyển-->
+                                <td class="text-center text-middle">
+                                    @if($item->order_is_cod == CGlobal::order_cod_chuagiao)
+                                        <a href="javascript:void(0);" title="Chưa chuyển hàng -{{$item->order_is_cod}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/delivery_miss.png">
+                                        </a>
+                                    @endif
+                                    @if($item->order_is_cod == CGlobal::order_cod_da_gan)
+                                        <a href="javascript:void(0);" title="Đã gán cho COD -{{$item->order_is_cod}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/COD.png">
+                                        </a>
+                                        <br/>{{$item->order_user_shipper_name}}
+                                    @endif
+                                    @if($item->order_is_cod == CGlobal::order_cod_danggiao)
+                                        <a href="javascript:void(0);" title="COD đang giao hàng -{{$item->order_is_cod}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/delivery_move.png">
+                                        </a>
+                                        <br/>{{$item->order_user_shipper_name}}
+                                    @endif
+                                    @if($item->order_is_cod == CGlobal::order_cod_da_giaohang)
+                                        <a href="javascript:void(0);" title="COD đã giao hàng -{{$item->order_is_cod}} ">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/delivery_suss.png">
+                                        </a>
+                                        <br/>{{$item->order_user_shipper_name}}
+                                    @endif
+                                    @if($item->order_is_cod == CGlobal::order_cod_hoantra)
+                                        <a href="javascript:void(0);" title="COD hoàn trả hàng-{{$item->order_is_cod}}">
+                                            <img src="{{Config::get('config.WEB_ROOT')}}assets/admin/img/order/icon-delivery-cancel.png">
+                                        </a>
+                                        <br/>{{$item->order_user_shipper_name}}
+                                    @endif
+                                </td>
+
+
+                                <td class="text-center text-middle">
+                                    @if($is_root || $permission_full || $permission_view_detail)
+                                        <a href="{{URL::route('admin.detailOrder',array('order_id' => $item->order_id))}}" title="Chi tiết đơn hàng"><i class="fa fa-file-text-o fa-2x"></i></a>
+                                    @endif
+                                    @if($is_root || $permission_full || $permission_delete)
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);" onclick="Admin.deleteItem({{$item->order_id}},8)" title="Xóa Item"><i class="fa fa-trash fa-2x"></i></a>
                                      @endif
                                     <span class="img_loading" id="img_loading_{{$item->order_id}}"></span>
+
                                 </td>
                             </tr>
                         @endforeach
