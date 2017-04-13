@@ -27,9 +27,11 @@ class BannerController extends BaseAdminController
 
     private $arrTypeBanner = array(-1 => '--- Chọn loại Banner --',
         CGlobal::BANNER_TYPE_TOP => 'Banner Top Header',
-        CGlobal::BANNER_TYPE_RIGHT => 'Banner Phải',
-        CGlobal::BANNER_TYPE_LEFT => 'Banner Trái',
-        CGlobal::BANNER_TYPE_SLIDE => 'Banner slide' );
+        CGlobal::BANNER_TYPE_SLIDE => 'Banner Slider',
+        CGlobal::BANNER_TYPE_SLIDE_SUB => 'Banner Phải Slider',
+        CGlobal::BANNER_TYPE_CENTER => 'Banner nội dung giữa',
+        CGlobal::BANNER_TYPE_LEFT_TOP => 'Banner Trái trên',
+        CGlobal::BANNER_TYPE_LEFT_BOTTOM => 'Banner Trái dưới');
 
     /*const BANNER_PAGE_HOME = 1;
     const BANNER_PAGE_DETAIL = 3;
@@ -181,6 +183,7 @@ class BannerController extends BaseAdminController
         $data['banner_start_time'] = Request::get('banner_start_time');
         $data['banner_end_time'] = Request::get('banner_end_time');
         $data['banner_status'] = (int)Request::get('banner_status', 0);
+        $data['banner_province_id'] = (int)Request::get('banner_province_id', 0);
         $id_hiden = (int)Request::get('id_hiden', 0);
 
         $action = $this->getControllerAction();

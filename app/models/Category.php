@@ -12,7 +12,7 @@ class Category extends Eloquent
     //cac truong trong DB
     protected $fillable = array('category_id','category_name', 'category_depart_id','category_parent_id',
         'category_type', 'category_level', 'category_image_background', 'category_icons',
-        'category_status', 'category_order');
+        'category_status','category_menu_status', 'category_menu_right', 'category_order');
 
     public static function getByID($id) {
         $category = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_CATEGORY_ID.$id) : array();
@@ -150,6 +150,10 @@ class Category extends Eloquent
             if (isset($dataSearch['string_depart_id']) && $dataSearch['string_depart_id'] != '') {
                 $query->whereIn('category_depart_id', explode(',',$dataSearch['string_depart_id']));
             }
+            if (isset($dataSearch['category_menu_right']) && $dataSearch['category_menu_right'] != -1) {
+                $query->where('category_menu_right', $dataSearch['category_menu_right']);
+            }
+
             $total = $query->count();
             $query->orderBy('category_id', 'desc');
 
@@ -259,6 +263,8 @@ class Category extends Eloquent
         Cache::forget(Memcache::CACHE_ALL_PARENT_CATEGORY);
         Cache::forget(Memcache::CACHE_ALL_PARENT_CATEGORY.'_'.$data->category_type);
         Cache::forget(Memcache::CACHE_ALL_SHOW_CATEGORY_FRONT);
+        Cache::forget(Memcache::CACHE_ALL_CATEGORY_BY_TYPE.$data->category_type);
+        Cache::forget(Memcache::CACHE_ALL_CATEGORY_RIGHT);
     }
 
     public static function getCategoriessAll(){
@@ -276,6 +282,7 @@ class Category extends Eloquent
                         'category_image_background'=>$itm->category_image_background,
                         'category_icons'=>$itm->category_icons,
                         'category_status'=>$itm->category_status,
+                        'category_menu_status'=>$itm->category_menu_status,
                         'category_order'=>$itm->category_order);
                 }
                 if(!empty($data) && Memcache::CACHE_ON){
@@ -320,7 +327,9 @@ class Category extends Eloquent
                     'category_icons'=>$value->category_icons,
                     'category_order'=>$value->category_order,
                     'category_status'=>$value->category_status,
-                    'category_name'=>$value->category_name);
+                    'category_menu_status'=>$value->category_menu_status,
+                    'category_name'=>$value->category_name,
+                    'category_menu_right'=>$value->category_menu_right);
             }
         }
 
@@ -347,7 +356,7 @@ class Category extends Eloquent
         if($cat_id <= $max) {
             foreach ($aryDataInput as $chk => $chval) {
                 if($chval['category_parent_id'] == $cat_id) {
-                    $chval['padding_left'] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                    $chval['padding_left'] = '--- ';
                     $chval['category_parent_name'] = $cat_name;
                     $aryData[] = $chval;
                     self::showSubCategory($chval['category_id'],$chval['category_name'], $max, $aryDataInput, $aryData);
@@ -356,4 +365,76 @@ class Category extends Eloquent
         }
     }
 
+    //SITE
+    public static function getAllCategoryByType($type=0, $limit=5) {
+        $data = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CATEGORY_BY_TYPE.$type) : array();
+        if (sizeof($data) == 0) {
+            $data = Category::where('category_id', '>', 0)
+                ->where('category_status', CGlobal::status_show)
+                ->where('category_type', $type)
+                ->take($limit)
+                ->orderBy('category_order','asc')->get();
+            if($data && Memcache::CACHE_ON){
+                Cache::put(Memcache::CACHE_ALL_CATEGORY_BY_TYPE.$type, $data, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+            }
+        }
+        return $data;
+    }
+    //Make List Category
+    public static function makeListCatId($catid=0, $level=0, &$arrCat){
+        $listcat = explode(',', $catid);
+        if(!empty($listcat)){
+            $query = Category::where('category_status', '=', CGlobal::status_show);
+            foreach($listcat as $cat){
+                if($cat != end($listcat)){
+                    $query->orWhere('category_parent_id',$cat);
+                }else{
+                    $query->where('category_parent_id', $cat);
+                }
+            }
+            $result = $query->get();
+        }
+        if ($result != null){
+            foreach ($result as $k => $v){
+                array_push($arrCat, $v->category_id);
+                self::makeListCatId($v->category_id, $level+1, $arrCat);
+            }
+        }
+        return true;
+    }
+    public static function searchCategoryRightByCondition($dataSearch = array(), $limit =0){
+        $result = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_ALL_CATEGORY_RIGHT) : array();
+
+        try{
+            if (sizeof($result) == 0) {
+                $query = Category::where('category_id', '>', 0);
+
+                if (isset($dataSearch['category_menu_right']) && $dataSearch['category_menu_right'] != -1) {
+                    $query->where('category_menu_right', $dataSearch['category_menu_right']);
+                }
+                if (isset($dataSearch['category_type']) && $dataSearch['category_type'] > 0) {
+                    $query->where('category_type', $dataSearch['category_type']);
+                }
+
+                $query->orderBy('category_id', 'asc');
+
+                //get field can lay du lieu
+                $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',', trim($dataSearch['field_get'])) : array();
+                if (!empty($fields)) {
+                    $result = $query->take($limit)->get($fields);
+                } else {
+                    $result = $query->take($limit)->get();
+                }
+
+                if($result && Memcache::CACHE_ON){
+                    Cache::put(Memcache::CACHE_ALL_CATEGORY_RIGHT, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+                }
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            return $e->getMessage();
+            throw new PDOException();
+        }
+    }
 }

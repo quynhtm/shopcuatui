@@ -1,6 +1,6 @@
 <?php
 class Memcache{
-    const CACHE_ON = 0 ;// 0: khong dung qua cache, 1: dung qua cache
+    const CACHE_ON = 1 ;// 0: khong dung qua cache, 1: dung qua cache
     const CACHE_TIME_TO_LIVE_5 = 300; //Time cache 5 phut
     const CACHE_TIME_TO_LIVE_15 = 900; //Time cache 15 phut
     const CACHE_TIME_TO_LIVE_30 = 1800; //Time cache 30 phut
@@ -21,6 +21,9 @@ class Memcache{
     const CACHE_ALL_SHOW_CATEGORY_FRONT    = 'cache_all_show_category_front';
     const CACHE_ALL_CHILD_CATEGORY_BY_PARENT_ID    = 'cache_all_child_by_parent_id_';
     const CACHE_CATEGORY_ID    = 'cache_category_id_';
+
+    const CACHE_ALL_CATEGORY_BY_TYPE = 'cache_all_category_by_type_';
+    const CACHE_ALL_CATEGORY_RIGHT = 'cache_all_category_right';
 
     //depart
     const CACHE_DEPARTMENT_ID    = 'cache_department_id_';

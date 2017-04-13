@@ -283,7 +283,7 @@ class FunctionLib {
         if ($text) {
             return $text;
         } else {
-            return "shop";
+            return "tin-tuc";
         }
     }
 
@@ -301,7 +301,7 @@ class FunctionLib {
         if ($text) {
             return $text;
         } else {
-            return "shop";
+            return "tin-tuc";
         }
     }
 
@@ -458,7 +458,7 @@ class FunctionLib {
      */
     static function buildLinkDetailItem($item_id = 0,$item_name = 'tin đăng',$cat_id = 0){
         if($item_id > 0){
-            return URL::route('Site.pageDetailItem', array('item_id'=>$item_id,'item_name'=>strtolower(FunctionLib::safe_title($item_name)),'item_category_id'=>$cat_id));
+            return URL::route('site.pageDetailItem', array('item_id'=>$item_id,'item_name'=>strtolower(FunctionLib::safe_title($item_name)),'item_category_id'=>$cat_id));
         }
         return '#';
     }
@@ -469,13 +469,18 @@ class FunctionLib {
      * @param string $cat_name
      * @return string
      */
-    static function buildLinkDetailNews($new_id = 0,$news_title = 'tin tức'){
+    static function buildLinkDetailNews($catname='danh-muc', $news_title = 'tin tức', $new_id = 0){
         if($new_id > 0){
-            //return URL::route('Site.pageDetailNew', array('news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
+            return URL::route('site.pageDetailNew', array('catname'=>strtolower(FunctionLib::safe_title($catname)), 'news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
         }
         return '#';
     }
-
+    static function buildLinkDetailVideo($news_title = '', $new_id = 0){
+        if($new_id > 0){
+            return URL::route('site.pageVideoDetail', array('news_title'=>strtolower(FunctionLib::safe_title($news_title)), 'new_id'=>$new_id));
+        }
+        return '#';
+    }
     /**
      * @param string $file_name
      * @param int $id

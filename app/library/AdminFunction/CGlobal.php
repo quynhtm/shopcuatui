@@ -147,7 +147,7 @@ class CGlobal{
     const TYPE_LANGUAGE_ENG = 3;
     public static $arrLanguage= array(
         self::TYPE_LANGUAGE_VIET => 'Viet Nam',
-        self::TYPE_LANGUAGE_LAO => 'Lao',
+        //self::TYPE_LANGUAGE_LAO => 'Lao',
         self::TYPE_LANGUAGE_ENG => 'English',
     );
 
@@ -210,11 +210,12 @@ class CGlobal{
     const BANNER_TARGET_BLANK = 1;
 
     const BANNER_TYPE_TOP = 1;
-    const BANNER_TYPE_LEFT = 2;
-    const BANNER_TYPE_RIGHT = 3;
+    const BANNER_TYPE_LEFT_TOP = 2;
+    const BANNER_TYPE_LEFT_BOTTOM = 3;
     const BANNER_TYPE_BOTTOM = 4;
     const BANNER_TYPE_CENTER = 5;
     const BANNER_TYPE_SLIDE = 6;
+    const BANNER_TYPE_SLIDE_SUB = 7;
 
     //page gắn link quảng cáo
     const BANNER_PAGE_HOME = 1;

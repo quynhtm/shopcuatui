@@ -13,6 +13,7 @@ class CategoryController extends BaseAdminController
     private $permission_edit = 'category_edit';
     private $arrStatus = array(-1 => '----Chọn trạng thái----', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $arrShowHide = array(CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện thị');
+    private $arrMenuRight = array(-1 => '----Chọn trạng thái----', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
 
     private $arrTypeCategory = array();
     private $arrCategoryParent = array();
@@ -46,6 +47,7 @@ class CategoryController extends BaseAdminController
         $search['category_status'] = (int)Request::get('category_status',-1);
         $search['category_depart_id'] = (int)Request::get('category_depart_id',-1);
         $search['category_type'] = (int)Request::get('category_type',0);
+        $search['category_menu_right'] = (int)Request::get('category_menu_right',-1);
 
         $dataSearch = Category::searchByCondition($search, 500, $offset,$total);
         if(!empty($dataSearch)){
@@ -54,8 +56,9 @@ class CategoryController extends BaseAdminController
         }
         $paging = '';
 
-        //FunctionLib::debug($dataSearch);
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['category_status']);
+        $optionMenuRight = FunctionLib::getOption($this->arrMenuRight, $search['category_menu_right']);
+
         $this->layout->content = View::make('admin.Category.view')
             ->with('paging', $paging)
             ->with('stt', ($pageNo-1)*$limit)
@@ -64,6 +67,7 @@ class CategoryController extends BaseAdminController
             ->with('search', $search)
             ->with('category_type', $this->category_type)
             ->with('optionStatus', $optionStatus)
+            ->with('optionMenuRight', $optionMenuRight)
 
             ->with('arrCategoryParent', $this->arrCategoryParent)
             ->with('is_root', $this->is_root)//dùng common
@@ -88,18 +92,22 @@ class CategoryController extends BaseAdminController
         $this->arrCategoryParent = Category::getAllParentCateWithType($category_type);
         //FunctionLib::debug($data);
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : CGlobal::status_show);
+        $optionMenuStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_menu_status'])? $data['category_menu_status'] : CGlobal::status_hide);
         $optionCategoryParent = FunctionLib::getOption($this->arrCategoryParent, isset($data['category_parent_id'])? $data['category_parent_id'] : 0);
         $optionCategoryDepart = FunctionLib::getOption($this->arrCategoryDepart, isset($data['category_depart_id'])? $data['category_depart_id'] : 0);
         $optionTypeCategory = FunctionLib::getOption($this->arrTypeCategory, isset($data['category_type'])? $data['category_type'] : $this->category_type);
+        $optionMenuRight = FunctionLib::getOption($this->arrStatus, isset($data['category_menu_right'])? $data['category_menu_right'] : CGlobal::status_hide);
         $this->layout->content = View::make('admin.Category.add')
             ->with('id', $id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
+            ->with('optionMenuStatus', $optionMenuStatus)
             ->with('category_type', $category_type)
             ->with('optionTypeCategory', $optionTypeCategory)
             ->with('optionCategoryDepart', $optionCategoryDepart)
             ->with('arrShowHide', $this->arrShowHide)
-        	->with('optionCategoryParent', $optionCategoryParent);
+        	->with('optionCategoryParent', $optionCategoryParent)
+            ->with('optionMenuRight', $optionMenuRight);
     }
 
     public function postItem($id=0) {
@@ -109,11 +117,13 @@ class CategoryController extends BaseAdminController
 
         $data['category_name'] = addslashes(Request::get('category_name'));
         $data['category_status'] = (int)Request::get('category_status', 0);
+        $data['category_menu_status'] = (int)Request::get('category_menu_status', 0);
         $data['category_parent_id'] = (int)Request::get('category_parent_id', 0);
         $data['category_depart_id'] = (int)Request::get('category_depart_id', 0);
         $data['category_order'] = (int)Request::get('category_order', 0);
         $data['category_type'] = (int)Request::get('category_type', 0);
         $data['category_level'] = 1;
+        $data['category_menu_right'] = (int)Request::get('category_menu_right', 0);
 
         if($this->valid($data) && empty($this->error)) {
             if($data['category_parent_id'] > 0){
@@ -132,19 +142,23 @@ class CategoryController extends BaseAdminController
         }
         $this->arrCategoryParent = Category::getAllParentCateWithType($data['category_type']);
         $optionStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_status'])? $data['category_status'] : CGlobal::status_show);
+        $optionMenuStatus = FunctionLib::getOption($this->arrStatus, isset($data['category_menu_status'])? $data['category_menu_status'] : CGlobal::status_hide);
         $optionCategoryParent = FunctionLib::getOption(array(0=>'--- Chọn danh mục cha ---')+$this->arrCategoryParent, isset($data['category_parent_id'])? $data['category_parent_id'] : -1);
         $optionTypeCategory = FunctionLib::getOption($this->arrTypeCategory, isset($data['category_type'])? $data['category_type'] : -1);
         $optionCategoryDepart = FunctionLib::getOption($this->arrCategoryDepart, isset($data['category_depart_id'])? $data['category_depart_id'] : 0);
+        $optionMenuRight = FunctionLib::getOption($this->arrStatus, isset($data['category_menu_right'])? $data['category_menu_right'] : CGlobal::status_hide);
         $this->layout->content =  View::make('admin.Category.add')
             ->with('id', $id)
             ->with('data', $data)
             ->with('optionStatus', $optionStatus)
+            ->with('optionMenuStatus', $optionMenuStatus)
             ->with('category_type', $data['category_type'])
             ->with('optionTypeCategory', $optionTypeCategory)
             ->with('optionCategoryDepart', $optionCategoryDepart)
             ->with('error', $this->error)
             ->with('arrShowHide', $this->arrShowHide)
-        	->with('optionCategoryParent', $optionCategoryParent);
+        	->with('optionCategoryParent', $optionCategoryParent)
+            ->with('optionMenuRight', $optionMenuRight);
     }
 
     private function valid($data=array()) {

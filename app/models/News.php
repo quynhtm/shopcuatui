@@ -12,9 +12,9 @@ class News extends Eloquent
     //cac truong trong DB
     protected $fillable = array('news_id','news_title', 'news_desc_sort',
         'news_content', 'news_image', 'news_image_other',
-        'news_create','news_user_create','news_update','news_user_update',
+        'news_create','news_user_create','news_update','news_user_update', 'news_hot', 'new_infor_other',
         'meta_title', 'meta_keywords', 'meta_description',
-        'news_type', 'news_category', 'news_status');
+        'news_type', 'news_category','news_category_name', 'news_status');
 
     public static function getNewByID($id) {
         $new = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_NEW_ID.$id) : array();
@@ -41,6 +41,9 @@ class News extends Eloquent
             }
             if (isset($dataSearch['news_type']) && $dataSearch['news_type'] > 0) {
                 $query->where('news_type', $dataSearch['news_type']);
+            }
+            if (isset($dataSearch['news_hot']) && $dataSearch['news_hot'] != -1) {
+                $query->where('news_hot', $dataSearch['news_hot']);
             }
             if (isset($dataSearch['not_news_id']) && $dataSearch['not_news_id'] > 0) {
                 $query->where('news_id','<>', $dataSearch['not_news_id']);
@@ -139,7 +142,7 @@ class News extends Eloquent
                         unset($arrImagOther[$k]);
                         //xoa anh upload
                         FunctionLib::deleteFileUpload($v,$id,CGlobal::FOLDER_NEWS);
-                        //xóa anh thumb
+                        //xï¿½a anh thumb
                         $arrSizeThumb = CGlobal::$arrSizeImage;
                         foreach($arrSizeThumb as $k=>$size){
                             $sizeThumb = $size['w'].'x'.$size['h'];
@@ -185,5 +188,65 @@ class News extends Eloquent
         }catch (PDOException $e){
             throw new PDOException();
         }
+    }
+
+    public static function searchByConditionSite($dataSearch = array(), $limit =0, $offset=0, &$total){
+        try{
+            $query = News::where('news_id','>',0);
+            $query->where('news_status', CGlobal::status_show);
+            if (isset($dataSearch['news_category_id']) && $dataSearch['news_category_id'] > 0) {
+                if(is_array($dataSearch['news_category_id']) && !empty($dataSearch['news_category_id'])){
+                    $query->whereIn('news_category', $dataSearch['news_category_id']);
+                }else{
+                    $query->where('news_category', $dataSearch['news_category_id']);
+                }
+            }
+            $total = $query->count();
+            $query->orderBy('news_id', 'desc');
+            //get field can lay du lieu
+            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+            if(!empty($fields)){
+                $result = $query->take($limit)->skip($offset)->get($fields);
+            }else{
+                $result = $query->take($limit)->skip($offset)->get();
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
+    }
+
+    public static function getPostHot($dataSearch = array(), $limit =0){
+        try{
+            $query = News::where('news_id','>',0);
+            $query->where('news_status', CGlobal::status_show);
+            if (isset($dataSearch['news_hot']) && $dataSearch['news_hot'] != -1) {
+                $query->where('news_hot', $dataSearch['news_hot']);
+            }
+            $query->orderBy('news_id', 'desc');
+            //get field can lay du lieu
+            $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+            if(!empty($fields)){
+                $result = $query->take($limit)->get($fields);
+            }else{
+                $result = $query->take($limit)->get();
+            }
+            return $result;
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
+    }
+    public static function getPostInCategoryParent($arrCat=array(), $limit=0){
+        $result = array();
+        if(sizeof($arrCat)>0 && $limit > 0){
+            $query = News::where('news_id','>',0);
+            $query->whereIn('news_category', $arrCat);
+            $query->where('news_status', CGlobal::status_show);
+            $query->orderBy('news_id', 'desc');
+            $result = $query->take($limit)->get();
+        }
+        return $result;
     }
 }
