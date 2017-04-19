@@ -122,6 +122,11 @@ class CGlobal{
 
     const province_id_hanoi = 22;
 
+    //lien ket link
+    const TYPE_LINK_COQUAN = 1;
+    const TYPE_LINK_TRUONG = 2;
+    const TYPE_LINK_WEBSITE = 3;
+
     //Tin tuc
     const NEW_CATEGORY_TIN_TUC_CHUNG = 1;
     const NEW_CATEGORY_GIOI_THIEU = 2;

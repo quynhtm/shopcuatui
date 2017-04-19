@@ -219,6 +219,12 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::get('province/getInforDistrictOfProvince',array('as'=>'getInforDistrictOfProvince','uses'=>'ProvinceController@getInforDistrictOfProvince'));// thong tin quan huyen
     Route::post('province/submitInforDistrictOfProvince',array('as'=>'submitInforDistrictOfProvince','uses'=>'ProvinceController@submitInforDistrictOfProvince'));// thong tin quan huyen
 
+    //Quản lý link liên kết
+    Route::get('attackLink/view', array('as' => 'admin.attackLinkView','uses' => 'AttackLinkController@view'));
+    Route::get('attackLink/edit/{id?}', array('as' => 'admin.editLink','uses' => 'AttackLinkController@getItem'))->where('id', '[0-9]+');
+    Route::post('attackLink/edit/{id?}', array('as' => 'admin.editLink','uses' => 'AttackLinkController@postItem'))->where('id', '[0-9]+');
+    Route::post('attackLink/deleteLink', array('as' => 'admin.deleteLink','uses' => 'AttackLinkController@deleteLink'));
+
     Route::get('toolsCommon/addPermit',array('as' => 'admin.addPermit','uses' => 'ToolsCommonController@addPermit'));
     //Tools quản lý các page khác nhau
     Route::get('toolsCommon/viewClickShare',array('as' => 'admin.viewClickShare','uses' => 'ToolsCommonController@viewClickShare'));
