@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-19 14:23:45
+Date: 2017-04-19 17:26:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -894,18 +894,11 @@ CREATE TABLE `web_order` (
   `order_time_update` int(11) DEFAULT NULL,
   `order_time_creater` int(11) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_order
 -- ----------------------------
-INSERT INTO `web_order` VALUES ('11', 'Nguyễn tien huan', '0902868001', 'nguyentienhuanl@gmail.com', '98-108 cmt8, p.7, q.3, hcm', 'Ngay 18/01/2016 ngay nhan hang', '634', '350000', '1', '15000', '0', '0', null, '32', 'Công ty CP Gilos', '1', '1', null, '0', null, '1484617031');
-INSERT INTO `web_order` VALUES ('12', 'Nguyễn tien huan', '0902868001', 'nguyentienhuanl@gmail.com', '98-108 cmt8, p.7, q.3, hcm', 'Ngay 18/01/2016 ngay nhan hang', '634', '350000', '1', '15000', '1', '0', null, '32', 'Công ty CP Gilos', '2', '1', null, '0', null, '1484617048');
-INSERT INTO `web_order` VALUES ('13', 'Nguyễn thị thu ', '0972179586', '', 'Số nha51 thôn bến Trung, xã Bắc hồng , huyện Đông Anh Hà nội', '', '658', '600000', '1', '15000', '2', '0', null, '63', 'Sữa non T470', '3', '0', null, '0', null, '1485356198');
-INSERT INTO `web_order` VALUES ('14', 'Lê Hằng', '0932366081', '', '521 kim mã', 'Giao hàng h hành chính', '802', '550000', '8', '15000', '3', '0', null, '74', 'Đồ Gia Dụng ', '4', '0', null, '0', null, '1486874186');
-INSERT INTO `web_order` VALUES ('15', 'Hải Nam', '0913922986', 'nguyenduypt86@gmail.com', '483 Nguyễn Khang Cầu giấy Hà Nội', 'Test đơn nhận mail.', '865', '350000', '1', '15000', '4', '0', null, '55', 'Siêu thị gia đình', '1', '0', null, '0', null, '1487303589');
-INSERT INTO `web_order` VALUES ('16', 'Hải Nam', '0913922986', 'nguyenduypt86@gmail.com', '483 Nguyễn Khang Cầu giấy Hà Nội', 'Testing...', '865', '350000', '1', '15000', '0', '0', null, '55', 'Siêu thị gia đình', '1', '0', null, '0', null, '1487304103');
-INSERT INTO `web_order` VALUES ('17', 'Quynh', '0938413368', 'manhquynh@gmail.com', 'Việt hưng - long biên hà nội', 'đơn hàng test 2', '1,2', '4310000', '10', '60000', '0', '2', 'admin', '0', null, '1', '1', null, '0', null, '1492140454');
 
 -- ----------------------------
 -- Table structure for web_order_item
@@ -926,26 +919,11 @@ CREATE TABLE `web_order_item` (
   `product_provider` int(10) DEFAULT NULL COMMENT 'ID nhà cung cấp',
   `number_buy` int(10) DEFAULT '0' COMMENT 'Số lượng đặt mua',
   PRIMARY KEY (`order_item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of web_order_item
 -- ----------------------------
-INSERT INTO `web_order_item` VALUES ('2', '11', '718', 'Pharysol điều trị viêm họng viêm thanh quản, amidan dứt điểm', '185000', null, '1474445490-pharysol-moi.png', '196', 'Thực phẩm chức năng', '1', null, null, '1');
-INSERT INTO `web_order_item` VALUES ('5', '11', '619', 'Xi nước đánh giày thể thao GoldCare - GC 2006 Sport', '55000', null, '05-30-17-20-06-2016-gc2006-sporttrang-01.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '1');
-INSERT INTO `web_order_item` VALUES ('6', '11', '634', 'Cây xỏ giày GoldCare - GC7003', '20000', null, '01-45-43-21-06-2016-dsc6901.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '2');
-INSERT INTO `web_order_item` VALUES ('7', '12', '632', 'Xi nước đánh giày GoldCare - GC 2002', '55000', null, '11-45-07-21-06-2016-gc2002den-1.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '3');
-INSERT INTO `web_order_item` VALUES ('8', '12', '626', 'Xi sáp đánh giày GoldCare - GC 5003', '39000', null, '10-41-36-21-06-2016-gc-5003.jpg', '119', 'Phụ kiện thời trang Nam', '1', null, null, '1');
-INSERT INTO `web_order_item` VALUES ('9', '13', '634', 'Cây xỏ giày GoldCare - GC7003', '20000', null, '01-45-43-21-06-2016-dsc6901.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '1');
-INSERT INTO `web_order_item` VALUES ('10', '13', '634', 'Cây xỏ giày GoldCare - GC7003', '20000', null, '01-45-43-21-06-2016-dsc6901.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '1');
-INSERT INTO `web_order_item` VALUES ('11', '13', '634', 'Cây xỏ giày GoldCare - GC7003', '20000', null, '01-45-43-21-06-2016-dsc6901.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '2');
-INSERT INTO `web_order_item` VALUES ('12', '14', '634', 'Cây xỏ giày GoldCare - GC7003', '20000', null, '01-45-43-21-06-2016-dsc6901.jpg', '139', 'Giày dép, túi sách Nam', '1', null, null, '2');
-INSERT INTO `web_order_item` VALUES ('13', '14', '658', 'T470 Pedia 400g', '200000', null, '02-15-32-29-06-2016-125034041210531068957195315420058n.jpg', '174', 'Sữa & Bột', '1', null, null, '2');
-INSERT INTO `web_order_item` VALUES ('14', '14', '802', 'HŨ THỦY TINH KOVA-STARLOCK 2.1L', '95000', null, '1476951578-img8770.png', '92', 'Vật dụng nhà bếp', '1', null, null, '2');
-INSERT INTO `web_order_item` VALUES ('15', '14', '865', 'SỮA BỘT DEVONDALE FULL CREAM: (Nguyên kem)', '320000', null, '1486827801-image.jpg', '196', 'Thực phẩm chức năng', '1', null, null, '1');
-INSERT INTO `web_order_item` VALUES ('16', '14', '865', 'SỮA BỘT DEVONDALE FULL CREAM: (Nguyên kem)', '320000', null, '1486827801-image.jpg', '196', 'Thực phẩm chức năng', '1', null, null, '2');
-INSERT INTO `web_order_item` VALUES ('17', '17', '1', 'sản phẩm test', '500000', '400000', null, null, null, '1', null, null, '5');
-INSERT INTO `web_order_item` VALUES ('18', '17', '2', 'Sản phẩm 2', '350000', '300000', null, null, null, '1', null, null, '5');
 
 -- ----------------------------
 -- Table structure for web_product
