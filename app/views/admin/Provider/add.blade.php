@@ -5,7 +5,7 @@
                 <i class="ace-icon fa fa-home home-icon"></i>
                 <a href="{{URL::route('admin.dashboard')}}">Home</a>
             </li>
-            <li><a href="{{URL::route('admin.provider_list')}}"> Danh sách NCC của shop</a></li>
+            <li><a href="{{URL::route('admin.providerView')}}"> Danh sách NCC của shop</a></li>
             <li class="active">@if($id > 0)Cập nhật NCC của shop @else Tạo mới NCC của shop @endif</li>
         </ul><!-- /.breadcrumb -->
     </div>

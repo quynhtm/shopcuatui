@@ -115,12 +115,12 @@ class ProviderController extends BaseAdminController
             if($id > 0) {
                 //cap nhat
                 if(Provider::updateData($id, $dataSave)) {
-                    return Redirect::route('admin.provider_list');
+                    return Redirect::route('admin.providerView');
                 }
             } else {
                 //them moi
                 if(Provider::addData($dataSave)) {
-                    return Redirect::route('admin.provider_list');
+                    return Redirect::route('admin.providerView');
                 }
             }
         }

@@ -270,6 +270,7 @@ class Product extends Eloquent
             DB::connection()->getPdo()->commit();
             return true;
         } catch (PDOException $e) {
+            //return $e->getMessage();
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
         }

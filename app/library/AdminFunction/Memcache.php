@@ -67,6 +67,12 @@ class Memcache{
     //Tinh thanh
     const CACHE_ALL_PROVICE = 'cache_all_provice';
     const CACHE_PROVICE_ID = 'cache_provice_id_';
+
+    //provider: NCC cho shop
+    const CACHE_ALL_PROVIDER = 'cache_all_provider';
+    const CACHE_PROVIDER_ID = 'cache_provider_id_';
+    const CACHE_LIST_PROVIDER_BY_SHOP_ID = 'cache_provider_by_shop_id_';
+
     //Info
     const CACHE_INFO_ID    = 'cache_info_id_';
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
