@@ -73,6 +73,11 @@ class Memcache{
     const CACHE_PROVIDER_ID = 'cache_provider_id_';
     const CACHE_LIST_PROVIDER_BY_SHOP_ID = 'cache_provider_by_shop_id_';
 
+    //user shop
+    const CACHE_ALL_USER_SHOP = 'cache_all_user_shop';
+    const CACHE_USER_SHOP_ID = 'cache_user_shop_id_';
+    const CACHE_CATEGORY_SHOP_ID = 'cache_category_shop_id_';
+
     //Info
     const CACHE_INFO_ID    = 'cache_info_id_';
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';

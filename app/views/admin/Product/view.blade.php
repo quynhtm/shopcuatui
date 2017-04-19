@@ -38,6 +38,15 @@
                                 {{$optionDepart}}
                             </select>
                         </div>
+                        <div class="form-group col-lg-3">
+                            <label for="order_status">Sản phẩm của Shop</label>
+                            <select name="user_shop_id" id="user_shop_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên shop">
+                                <option value=""></option>
+                                @foreach($arrShop as $shop_id => $shopName)
+                                    <option value="{{$shop_id}}" @if($search['user_shop_id'] == $shop_id) selected="selected" @endif>{{$shopName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="form-group col-lg-12 text-right">
                             @if($is_root || $permission_full ==1 || $permission_create == 1)
                                 <span class="">

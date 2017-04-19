@@ -30,6 +30,7 @@ class ProductController extends BaseAdminController
     private $error =  array();
     private $arrCategory = array();
     private $arrDepart = array();
+    private $arrShop =  array();
     public function __construct()
     {
         parent::__construct();
@@ -58,6 +59,9 @@ class ProductController extends BaseAdminController
 
         //láy thông tin depart_id
         $this->arrDepart = Department::getDepart();
+
+        //danh sách shop
+        $this->arrShop = UserShop::getShopAll();
     }
 
     public function view() {
@@ -77,6 +81,7 @@ class ProductController extends BaseAdminController
         $search['product_is_hot'] = (int)Request::get('product_is_hot',-1);
         $search['category_id'] = (int)Request::get('category_id',-1);
         $search['depart_id'] = (int)Request::get('depart_id',-1);
+        $search['user_shop_id'] = (int)Request::get('user_shop_id',-1);
         //$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
         $dataSearch = Product::searchByCondition($search, $limit, $offset,$total);
@@ -101,6 +106,7 @@ class ProductController extends BaseAdminController
 
             ->with('arrDepart', $this->arrDepart)
             ->with('arrIsSale', $this->arrIsSale)
+            ->with('arrShop', $this->arrShop)
 
             ->with('optionStatusUpdate', $optionStatusUpdate)
             ->with('is_root', $this->is_root)//dùng common
