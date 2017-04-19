@@ -289,7 +289,7 @@ class ManagerOrderController extends BaseAdminController
         return Response::json($arrAjax);
     }
 
-    public function deleteOrderShop(){
+    public function deleteOrder(){
         $data = array('isIntOk' => 0);
         if(!$this->is_root){
             return Response::json($data);
