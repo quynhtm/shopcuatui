@@ -16,10 +16,10 @@ class CGlobal{
     public static $pageAdminTitle = 'Dashboard Admin';
     public static $pageShopTitle = 'HaiChau Admin';
 
-    const web_name = 'Haichau.com.vn';
-    const web_keywords= 'Bánh kẹo Hải Châu';
-    const web_description= 'Bánh kẹo Hải Châu';
-    public static $pageTitle = 'Bánh kẹo Hải Châu';
+    const web_name = 'shopcuatui.com.vn';
+    const web_keywords= 'Shopcuatui';
+    const web_description= 'Shopcuatui';
+    public static $pageTitle = 'Shopcuatui';
     
     const num_scroll_page = 2;
     const number_limit_show = 30;
