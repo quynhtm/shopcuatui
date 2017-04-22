@@ -114,6 +114,7 @@ class Department extends Eloquent
             DB::connection()->getPdo()->commit();
             return false;
         } catch (PDOException $e) {
+            return $e->getMessage();
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
         }

@@ -118,8 +118,8 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="name" class="control-label">Giá thị trường</label>
-                            <input type="text" placeholder="Giá thị trường" id="product_price_market" name="product_price_market" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['product_price_market'])){{$data['product_price_market']}}@endif">
+                            <label for="name" class="control-label">Giá nhập <span class="red"> (*) </span></label>
+                            <input type="text" placeholder="Giá nhập" id="product_price_input" name="product_price_input" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['product_price_input'])){{$data['product_price_input']}}@endif">
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -133,8 +133,8 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="name" class="control-label">Giá nhập</label>
-                            <input type="text" placeholder="Giá nhập" id="product_price_input" name="product_price_input" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['product_price_input'])){{$data['product_price_input']}}@endif">
+                            <label for="name" class="control-label">Giá thị trường</label>
+                            <input type="text" placeholder="Giá thị trường" id="product_price_market" name="product_price_market" class="formatMoney text-left form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="@if(isset($data['product_price_market'])){{$data['product_price_market']}}@endif">
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -146,6 +146,11 @@
                             <a href="javascript:;"class="btn btn-primary" onclick="Admin.uploadMultipleImages(2);">Upload ảnh</a>
                             <input name="image_primary" type="hidden" id="image_primary" value="@if(isset($data['product_image'])){{$data['product_image']}}@endif">
                             <input name="product_image_hover" type="hidden" id="image_primary_hover" value="@if(isset($data['product_image_hover'])){{$data['product_image_hover']}}@endif">
+                            @if($id > 0)
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-warning" href="{{URL::route('admin.productView')}}"><i class="fa fa-reply"></i> Trở lại</a>
+                                <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-saved"></i> Lưu lại</button>
+                            @endif
                         </div>
                     </div>
                     <div class="clearfix"></div>

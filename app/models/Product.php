@@ -102,10 +102,13 @@ class Product extends Eloquent
                 $query->whereIn('category_id', $arrCatId);
             }
 
-            if (isset($dataSearch['user_shop_id']) && $dataSearch['user_shop_id'] != -1) {
+            if (isset($dataSearch['user_shop_id']) && $dataSearch['user_shop_id'] != 0) {
                 $query->where('user_shop_id','=', $dataSearch['user_shop_id']);
             }
 
+            if (isset($dataSearch['depart_id']) && $dataSearch['depart_id'] > 0) {
+                $query->where('depart_id','=', $dataSearch['depart_id']);
+            }
             if (isset($dataSearch['product_is_hot']) && $dataSearch['product_is_hot'] != -1) {
                 $query->where('product_is_hot','=', $dataSearch['product_is_hot']);
             }
@@ -164,10 +167,13 @@ class Product extends Eloquent
             if (isset($dataSearch['provider_id']) && $dataSearch['provider_id'] != -1) {
                 $query->where('provider_id', $dataSearch['provider_id']);
             }
-            if (isset($dataSearch['user_shop_id']) && $dataSearch['user_shop_id'] != -1) {
+            if (isset($dataSearch['user_shop_id']) && $dataSearch['user_shop_id'] != 0) {
                 $query->where('user_shop_id', $dataSearch['user_shop_id']);
             }
-            
+            if (isset($dataSearch['depart_id']) && $dataSearch['depart_id'] > 0) {
+                $query->where('depart_id','=', $dataSearch['depart_id']);
+            }
+
             if (isset($dataSearch['user_shop_id'])) {
             	if (is_array($dataSearch['user_shop_id'])) {
             		$query->whereIn('user_shop_id', $dataSearch['user_shop_id']);
