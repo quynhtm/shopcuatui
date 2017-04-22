@@ -81,7 +81,7 @@ class ProductController extends BaseAdminController
         $search['product_is_hot'] = (int)Request::get('product_is_hot',-1);
         $search['category_id'] = (int)Request::get('category_id',-1);
         $search['depart_id'] = (int)Request::get('depart_id',-1);
-        $search['user_shop_id'] = (int)Request::get('user_shop_id',-1);
+        $search['user_shop_id'] = (int)Request::get('user_shop_id',0);
         //$search['field_get'] = 'order_id,order_product_name,order_status';//cac truong can lay
 
         $dataSearch = Product::searchByCondition($search, $limit, $offset,$total);
@@ -90,7 +90,7 @@ class ProductController extends BaseAdminController
 
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['product_status']);
         $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['product_is_hot']);
-        $optionDepart = FunctionLib::getOption($this->arrDepart, $search['depart_id']);
+        $optionDepart = FunctionLib::getOption(array(0=>'--- Chọn chuyên mục ---')+ $this->arrDepart, $search['depart_id']);
         $optionStatusUpdate = FunctionLib::getOption($this->arrStatusUpdate, -1);
         $this->layout->content = View::make('admin.Product.view')
             ->with('paging', $paging)
@@ -100,6 +100,7 @@ class ProductController extends BaseAdminController
             ->with('data', $dataSearch)
             ->with('search', $search)
             ->with('arrTypeProduct', $this->arrTypeProduct)
+            ->with('arrTypePrice', $this->arrTypePrice)
             ->with('optionStatus', $optionStatus)
             ->with('optionType', $optionType)
             ->with('optionDepart', $optionDepart)
@@ -299,11 +300,18 @@ class ProductController extends BaseAdminController
             if(isset($data['depart_id']) && $data['depart_id'] == -1) {
                 $this->error[] = 'Chưa chọn chuyên mục';
             }
-            if(isset($data['product_type_price']) && $data['product_type_price'] == CGlobal::TYPE_PRICE_NUMBER) {
+            if(isset($data['product_price_sell']) && $data['product_price_sell'] <= 0) {
+                $this->error[] = 'Chưa nhập giá bán';
+            }
+            if(isset($data['product_price_input']) && $data['product_price_input'] <= 0) {
+                $this->error[] = 'Chưa nhập giá nhập';
+            }
+
+            /*if(isset($data['product_type_price']) && $data['product_type_price'] == CGlobal::TYPE_PRICE_NUMBER) {
                 if(isset($data['product_price_sell']) && $data['product_price_sell'] <= 0) {
                     $this->error[] = 'Chưa nhập giá bán';
                 }
-            }
+            }*/
             return true;
         }
         return false;

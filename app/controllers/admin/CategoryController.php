@@ -169,13 +169,13 @@ class CategoryController extends BaseAdminController
             if(isset($data['category_status']) && $data['category_status'] == -1) {
                 $this->error[] = 'Bạn chưa chọn trạng thái cho danh mục';
             }
-            if(isset($data['category_parent_id']) && $data['category_parent_id'] == 0) {
+            /*if(isset($data['category_parent_id']) && $data['category_parent_id'] == 0) {
                 if(isset($data['category_depart_id']) && $data['category_depart_id'] == 0) {
                     if(isset($data['category_type']) && $data['category_type'] == CGlobal::category_product) {
                         $this->error[] = 'Bạn chưa chuyên mục';
                     }
                 }
-            }
+            }*/
             return true;
         }
         return false;

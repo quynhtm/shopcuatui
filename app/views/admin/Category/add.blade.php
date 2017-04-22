@@ -43,7 +43,7 @@
 
                     @if($category_type == CGlobal::category_product)
                         <div class="clearfix"></div>
-                        <div class="col-sm-10">
+                        <div class="col-sm-10" style="display: none">
                             <div class="form-group">
                                 <label for="name" class="control-label">Thuộc chuyên mục</label>
                                 <select name="category_depart_id" id="category_depart_id" class="form-control input-sm">
