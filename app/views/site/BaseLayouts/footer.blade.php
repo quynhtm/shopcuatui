@@ -1,41 +1,49 @@
-<div class="get-mail-post-new">
-    <div class="container">
-        <div class="wrap-get-mail">
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                Đăng ký nhận thông tin từ Hải Châu
-                <br><span>để nắm bắt giá cả thị trường ôtô cũ Việt Nam</span>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-12">
-                <div class="box-get-mail">
-                    <input name="keyword" class="keywordMail" placeholder="Nhập địa chỉ email để nhận thông tin từ HẢI CHÂU" type="text">
-                    <button type="submit" class="btn-mail">Đăng ký</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="footer-address">
-    <div class="container">
-        <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="logo">
-                <a href="{{URL::route('site.home')}}"></a>
-            </div>
-        </div>
-        <div class="col-lg-8 col-md-8 col-sm-12">
-            <div class="connect-us">
-                <div class="title-connect">Follow  US</div>
-                <div class="list-item-social">
-                    <a class="bg ic icon-fb" href="">F</a>
-                    <a class="bg ic icon-g" href="">G</a>
-                    <a class="bg ic icon-i" href="">I</a>
-                    <a class="bg ic icon-y" href="">Y</a>
-                    <a class="bg ic icon-t" href="">T</a>
-                    <a class="bg ic icon-p" href="">P</a>
-                </div>
-                <div class="title-connect">THÔNG TIN LIÊN HỆ</div>
-                <div class="bg address-connect">15 Mạc Thị Bưởi, Quận Hai Bà Trưng, Hà Nội</div>
-                <div class="bg phone-connect">+(84-4).38621520 - 36365592</div>
+
+
+<div class="top-bg-footer">
+    <div class="top-footer">
+        <div class="container">
+            <div class="right-top-footer">
+                <span>Kết nối với chúng tôi:</span>
+                <a href="https://plus.google.com/100693074505743994095" rel="nofollow">
+                    <i class="icon-google-plus"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100012051900214" rel="nofollow">
+                    <i class="icon-facebook"></i>
+                </a>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="midd-footer">
+            <ul>
+                <li><span>Về chúng tôi</span></li>
+                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/10-gioi-thieu.html" title="Giới thiệu">Giới thiệu</a></li>
+                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/11-lien-he.html" title="Liên hệ">Liên hệ</a></li>
+                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/12-chinh-sach-bao-mat.html" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
+                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/13-huong-dan-dang-ky-tai-khoan.html" title="Hướng dẫn đăng ký tài khoản">Hướng dẫn đăng ký tài khoản</a></li>
+            </ul>
+            <ul>
+                <li><span>Dành cho người mua</span></li>
+                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c1/14-huong-dan-mua-hang.html" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>
+            </ul>
+            <ul>
+                <li><span>Dành cho người bán</span></li>
+                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c2/15-cac-quy-dinh.html" title="Các quy định">Các quy định</a></li>
+            </ul>
+            <ul>
+                <li>
+                </li>
+                <li><span>ShopCuaTui.com.vn</span></li>
+                <div class="address">
+                    Địa chỉ: CT2A-Khu đô thị Nghĩa Đô-Cầu Giấy-Hà Nội<br>
+                    <span class="phone">ĐT: 0985.10.10.26 - 0913.922.986</span><br>
+                </div>
+                <div class="note-footer">
+                    Chú ý: Shopcuatui.com.vn là một CHỢ ONLINE. Quý khách mua hàng vui lòng liên hệ trực tiếp với Shop đăng sản phẩm ở mục liên hệ để mua hàng.
+                </div>
+            </ul>
+        </div>
+    </div>
 </div>
+
