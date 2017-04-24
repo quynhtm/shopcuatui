@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-xs-12">
                 {{Form::open(array('method' => 'POST','role'=>'form','files' => true))}}
-                <!--thông tin khách hàng-->
+                        <!--thông tin khách hàng-->
                 <div style="float: left; width: 45%;">
                     <div class="panel panel-info" >
                         <div class="panel-footer text-left">
@@ -153,7 +153,7 @@
                                             <td class="text-right text-middle"><b class="red" id="sys_total_product_price_sell_{{$product->product_id}}">{{FunctionLib::numberFormat($product->product_price_sell*$product->number_buy)}} đ</b></td>
 
                                             <input type="hidden" id="sys_product_price_sell_{{$product->product_id}}" name="product_price_sell_{{$product->product_id}}" class="form-control" value="{{$product->product_price_sell}}" >
-                                            <input type="hidden" id="total_product_price_sell_hiden_{{$product->product_id}}" name="total_product_price_sell_hiden[]" class="total_product_price_sell_hiden" value="{{$product->product_price_sell}}" >
+                                            <input type="hidden" id="total_product_price_sell_hiden_{{$product->product_id}}" name="total_product_price_sell_hiden[]" class="total_product_price_sell_hiden" value="{{$product->product_price_sell*$product->number_buy}}" >
                                             <?php
                                             $total_product = $total_product + $product->number_buy;
                                             $total_money = $total_money + ($product->product_price_sell*$product->number_buy);
