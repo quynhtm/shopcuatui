@@ -8,18 +8,9 @@
             <li><a href="{{URL::route('admin.groupUser_view')}}"> Danh sách nhóm quyền</a></li>
             <li class="active">Tạo nhóm quyền</li>
         </ul>
-        <!-- /.breadcrumb -->
     </div>
 
     <div class="page-content">
-        {{--<div class="page-header">--}}
-        {{--<h1>--}}
-        {{--<small>--}}
-        {{--Danh sách khách hàng--}}
-        {{--</small>--}}
-        {{--</h1>--}}
-        {{--</div><!-- /.page-header -->--}}
-
         <div class="row">
             <div class="col-xs-12">
                 <!-- PAGE CONTENT BEGINS -->
@@ -50,18 +41,20 @@
                     </div>
                 </div>
                 <div class="col-sm-10">
-                    @foreach($arrPermissionByController as $key => $val)
-                        <h4 class="header">@if($key || $key != ''){{$key}}@else Khac @endif</h4>
-                        @foreach($val as $k => $v)
-                            <label class="middle col-sm-3">
-                                <input type="checkbox" name="permission_id[]" value="{{$v['permission_id']}}"
-                                       class="ace" @if(isset($data['strPermission'])) @if(in_array($v['permission_id'],$data['strPermission']))
-                                       checked @endif @endif>
-                                <span class="lbl"> {{$v['permission_name']}}</span>
-                            </label>
+                    <div style="height: 550px; overflow-y: scroll;">
+                        @foreach($arrPermissionByController as $key => $val)
+                            <h4 class="header">@if($key || $key != ''){{$key}}@else Khac @endif</h4>
+                            @foreach($val as $k => $v)
+                                <label class="middle col-sm-3">
+                                    <input type="checkbox" name="permission_id[]" value="{{$v['permission_id']}}"
+                                           class="ace" @if(isset($data['strPermission'])) @if(in_array($v['permission_id'],$data['strPermission']))
+                                           checked @endif @endif>
+                                    <span class="lbl"> {{$v['permission_name']}}</span>
+                                </label>
+                            @endforeach
+                            <div class="clearfix"></div>
                         @endforeach
-                        <div class="clearfix"></div>
-                    @endforeach
+                    </div>
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group col-sm-12 text-right">
