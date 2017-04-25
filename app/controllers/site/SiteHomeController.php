@@ -3,6 +3,7 @@ class SiteHomeController extends BaseSiteController{
     public function __construct(){
         parent::__construct();
         FunctionLib::site_js('lib/swfObject/swfObject.js', CGlobal::$POS_HEAD);
+        return $this->offSite();
     }
 
 	//Trang chu
@@ -26,9 +27,12 @@ class SiteHomeController extends BaseSiteController{
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
     	$this->header();
-    	$this->middle();
-    	$this->consult();
-        $this->layout->content = View::make('site.SiteLayouts.Home');
+        //Slider
+        $arrSlider = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_BIG, CGlobal::BANNER_PAGE_HOME, 0, 0);
+
+        $this->layout->content = View::make('site.SiteLayouts.Home')
+            ->with('arrSlider', $arrSlider);
+
         $this->footer();
     }
 	public function pageCategory($catname='', $caid=0){
@@ -327,5 +331,15 @@ class SiteHomeController extends BaseSiteController{
             ->with('arrCatRight', $arrCatRight);
         $this->footer();
 
+    }
+
+    public function offSite()
+    {
+        $userAdmin = User::user_login();
+        if(empty($userAdmin)){
+            $url_image = Config::get('config.WEB_ROOT').'images/cap-nhat-va-bao-tri-web.jpg';
+            echo View::make('site.offSite', array('url_src_icon' => $url_image, 'date_off'=>86400 * 10));
+            die();
+        }
     }
 }

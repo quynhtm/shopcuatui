@@ -70,6 +70,55 @@ class ArrayPermission{
         'user_customer_create' => array('name_permit'=>'Tạo khách hàng','group_permit'=>'Quyền khách hàng'),
         'user_customer_edit' => array('name_permit'=>'Sửa khách hàng','group_permit'=>'Quyền khách hàng'),
 
+        'managerOrder_full' => array('name_permit'=>'Full Order','group_permit'=>'Quyền đơn hàng'),
+        'managerOrder_view' => array('name_permit'=>'Xem Order','group_permit'=>'Quyền đơn hàng'),
+        'managerOrder_delete' => array('name_permit'=>'Xóa Order','group_permit'=>'Quyền đơn hàng'),
+        'managerOrder_create' => array('name_permit'=>'Tạo Order','group_permit'=>'Quyền đơn hàng'),
+        'managerOrder_edit' => array('name_permit'=>'Sửa Order','group_permit'=>'Quyền đơn hàng'),
+        'managerOrder_view_detail' => array('name_permit'=>'Chi tiết Order','group_permit'=>'Quyền đơn hàng'),
+
+        'Report_full' => array('name_permit'=>'Full báo cáo','group_permit'=>'Quyền báo cáo'),
+        'Report_view' => array('name_permit'=>'Xem báo cáo','group_permit'=>'Quyền báo cáo'),
+        'Report_delete' => array('name_permit'=>'Xóa báo cáo','group_permit'=>'Quyền báo cáo'),
+        'Report_create' => array('name_permit'=>'Tạo báo cáo','group_permit'=>'Quyền báo cáo'),
+        'Report_edit' => array('name_permit'=>'Sửa báo cáo','group_permit'=>'Quyền báo cáo'),
+
+        'libraryImage_full' => array('name_permit'=>'Full thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_view' => array('name_permit'=>'Full thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_create' => array('name_permit'=>'Full thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_edit' => array('name_permit'=>'Full thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+        'libraryImage_delete' => array('name_permit'=>'Full thư viện ảnh','group_permit'=>'Quyền thư viện ảnh'),
+
+        'tab_full' => array('name_permit'=>'Full','group_permit'=>'Quyền danh mục tab'),
+        'tab_view' => array('name_permit'=>'Xem danh mục tab','group_permit'=>'Quyền danh mục tab'),
+        'tab_create' => array('name_permit'=>'Tạo danh mục tab','group_permit'=>'Quyền danh mục tab'),
+        'tab_edit' => array('name_permit'=>'Sửa danh mục tab','group_permit'=>'Quyền danh mục tab'),
+        'tab_delete' => array('name_permit'=>'Xóa danh mục tab','group_permit'=>'Quyền danh mục tab'),
+
+        'video_full' => array('name_permit'=>'Full video','group_permit'=>'Quyền video'),
+        'video_view' => array('name_permit'=>'Xem video','group_permit'=>'Quyền video'),
+        'video_create' => array('name_permit'=>'Tạo video','group_permit'=>'Quyền video'),
+        'video_edit' => array('name_permit'=>'Sửa video','group_permit'=>'Quyền video'),
+        'video_delete' => array('name_permit'=>'Xóa video','group_permit'=>'Quyền video'),
+
+        'attackLink_full' => array('name_permit'=>'Full liên kết','group_permit'=>'Quyền liên kết'),
+        'attackLink_view' => array('name_permit'=>'View liên kết','group_permit'=>'Quyền liên kết'),
+        'attackLink_delete' => array('name_permit'=>'Xóa liên kết','group_permit'=>'Quyền liên kết'),
+        'attackLink_create' => array('name_permit'=>'Tạo liên kết','group_permit'=>'Quyền liên kết'),
+        'attackLink_edit' => array('name_permit'=>'Sửa liên kết','group_permit'=>'Quyền liên kết'),
+
+        'excel_full' => array('name_permit'=>'Full excel','group_permit'=>'Quyền excel'),
+        'excel_view' => array('name_permit'=>'View excel','group_permit'=>'Quyền excel'),
+        'excel_delete' => array('name_permit'=>'Xóa excel','group_permit'=>'Quyền excel'),
+        'excel_create' => array('name_permit'=>'Tạo excel','group_permit'=>'Quyền excel'),
+        'excel_edit' => array('name_permit'=>'Sửa excel','group_permit'=>'Quyền excel'),
+
+        'contract_full' => array('name_permit'=>'Full liên hệ','group_permit'=>'Quyền liên hệ'),
+        'contract_view' => array('name_permit'=>'Xem liên hệ','group_permit'=>'Quyền liên hệ'),
+        'contract_delete' => array('name_permit'=>'Xóa liên hệ','group_permit'=>'Quyền liên hệ'),
+        'contract_create' => array('name_permit'=>'Tạo liên hệ','group_permit'=>'Quyền liên hệ'),
+        'contract_edit' => array('name_permit'=>'Sửa liên hệ','group_permit'=>'Quyền liên hệ'),
+
     );
 
 }

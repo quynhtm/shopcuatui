@@ -57,11 +57,10 @@
                         <tr class="">
                             <th width="2%"class="text-center">STT</th>
                             <!--<th width="1%" class="text-center"><input type="checkbox" id="checkAll"/></th>-->
-                            <th width="35%" class="td_list">Tên danh mục</th>
+                            <th width="45%" class="td_list">Tên danh mục</th>
                             <th width="20%" class="td_list">Danh mục cha</th>
                             <!---<th width="15%" class="td_list">Khoa - trung tâm</th>-->
-                            <th width="5%" class="text-center">Menu ngang-doc</th>
-                            <th width="15%" class="text-center">Menu bên phải tin</th>
+                            <th width="10%" class="text-center">Menu home</th>
                             <th width="5%" class="text-center">Thứ tự</th>
                             <th width="15%" class="text-center">Action</th>
                         </tr>
@@ -84,13 +83,6 @@
                                 </td>
                                 <td class="text-center">
                                     @if($item['category_menu_status'] == 1)
-                                        <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
-                                    @else
-                                        <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>
-                                    @endif
-                                </td>
-                                <td class="text-center">
-                                    @if($item['category_menu_right'] == 1)
                                         <a href="javascript:void(0);" title="Hiện"><i class="fa fa-check fa-2x"></i></a>
                                     @else
                                         <a href="javascript:void(0);" style="color: red" title="Ẩn"><i class="fa fa-close fa-2x"></i></a>

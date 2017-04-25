@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-xs-12">
                 {{Form::open(array('method' => 'POST','role'=>'form','files' => true))}}
-                <!--thông tin khách hàng-->
+                        <!--thông tin khách hàng-->
                 <div style="float: left; width: 45%;">
                     <div class="panel panel-info" >
                         <div class="panel-footer text-left">

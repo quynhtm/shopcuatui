@@ -103,7 +103,7 @@ class DepartmentController extends BaseAdminController
 
         $dataSave['department_name'] = addslashes(Request::get('department_name'));
         $dataSave['department_status'] = (int)Request::get('department_status', CGlobal::status_show);
-        $dataSave['department_status_home'] = (int)Request::get('department_status_home', CGlobal::status_show);
+        //$dataSave['department_status_home'] = (int)Request::get('department_status_home', CGlobal::status_show);
         $dataSave['department_order'] = (int)Request::get('department_order', 1);
         $dataSave['department_type'] = Request::get('department_type', '');
         $dataSave['department_layouts'] = Request::get('department_layouts', '');
@@ -117,6 +117,8 @@ class DepartmentController extends BaseAdminController
                 }
             } else {
                 //them moi
+                /*$abc = Department::addData($dataSave);
+                FunctionLib::debug($abc);*/
                 if(Department::addData($dataSave)) {
                     return Redirect::route('admin.department_list');
                 }

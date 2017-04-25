@@ -38,6 +38,13 @@
                                 {{$optionDepart}}
                             </select>
                         </div>
+
+                        <div class="form-group col-lg-3">
+                            <label for="order_status">Thuộc danh mục</label>
+                            <select name="category_id" id="category_id" class="form-control input-sm">
+                                {{$optionCategory}}
+                            </select>
+                        </div>
                         <div class="form-group col-lg-3">
                             <label for="order_status">Sản phẩm của Shop</label>
                             <select name="user_shop_id" id="user_shop_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên shop">
@@ -91,7 +98,7 @@
                         </thead>
                         <tbody>
                         @foreach ($data as $key => $item)
-                            <tr @if($item->is_shop == CGlobal::SHOP_VIP)style="background-color: #d6f6f6"@endif>
+                            <tr>
                                 <td class="text-center text-middle">
                                     {{ $stt + $key+1 }}<br/>
                                     <input class="check" type="checkbox" name="checkItems[]" id="sys_checkItems" value="{{$item->product_id}}">
@@ -115,12 +122,12 @@
                                     @endif
                                 </td>
                                 <td class="text-middle">
-                                    @if($item->product_type_price == CGlobal::TYPE_PRICE_CONTACT)
-                                        Giá bán: <b class="red"> Liên hệ </b>
-                                    @else
-                                        @if($item->product_price_market > 0)Thị trường: <b class="green">{{ FunctionLib::numberFormat($item->product_price_market) }} đ</b><br/>@endif
-                                        Giá bán: <b class="red">{{ FunctionLib::numberFormat($item->product_price_sell) }} đ</b>
-                                        @if($item->product_price_input > 0)<br/>Giá nhập: <b>{{ FunctionLib::numberFormat($item->product_price_input) }} đ</b>@endif
+                                    @if($item->product_price_market > 0)Thị trường: <b class="green">{{ FunctionLib::numberFormat($item->product_price_market) }} đ</b><br/>@endif
+                                    Giá bán: <b class="red">{{ FunctionLib::numberFormat($item->product_price_sell) }} đ</b>
+                                    @if($item->product_price_input > 0)<br/>Giá nhập: <b>{{ FunctionLib::numberFormat($item->product_price_input) }} đ</b>@endif
+
+                                    @if(isset($arrTypePrice[$item->product_type_price]))
+                                        <br/><b class="red">{{ $arrTypePrice[$item->product_type_price] }}</b>
                                     @endif
                                     @if(isset($arrTypeProduct[$item->product_is_hot]) && $item->product_is_hot != CGlobal::PRODUCT_NOMAL)
                                         <br/><b class="red">{{ $arrTypeProduct[$item->product_is_hot] }}</b>

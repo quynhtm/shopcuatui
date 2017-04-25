@@ -550,10 +550,10 @@ class FunctionLib {
      * @param int $banner_shop_id
      * @return array
      */
-     static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_shop_id = 0){
-         $result = array();
-         $arrBanner = Banner::getBannerAdvanced($banner_type, $banner_page, $banner_category_id, $banner_shop_id);
-         if($arrBanner && sizeof($arrBanner) > 0){
+    static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_shop_id = 0){
+        $result = array();
+        $arrBanner = Banner::getBannerAdvanced($banner_type, $banner_page, $banner_category_id, $banner_shop_id);
+        if($arrBanner && sizeof($arrBanner) > 0){
             foreach($arrBanner as $banner){
                 //banner chạy thời gian
                 if($banner->banner_is_run_time == CGlobal::BANNER_IS_RUN_TIME){
@@ -572,9 +572,9 @@ class FunctionLib {
                     $result[] = $banner;
                 }
             }
-         }
-         return $result;
-     }
+        }
+        return $result;
+    }
 
     static function sortBySubValue($array, $value, $asc = true, $preserveKeys = false){
         if(!empty($array)){

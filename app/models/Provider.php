@@ -25,10 +25,10 @@ class Provider extends Eloquent
         return $provider;
     }
 
-    public static function getListProviderByShopId($provider_shop_id) {
+    public static function getListProviderByShopId($provider_shop_id = 0) {
         $provider = (Memcache::CACHE_ON)? Cache::get(Memcache::CACHE_LIST_PROVIDER_BY_SHOP_ID.$provider_shop_id) : array();
         if (sizeof($provider) == 0) {
-            $data = Provider::where('provider_shop_id', $provider_shop_id)->get();
+            $data = Provider::where('provider_id','>' ,0)->get();
             if(count($data) > 0){
                 foreach($data as $itm) {
                     $provider[$itm->provider_id] = $itm->provider_name;
