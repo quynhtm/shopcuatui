@@ -72,7 +72,7 @@ class Order extends Eloquent
         return $data;
     }
 
-    public static function searchByCondition($dataSearch = array(), $limit =0, $offset=0, &$total){
+    public static function searchByCondition($dataSearch = array(), $limit = 0, $offset = 0, &$total){
         try{
             $tbl_OrderItem = with(new OrderItem())->getTable();
             $tbl_Order = with(new Order())->getTable();
