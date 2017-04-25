@@ -91,6 +91,8 @@ class ProductController extends BaseAdminController
         $optionStatus = FunctionLib::getOption($this->arrStatus, $search['product_status']);
         $optionType = FunctionLib::getOption($this->arrTypeProduct, $search['product_is_hot']);
         $optionDepart = FunctionLib::getOption(array(0=>'--- Chọn chuyên mục ---')+ $this->arrDepart, $search['depart_id']);
+
+        $optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $this->arrCategory,$search['category_id']);
         $optionStatusUpdate = FunctionLib::getOption($this->arrStatusUpdate, -1);
         $this->layout->content = View::make('admin.Product.view')
             ->with('paging', $paging)
@@ -104,6 +106,7 @@ class ProductController extends BaseAdminController
             ->with('optionStatus', $optionStatus)
             ->with('optionType', $optionType)
             ->with('optionDepart', $optionDepart)
+            ->with('optionCategory', $optionCategory)
 
             ->with('arrDepart', $this->arrDepart)
             ->with('arrIsSale', $this->arrIsSale)
@@ -143,6 +146,9 @@ class ProductController extends BaseAdminController
             $imagePrimary = $product->product_image;
             $imageHover = $product->product_image_hover;
         }
+        //nhà cung cấp
+        $arrNCC = Provider::getListProviderByShopId();
+        $optionNCC = FunctionLib::getOption(array(-1=>'---Chọn nhà cung cấp ----') + $arrNCC, isset($product->provider_id)? $product->provider_id:-1);
 
         $optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $this->arrCategory,isset($product->category_id)? $product->category_id: -1);
         $optionDepart = FunctionLib::getOption(array(-1=>'---Chọn chuyên mục----') + $this->arrDepart,isset($product->depart_id)? $product->depart_id: -1);
@@ -163,6 +169,7 @@ class ProductController extends BaseAdminController
             ->with('optionStatus', $optionStatus)
             ->with('optionTypePrice', $optionTypePrice)
             ->with('optionIsSale', $optionIsSale)
+            ->with('optionNCC', $optionNCC)
             ->with('optionTypeProduct', $optionTypeProduct);
     }
     public function postProduct($id = 0){
@@ -207,9 +214,6 @@ class ProductController extends BaseAdminController
         //check lại xem SP co phai cua Shop nay ko
         $id_hiden = Request::get('id_hiden',0);
         $product_id = ($id >0)? $id: $id_hiden;
-
-        //danh sach NCC cua shop
-        //$arrNCC = ($shopVip == 1)?Provider::getListProviderByShopId($this->inforUserShop->shop_id): array();
 
         //lay lai vi tri sap xep cua anh khac
         $arrInputImgOther = array();
@@ -262,8 +266,9 @@ class ProductController extends BaseAdminController
             }
         }
 
-        //FunctionLib::debug($dataSave);
-        //$optionNCC = FunctionLib::getOption(array(-1=>'---Chọn nhà cung cấp ----') + $arrNCC, $dataSave['provider_id']);
+        $arrNCC = Provider::getListProviderByShopId();
+        $optionNCC = FunctionLib::getOption(array(-1=>'---Chọn nhà cung cấp ----') + $arrNCC, $dataSave['provider_id']);
+
         $optionCategory = FunctionLib::getOption(array(-1=>'---Chọn danh mục----') + $this->arrCategory,$dataSave['category_id']);
         $optionStatus = FunctionLib::getOption($this->arrStatus,$dataSave['product_status']);
         $optionTypePrice = FunctionLib::getOption($this->arrTypePrice,$dataSave['product_type_price']);
@@ -284,6 +289,7 @@ class ProductController extends BaseAdminController
             ->with('optionDepart', $optionDepart)
             ->with('optionStatus', $optionStatus)
             ->with('optionTypePrice', $optionTypePrice)
+            ->with('optionNCC', $optionNCC)
             ->with('optionTypeProduct', $optionTypeProduct);
     }
     private function validInforProduct($data=array()) {

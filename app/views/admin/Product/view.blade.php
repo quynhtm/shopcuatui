@@ -38,6 +38,13 @@
                                 {{$optionDepart}}
                             </select>
                         </div>
+
+                        <div class="form-group col-lg-3">
+                            <label for="order_status">Thuộc danh mục</label>
+                            <select name="category_id" id="category_id" class="form-control input-sm">
+                                {{$optionCategory}}
+                            </select>
+                        </div>
                         <div class="form-group col-lg-3">
                             <label for="order_status">Sản phẩm của Shop</label>
                             <select name="user_shop_id" id="user_shop_id" class="form-control input-sm chosen-select-deselect" tabindex="12" data-placeholder="Chọn tên shop">
