@@ -152,94 +152,36 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a href="/c-41/me-va-be.html" title="Mẹ và bé">Mẹ và bé</a>
-                        <div class="list-subcat" style="background: #fff ">
-                            <ul>
-                                <li><a href="/c-53/do-dung-cho-me.html" title="Đồ dùng cho mẹ">Đồ dùng cho mẹ</a></li>
-                                <li><a href="/c-56/dinh-duong-cho-me.html" title="Dinh dưỡng cho mẹ">Dinh dưỡng cho mẹ</a></li>
-                                <li><a href="/c-105/quan-ao-do-so-sinh.html" title="Quần áo - đồ sơ sinh">Quần áo - đồ sơ sinh</a></li>
-                                <li><a href="/c-170/be-hoc-va-choi.html" title="Bé học và chơi">Bé học và chơi</a></li>
-                                <li><a href="/c-171/giuong-noi-xe-cho-be.html" title="Giường - nôi - xe cho bé">Giường - nôi - xe cho bé</a></li>
-                                <li><a href="/c-172/do-dung-cham-soc-be.html" title="Đồ dùng chăm sóc bé">Đồ dùng chăm sóc bé</a></li>
-                                <li><a href="/c-173/dinh-duong-cho-be.html" title="Dinh dưỡng cho bé">Dinh dưỡng cho bé</a></li>
-                                <li><a href="/c-174/sua-bot.html" title="Sữa &amp; Bột">Sữa &amp; Bột</a></li>
-                                <li><a href="/c-175/ta-bim.html" title="Tã bỉm">Tã bỉm</a></li>
-                                <li><a href="/c-177/cham-soc-cho-me.html" title="Chăm sóc cho mẹ">Chăm sóc cho mẹ</a></li>
-                            </ul>
-                            <ul>
-                                <li><a href="/c-178/y-te-cho-me-be.html" title="Y tế cho mẹ &amp; bé">Y tế cho mẹ &amp; bé</a></li>
-                                <li><a href="/c-179/thoi-trang-bau-sau-sinh.html" title="Thời trang bầu - sau sinh">Thời trang bầu - sau sinh</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/c-86/do-gia-dung-noi-that.html" title="Đồ gia dụng &amp; Nội thất">Đồ gia dụng &amp; Nội thất</a>
-                        <div class="list-subcat" style="background: #fff ">
-                            <ul>
-                                <li><a href="/c-27/do-dien-gia-dung.html" title="Đồ điện gia dụng">Đồ điện gia dụng</a></li>
-                                <li><a href="/c-50/dien-lanh.html" title="Điện lạnh">Điện lạnh</a></li>
-                                <li><a href="/c-89/noi-that-phong-tam.html" title="Nội thất phòng tắm">Nội thất phòng tắm</a></li>
-                                <li><a href="/c-92/vat-dung-nha-bep.html" title="Vật dụng nhà bếp">Vật dụng nhà bếp</a></li>
-                                <li><a href="/c-153/dung-cu-nha-bep.html" title="Dụng cụ nhà bếp">Dụng cụ nhà bếp</a></li>
-                                <li><a href="/c-154/do-dien-gia-dung.html" title="Đồ điện gia dụng">Đồ điện gia dụng</a></li>
-                                <li><a href="/c-155/san-pham-tien-ich.html" title="Sản phẩm tiện ích">Sản phẩm tiện ích</a></li>
-                                <li><a href="/c-156/day-cap-dien.html" title="Dây - cáp điện">Dây - cáp điện</a></li>
-                                <li><a href="/c-157/noi-that-va-trang-tri-nha-o.html" title="Nội thất và trang trí nhà ở">Nội thất và trang trí nhà ở</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="/c-184/khoa-hoc-dao-tao.html" title="Khóa học - đào tạo">Khóa học - đào tạo</a>
-                        <div class="list-subcat" style="background: #fff ">
-                            <ul>
-                                <li><a href="/c-185/khoa-chinh-quy-dai-han.html" title="Khóa chính quy - dài hạn">Khóa chính quy - dài hạn</a></li>
-                                <li><a href="/c-186/khoa-hoc-ngoai-ngu.html" title="Khóa học ngoại ngữ">Khóa học ngoại ngữ</a></li>
-                                <li><a href="/c-187/khoa-ngan-han-khoa-he.html" title="Khóa ngắn hạn - khóa hè">Khóa ngắn hạn - khóa hè</a></li>
-                                <li><a href="/c-188/ngoai-khoa-ky-nang-song.html" title="Ngoại khóa - Kỹ năng sống">Ngoại khóa - Kỹ năng sống</a></li>
-                                <li><a href="/c-189/dao-tao-online-truc-tuyen.html" title="Đào tạo Online - Trực tuyến">Đào tạo Online - Trực tuyến</a></li>
-                                <li><a href="/c-190/gia-su-phu-dao.html" title="Gia Sư - Phụ đạo">Gia Sư - Phụ đạo</a></li>
-                                <li><a href="/c-191/du-hoc.html" title="Du học">Du học</a></li>
-                            </ul>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
-        <div class="slider-box-mid">
-            <div class="bx-wrapper" style="max-width: 720px;">
-                <div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 456px;">
-                    <div id="sliderMid" style="width: auto; position: relative;">
-                        <div class="slide " style="float: none; list-style: outside none none; position: absolute; width: 720px; z-index: 0; display: none;">
-                            <a target="_blank" title="Slider trang chủ 1" href=" http://shopcuatui.com.vn ">
-                                <img src="" alt="Slider trang chủ 1">
+        @if(sizeof($arrSlider) != 0)
+            <div class="slider-box-mid">
+                <div id="sliderMid">
+                    @foreach($arrSlider as $item)
+                        <div class="slide ">
+                            <a @if($item->banner_is_rel == CGlobal::LINK_NOFOLLOW) rel="nofollow" @endif @if($item->banner_is_target == CGlobal::BANNER_TARGET_BLANK) target="_blank" @endif title="{{$item->banner_name}}" href="@if($item->banner_link != '') {{$item->banner_link}} @else javascript:void(0) @endif">
+                                <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_BANNER, $item->banner_id, $item->banner_image, CGlobal::sizeImage_750, '', true, CGlobal::type_thumb_image_banner, false)}}" alt="{{$item->banner_name}}">
                             </a>
                         </div>
-                        <div class="slide " style="float: none; list-style: outside none none; position: absolute; width: 720px; z-index: 50; display: block;">
-                            <a target="_blank" title="Slider trang chủ 3" href=" http://shopcuatui.com.vn ">
-                                <img src="http://project.vn/BanHang/shopcuatui.com.vn.ver2/uploads/thumbs/banner/18/750x450/1473695513-3.jpg" alt="Slider trang chủ 3">
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="bx-controls bx-has-pager bx-has-controls-direction">
-                    <div class="bx-pager bx-default-pager">
-                        <div class="bx-pager-item"><a href="" data-slide-index="0" class="bx-pager-link">1</a></div>
-                        <div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link">2</a></div>
-                        <div class="bx-pager-item"><a href="" data-slide-index="2" class="bx-pager-link active">3</a></div>
-                    </div>
-                    <div class="bx-controls-direction"><a class="bx-prev" href="">‹</a><a class="bx-next" href="">›</a></div>
-                </div>
+                <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                        jQuery('#sliderMid').bxSlider({
+                            slideWidth: 720,
+                            slideHeight: 428,
+                            minSlides: 1,
+                            maxSlides: 2,
+                            slideMargin: 10,
+                            mode: 'fade',
+                            pager: true,
+                            auto: true,
+                        });
+                    });
+                </script>
             </div>
-        </div>
-        <div class="ads-right-mid">
-            <div class="item-right-slider">
-                <img src="http://project.vn/BanHang/shopcuatui.com.vn.ver2/uploads/thumbs/banner/22/301x0/1473698980-44.jpg" alt="Banner nhỏ cạnh slider 2">
-            </div>
-            <div class="item-right-slider">
-                <img src="http://project.vn/BanHang/shopcuatui.com.vn.ver2/uploads/thumbs/banner/22/301x0/1473698980-44.jpg" alt="Banner nhỏ cạnh slider 2">
-            </div>
-        </div>
+        @endif
     </div>
     <div class="line-box line-box-cat vip">
         <div class="cate-box">

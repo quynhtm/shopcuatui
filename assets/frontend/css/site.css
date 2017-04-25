@@ -458,7 +458,7 @@ p {
     position: relative;
     display: inline-block;
     float: left;
-    height: 427px;
+    height: 311px;
 }
 .icon-cat-title {
     display: inline-block !important;
@@ -950,9 +950,9 @@ p {
 .slider-box-mid {
     display: inline-block;
     float: left;
-    height: 428px;
+    height: 312px;
     margin-left: 5px;
-    width: 56%;
+    width: 81%;
     overflow: hidden;
 }
 .slider-box-mid img{

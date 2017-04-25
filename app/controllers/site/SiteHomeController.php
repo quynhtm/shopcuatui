@@ -27,7 +27,12 @@ class SiteHomeController extends BaseSiteController{
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
     	$this->header();
-        $this->layout->content = View::make('site.SiteLayouts.Home');
+        //Slider
+        $arrSlider = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_BIG, CGlobal::BANNER_PAGE_HOME, 0, 0);
+
+        $this->layout->content = View::make('site.SiteLayouts.Home')
+            ->with('arrSlider', $arrSlider);
+
         $this->footer();
     }
 	public function pageCategory($catname='', $caid=0){

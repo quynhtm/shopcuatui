@@ -222,6 +222,23 @@ class CGlobal{
     const BANNER_TYPE_SLIDE = 6;
     const BANNER_TYPE_SLIDE_SUB = 7;
 
+    //banner
+    const BANNER_NOT_SHOP = 0;
+    const BANNER_IS_SHOP = 1;
+
+    const BANNER_TYPE_HOME_BIG = 1;
+    const BANNER_TYPE_HOME_SMALL = 2;
+    const BANNER_TYPE_HOME_LEFT = 3;
+    const BANNER_TYPE_HOME_RIGHT = 4;
+    const BANNER_TYPE_HOME_LIST = 5;
+
+    const BANNER_PAGE_LIST = 2;
+    const BANNER_TYPE_HOME_RIGHT_1 = 6;
+    const BANNER_TYPE_HOME_RIGHT_2 = 7;
+
+    const LINK_NOFOLLOW = 0;
+    const LINK_FOLLOW = 1;
+
     //page gắn link quảng cáo
     const BANNER_PAGE_HOME = 1;
     const BANNER_PAGE_DETAIL = 2;
@@ -245,8 +262,7 @@ class CGlobal{
         'pageNews' => self::BANNER_PAGE_OTHER,
     );
 
-    const LINK_NOFOLLOW = 0;
-    const LINK_FOLLOW = 1;
+
    
     //Duy bo sung
     const emailAdmin = 'nguyenduypt86@gmail.com';
