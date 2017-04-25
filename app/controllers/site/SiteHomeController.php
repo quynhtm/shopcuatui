@@ -8,7 +8,6 @@ class SiteHomeController extends BaseSiteController{
 
 	//Trang chu
     public function index(){
-		
     	//Meta title
     	$meta_title='';
     	$meta_keywords='';
@@ -30,7 +29,12 @@ class SiteHomeController extends BaseSiteController{
         //Slider
         $arrSlider = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_BIG, CGlobal::BANNER_PAGE_HOME, 0, 0);
 
+        ////Menu category
+        $dataCategory = Category::getCategoriessAll();
+        $arrCategory = $this->getTreeCategory($dataCategory);
+
         $this->layout->content = View::make('site.SiteLayouts.Home')
+            ->with('arrCategory', $arrCategory)
             ->with('arrSlider', $arrSlider);
 
         $this->footer();
