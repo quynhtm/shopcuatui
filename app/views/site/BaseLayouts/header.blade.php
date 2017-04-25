@@ -274,10 +274,7 @@
             <div class="right-ultity">
                 <div class="part1-right-ultity">
                     <div class="list-product-new">
-                        <i class="icon-list-new"></i> <a href="" title="Sản phẩm mới">Sản phẩm mới</a>
-                    </div>
-                    <div class="list-giai-tri">
-                        <i class="fa fa-bullhorn"></i> <a href="" title="Tin tức">Tin tức</a>
+                        <i class="icon-list-new"></i> <a href="" title="Hàng sale off"> Hàng giảm giá</a>
                     </div>
                 </div>
                 <div class="part2-right-ultity">
