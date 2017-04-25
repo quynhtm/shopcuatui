@@ -3,8 +3,7 @@
 <div class="link-top-head">
     <div class="container">
         <div class="box-login">
-            <a href="/dang-ky.html" class="btnLog register" rel="nofollow"><i class="register"></i>Mở Shop</a>
-            <a href="/dang-nhap.html" class="btnLog" rel="nofollow"><i class="login"></i>Vào Shop</a>
+            <a href="/dang-ky.html" class="btnLog register" rel="nofollow"><i class="register"></i>Giỏ hàng</a>
         </div>
     </div>
 </div>
@@ -19,10 +18,7 @@
                 <div class="search-top-center">
                     <div class="box-search">
                         <form method="GET" action="" accept-charset="UTF-8" id="frmsearch" class="frmsearch" name="frmsearch">
-                            <select name="shop_province">
-                            </select>
-                            <select name="shop_category">
-                            </select>
+                            <input type="text" name="title_search" value="">
                             <input class="btn-search" value="Tìm kiếm" type="submit">
                         </form>
                     </div>
