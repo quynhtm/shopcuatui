@@ -33,7 +33,7 @@ p {
 /*Header*/
 
 #wrapper .container {
-    width: 95%;
+    width: 80%;
     margin:0 auto;
 }
 .link-top-head {
@@ -1054,7 +1054,7 @@ p {
     margin: 5px 0.8% 20px;
     overflow: hidden;
     position: relative;
-    width: 17.9%;
+    width: 22.9%;
 }
 .item:hover {
     box-shadow: 0 0 2px #fe6d01;

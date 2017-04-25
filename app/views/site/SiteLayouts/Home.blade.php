@@ -245,31 +245,7 @@
         <div class="cate-box">
             <div class="inner-cate-box hide-text-over">
                 <h2 class="parent-cate act">
-                    <a href="javascript:void(0)" datacatid="0" datatype="vip">Sản phẩm Shop Vip</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="90" datatype="vip">Thực phẩm</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="97" datatype="vip">Thời trang</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="164" datatype="vip">Mỹ phẩm - làm đẹp</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="214" datatype="vip">Nhà sạch - nhà đẹp</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="225" datatype="vip">Ẩm thực - Giải trí</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="239" datatype="vip">Văn phòng phẩm - Sách báo</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="246" datatype="vip">Dịch vụ</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="43" datatype="vip">Điện tử công nghệ</a>
+                    <a href="javascript:void(0)" datacatid="0" datatype="vip">Hàng nhập khẩu Đức</a>
                 </h2>
             </div>
         </div>
@@ -302,45 +278,334 @@
 
                     </div>
                 </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
-    <div class="line-box line-box-cat normal">
+
+    <div class="line-box line-box-cat vip">
         <div class="cate-box">
             <div class="inner-cate-box hide-text-over">
                 <h2 class="parent-cate act">
-                    <a href="javascript:void(0)" datacatid="0" datatype="normal">Sản phẩm Shop thường</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="90" datatype="normal">Thực phẩm</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="97" datatype="normal">Thời trang</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="164" datatype="normal">Mỹ phẩm - làm đẹp</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="214" datatype="normal">Nhà sạch - nhà đẹp</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="225" datatype="normal">Ẩm thực - Giải trí</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="239" datatype="normal">Văn phòng phẩm - Sách báo</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="246" datatype="normal">Dịch vụ</a>
-                </h2>
-                <h2 class="parent-cate">
-                    <a href="javascript:void(0)" datacatid="43" datatype="normal">Điện tử công nghệ</a>
+                    <a href="javascript:void(0)" datacatid="0" datatype="vip">Hàng nhập khẩu Pháp</a>
                 </h2>
             </div>
         </div>
         <div class="content-list-item ">
             <ul class="data-tab tab-0 act">
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
+
+    <div class="line-box line-box-cat vip">
+        <div class="cate-box">
+            <div class="inner-cate-box hide-text-over">
+                <h2 class="parent-cate act">
+                    <a href="javascript:void(0)" datacatid="0" datatype="vip">Hàng nhập khẩu Úc</a>
+                </h2>
+            </div>
+        </div>
+        <div class="content-list-item ">
+            <ul class="data-tab tab-0 act">
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <span class="sale-off">
+                        -10%
+                    </span>
+
+
+                    <div class="post-thumb">
+                        <a title="" href="">
+                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="item-content">
+                        <div class="title-info">
+                            <h4 class="post-title">
+                                <a title="" href="">Sản phẩm demo</a>
+                            </h4>
+                            <div class="item-price">
+                                <span class="amount-1">200.000đ</span>
+                                <span class="amount-2">300.000đđ</span>
+                            </div>
+                        </div>
+                        <div class="mgt5 amount-call">
+                            <a title="" class="link-shop" href="">Shopcuatui</a>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 
