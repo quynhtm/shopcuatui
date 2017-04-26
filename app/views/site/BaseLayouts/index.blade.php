@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="shortcut icon" href="{{Config::get('config.WEB_ROOT')}}assets/frontend/img/favicon.ico" type="image/vnd.microsoft.icon">
 
+	{{ HTML::script('assets/js/jquery.2.1.1.min.js', array(), Config::get('config.SECURE')) }}
 	{{ HTML::style('assets/frontend/css/site.css?ver='.CGlobal::$css_ver, array(), Config::get('config.SECURE')) }}
 	{{CGlobal::$extraHeaderCSS}}
 	<script type="text/javascript">
@@ -13,7 +14,7 @@
         var DEVMODE = "{{Config::get('config.DEVMODE')}}";
         var COOKIE_DOMAIN = "{{Config::get('config.DOMAIN_COOKIE_SERVER')}}";
 	</script>
-	{{ HTML::script('assets/js/jquery.2.1.1.min.js', array(), Config::get('config.SECURE')) }}
+
 	{{CGlobal::$extraHeaderJS}}
 	@if(Config::get('config.DEVMODE') == false)
 		<meta name="google-site-verification" content="lJpAlY8qAQ365SzwbRN9_UEySpftXGaB4zgKeZgwKyk" />

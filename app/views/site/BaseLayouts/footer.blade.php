@@ -1,5 +1,3 @@
-
-
 <div class="top-bg-footer">
     <div class="top-footer">
         <div class="container">

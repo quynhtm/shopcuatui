@@ -1,31 +1,28 @@
 <?php
-/*
-* @Created by: DUYNX
-* @Author    : nguyenduypt86@gmail.com
-* @Date      : 11/2016
-* @Version   : 1.0
-*/
+/**
+ * Created by PhpStorm.
+ * User: QuynhTM
+ */
 
-//Home
+/*home*/
 Route::any('/', array('as' => 'site.home','uses' => 'SiteHomeController@index'));
 Route::get('404.html',array('as' => 'site.page404','uses' =>'SiteHomeController@page404'));
-Route::get('tim-kiem.html',array('as' => 'site.searchItems','uses' =>'SiteHomeController@searchItems'));
-Route::match(['GET','POST'],'lien-he.html',array('as' => 'site.pageContact','uses' =>'SiteHomeController@pageContact'));
 
-//Video
-Route::get('video.html',array('as' => 'site.pageVideo','uses' =>'SiteHomeController@pageVideo'));
-Route::match(['GET','POST'],'thu-vien-video/{video_title}-{video_id}.html',array('as' => 'site.pageVideoDetail','uses' =>'SiteHomeController@pageVideoDetail'))->where('video_title', '[A-Z0-9a-z_\-]+')->where('video_id', '[0-9]+');
+//San pham
+Route::get('tim-kiem.html',array('as' => 'site.search','uses' => 'SiteHomeController@searchProduct'));
+Route::get('san-pham-moi.html',array('as' => 'site.product_new','uses' => 'SiteHomeController@listProductNew'));
+Route::get('{cat}/{id}-{name}.html',array('as' => 'site.detailProduct','uses' =>'SiteHomeController@detailProduct'))->where('id', '[0-9]+');
+Route::get('c-{id}/{name}.html',array('as' => 'site.listProduct','uses' =>'SiteHomeController@listProduct'))->where('id', '[0-9]+');
 
-//Category News
-Route::get('{name}-{id}.html',array('as' => 'site.pageCategory','uses' =>'SiteHomeController@pageCategory'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
-Route::get('{catname}/{news_title}-{new_id}.html',array('as' => 'site.pageDetailNew','uses' =>'SiteHomeController@pageDetailNew'))->where('catname', '[A-Z0-9a-z_\-]+')->where('news_title', '[A-Z0-9a-z_\-]+')->where('new_id', '[0-9]+');
+//Tin tuc
+Route::get('n-{id}/{name}.html',array('as' => 'site.listNewSearch','uses' =>'SiteHomeController@listNewSearch'))->where('id', '[0-9]+');
+Route::get('tin-tuc.html',array('as' => 'site.listNew','uses' =>'SiteHomeController@homeNew'));
+Route::get('tin-tuc/c{cat_id}/{id}-{name}.html',array('as' => 'site.detailNew','uses' =>'SiteHomeController@detailNew'))->where('cat_id', '[0-9]+')->where('id', '[0-9]+');
 
-//Care Customer
-Route::get('cham-soc-khach-hang.html',array('as' => 'site.pageCareCustomer','uses' =>'SiteHomeController@pageCareCustomer'));
-
-//Captcha
-Route::match(['GET','POST'], 'captcha', array('as' => 'site.linkCaptcha','uses' =>'SiteHomeController@linkCaptcha'));
-Route::match(['GET','POST'], 'captchaCheckAjax', array('as' => 'site.captchaCheckAjax','uses' =>'SiteHomeController@captchaCheckAjax'));
-
-
-
+//Gio hang
+Route::post('them-vao-gio-hang.html', array('as' => 'site.ajaxAddCart','uses' => 'SiteOrderController@ajaxAddCart'));
+Route::match(['GET','POST'], 'gio-hang.html',array('as' => 'site.listCartOrder','uses' =>'SiteOrderController@listCartOrder'));
+Route::match(['GET','POST'], 'xoa-mot-san-pham-trong-gio-hang.html', array('as' => 'site.deleteOneItemInCart','uses' => 'SiteOrderController@deleteOneItemInCart'));
+Route::match(['GET','POST'], 'xoa-gio-hang.html', array('as' => 'site.deleteAllItemInCart','uses' => 'SiteOrderController@deleteAllItemInCart'));
+Route::match(['GET','POST'], 'gui-don-hang.html',array('as' => 'site.sendCartOrder','uses' =>'SiteOrderController@sendCartOrder'));
+Route::get('cam-on-da-mua-hang.html',array('as' => 'site.thanksBuy','uses' =>'SiteOrderController@thanksBuy'));
