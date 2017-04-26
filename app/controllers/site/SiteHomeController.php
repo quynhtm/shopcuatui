@@ -54,7 +54,18 @@ class SiteHomeController extends BaseSiteController{
         $this->layout->content = View::make('site.SiteLayouts.listProduct');
         $this->footer();
 	}
-    public function offSite()
+    public function detailProduct($id){
+        FunctionLib::site_css('lib/slickslider/slick.css', CGlobal::$POS_HEAD);
+        FunctionLib::site_js('lib/slickslider/slick.min.js', CGlobal::$POS_END);
+
+	    $meta_title = $meta_keywords = $meta_description = $meta_img = '';
+        FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+        $this->header();
+        $this->layout->content = View::make('site.SiteLayouts.detailProduct');
+        $this->footer();
+    }
+	public function offSite()
     {
         $userAdmin = User::user_login();
         if(empty($userAdmin)){
