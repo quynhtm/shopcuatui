@@ -90,6 +90,7 @@ p {
     margin-top: 8px;
     overflow: hidden;
     width: 20%;
+    margin-left: 2px;
 }
 #logo img{
     border-radius: 4px;
@@ -797,6 +798,83 @@ p {
     display: block;
     padding: 10px 0px 2px;
     width: 100%;
+}
+.main-view-post {
+    background: #fff;
+    border: 1px solid #f2f2f2;
+    min-height: 400px;
+    padding: 10px 15px;
+    display: inline-block;
+}
+.content-post-line {
+    background: #fff;
+    display: inline-block;
+    margin-top: 0px;
+    min-height: 508px;
+    position: relative;
+    width: 100%;
+}
+.title-head {
+    border-bottom: 2px solid #cc0000;
+    font-size: 20px;
+    margin-top: 0 !important;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 300;
+}
+.title-head a,
+.title-head a:hover,
+.title-head a:focus,
+.title-head a:active {
+    color: #222;
+    font-size: 20px;
+    font-style: italic;
+    text-transform: uppercase;
+}
+.list-link-cat {
+    border: 1px solid #ddd;
+    clear: both;
+    margin-bottom: 20px;
+    padding: 10px 10px 2px;
+    background: #fafafa;
+}
+.list-link-cat ul {
+    height: 22px;
+    overflow: hidden;
+    margin-bottom: 0;
+    display: inline-block;
+    width: 100%;
+}
+.list-link-cat li {
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 15px;
+}
+.list-link-cat li a {
+    color: #333;
+    font-style: italic;
+}
+.list-link-cat li a:hover{
+    text-decoration: underline;
+    color: #cc0000;
+}
+.list-link-cat .click-more-view-cat {
+    background: #fafafa;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    cursor: pointer;
+    height: 10px;
+    margin: 0 auto -12px;
+    width: 100px;
+    text-align: center;
+}
+.list-link-cat .click-more-view-cat .fa{
+    position: relative;
+    top: -5px;
+}
+.list-link-cat.act ul {
+    height: auto;
 }
 /*Item Product*/
 .data-tab {

@@ -11,7 +11,7 @@ class BaseSiteController extends BaseController
     protected $layout = 'site.BaseLayouts.index';
     protected $user = array();
     public function __construct(){
-
+        FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
     }
 
     public function header(){

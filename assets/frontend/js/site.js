@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
 	SITE.backTop();
 	SITE.contact();
+	SITE.initMoreLink();
 });
 
 SITE={
@@ -85,5 +86,17 @@ SITE={
             var img = document.images['imageCaptchar'];
             img.src = img.src.substring(0,img.src.lastIndexOf("?"))+"?rand="+Math.round(1000*Math.random());
 		});
-	}
+	},
+    initMoreLink:function(){
+        $(".click-more-view-cat").click(function(){
+            if($(".list-link-cat").hasClass('act')){
+                $(".list-link-cat").removeClass('act');
+                $('.click-more-view-cat i').removeClass('fa-angle-up').addClass('fa-angle-down');
+            }else{
+                $(".list-link-cat").addClass('act');
+                $('.click-more-view-cat i').removeClass('fa-angle-down').addClass('fa-angle-up');
+            }
+            return false;
+        });
+    },
 }
