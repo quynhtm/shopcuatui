@@ -66,3 +66,58 @@
         </div><!-- /.row -->
     </div><!-- /.main-content -->
 </div><!-- /.main-container -->
+
+<div class="block_login_center">
+    <div class="block_login_top">
+        <span class="float-R marginTop10 marginRight30">
+            <a href="javascript:void(0);" id="zam-btn-signin">Đăng nhập</a>
+        </span>
+        <span class="float-R marginTop10 marginRight30">Hỗ trợ (9:00 - 17:00) : (08) 4458 1371</span>
+    </div>
+    <div class="msg_support">
+        <p class="title_support">Bạn cần hỗ trợ? Hãy gọi ngay:</p>
+        <p class="phone_support">(08) 4444 9999</p>
+    </div>
+    <div class="form_login">
+        <div class="form_login_top">
+            <i class="imge_logo"></i>
+        </div>
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+            <div class="form_login_content">
+                <span class="float-L marginTop5 dangnhap">Đăng nhập</span>
+                @if(Session::has('error'))
+                    <div class="clear"></div>
+                    <span class="float-L marginTop5 msg_error"> ** {{ Session::get('error') }}</span>
+                @endif
+                <div class="form_login_input marginTop10">
+                    <div class="label_input">Tên đăng nhập</div>
+                    <input type="email" class="login_input marginTop5" name="email" placeholder="Tên đăng nhập" value="{{ old('email') }}">
+
+                    <div class="label_input marginTop10">Mật khẩu</div>
+                    <input type="password" class="login_input marginTop5" name="password" placeholder="Mật khẩu">
+                <span class="float-L marginTop5">
+                    <input type="checkbox" class="login_input_checkbox"><b class="remeber_account">Nhớ tài khoản</b>
+                </span>
+
+                    <button type="submit" name="submit" class="button_login" >Đăng nhập</button>
+
+                <span class="block_note marginTop5">
+                   <hr class="ngang">
+                    <span class="note_login">&nbsp;&nbsp;&nbsp;hoặc&nbsp;&nbsp;&nbsp;</span>
+                </span>
+                    <button type="button" name="submit" class="button_login_google" >Đăng nhập bằng Google</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="block_login_bottom">
+    <span class="float-R marginTop30 marginRight100 text-right">
+        Email: zamba@vccorp <br/>
+        Địa chỉ: Tầng 21, tòa nhà 24T, Hapulico số 1 Nguyễn Huy Tưởng, Thanh Xuân, Hà Nội
+    </span>
+
+    <span class="float-L marginTop30 marginLeft100 text-left">
+       <i class="imge_logo"></i>
+    </span>
+</div>
