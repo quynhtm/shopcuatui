@@ -503,6 +503,7 @@ img {
     line-height: 38px;
     padding-left: 13px;
     text-decoration: none;
+	overflow: hidden;
 }
 .content-box-menu ul > li > a {
     display: inline-block;
