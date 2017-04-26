@@ -32,7 +32,22 @@ class SiteHomeController extends BaseSiteController{
         $dataCategory = Category::getCategoriessAll();
         $arrCategory = $this->getTreeCategory($dataCategory);
 
+        //danh sach chuyen mục chính
+        $arrProductHome = array();
+        $arrDepart = Department::getDepart();
+        if(!empty($arrDepart)){
+            foreach($arrDepart as $depart_id =>$name){
+                $product = Product::getProductHomeByDepartId($depart_id);
+                if(!empty($product)){
+                    $arrProductHome[$depart_id]['depart_id'] = $depart_id;
+                    $arrProductHome[$depart_id]['depart_name'] = $name;
+                    $arrProductHome[$depart_id]['product'] = $product;
+                }
+            }
+        }
+
         $this->layout->content = View::make('site.SiteLayouts.Home')
+            ->with('arrProductHome', $arrProductHome)
             ->with('arrCategory', $arrCategory)
             ->with('arrSlider', $arrSlider);
 

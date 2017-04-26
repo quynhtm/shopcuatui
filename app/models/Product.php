@@ -68,6 +68,20 @@ class Product extends Eloquent
         }
         return array();
     }
+    public static function getProductHomeByDepartId($depart_id = 0,$field_get = array()) {
+        if(!empty($depart_id > 0)){
+            $limit = 8;
+            $offset = 0;
+            $query = Product::where('product_id','>',0);
+            $query->where('product_status',CGlobal::status_show);
+            $query->where('is_block',CGlobal::PRODUCT_NOT_BLOCK);
+            $query->where('depart_id',$depart_id);
+            $query->orderBy('time_update', 'desc')->orderBy('product_id', 'desc');
+            $result = (!empty($field_get)) ? $query->take($limit)->skip($offset)->get($field_get) :  $query->take($limit)->skip($offset)->get();
+            return ($result) ? $result: array();
+        }
+        return array();
+    }
 
     public static function getProductForSite($dataSearch = array(), $limit =0, $offset = 0, &$total){
         try{
