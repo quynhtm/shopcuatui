@@ -24,6 +24,8 @@
     {{ HTML::style('assets/css/ace.min.css'); }}
     {{--<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />--}}
 
+    {{ HTML::style('assets/admin/css/admin_css.css'); }}
+
     <!--[if lte IE 9]>
     {{ HTML::style('assets/css/ace-part2.min.css'); }}
     <![endif]-->
