@@ -47,6 +47,8 @@ class CGlobal{
     const sizeImage_500 = 500;
     const sizeImage_600 = 600;
     const sizeImage_750 = 750;
+    const sizeImage_800 = 800;
+    const sizeImage_400 = 400;
     const sizeImage_1020 = 1020;
 
     const sizeImage_1000 = 1000;
@@ -55,7 +57,7 @@ class CGlobal{
 
     const freeSizeImage_300 = 301;
 
-    //size anh cho tin rao
+    //size anh cho sản phẩm
     public static $arrSizeImage = array(
         self::sizeImage_80 =>array('w'=>self::sizeImage_80,'h'=>self::sizeImage_80),
         self::sizeImage_100 =>array('w'=>self::sizeImage_100,'h'=>self::sizeImage_100),
@@ -64,6 +66,8 @@ class CGlobal{
         self::sizeImage_300 =>array('w'=>self::sizeImage_300,'h'=>self::sizeImage_300),
     	self::sizeImage_600 =>array('w'=>self::sizeImage_600,'h'=>self::sizeImage_600),//insert vao noi dung
         self::sizeImage_500 =>array('w'=>self::sizeImage_500,'h'=>self::sizeImage_300),
+        self::sizeImage_800 =>array('w'=>self::sizeImage_800,'h'=>self::sizeImage_800),//ảnh to chi tiết
+        self::sizeImage_400 =>array('w'=>self::sizeImage_400,'h'=>self::sizeImage_400),//ảnh nho chi tiết
     );
 
     //dinh nghĩa khung ảnh hiển thị bên ngoài

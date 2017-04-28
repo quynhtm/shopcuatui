@@ -69,15 +69,52 @@ class SiteHomeController extends BaseSiteController{
         $this->layout->content = View::make('site.SiteLayouts.listProduct');
         $this->footer();
 	}
-    public function detailProduct($id){
+
+    public function detailProduct($namCate, $id){
         FunctionLib::site_css('lib/slickslider/slick.css', CGlobal::$POS_HEAD);
         FunctionLib::site_js('lib/slickslider/slick.min.js', CGlobal::$POS_END);
-
-	    $meta_title = $meta_keywords = $meta_description = $meta_img = '';
+        $meta_title = $meta_keywords = $meta_description = $meta_img = '';
+        $product = array();
+        $product_image_other = array();
+        if((int)$id > 0){
+            $product = Product::getProductByID($id);
+            //check sản phẩm lỗi
+            if(!isset($product->product_id)){
+                return Redirect::route('site.home');
+            }
+            if(isset($product->product_status) && $product->product_status == CGlobal::status_hide){
+                return Redirect::route('site.home');
+            }
+            if(isset($product->is_block) && $product->is_block == CGlobal::PRODUCT_BLOCK){
+                return Redirect::route('site.home');
+            }
+            if(sizeof($product) > 0){
+                $meta_title = $product->product_name;
+                $meta_keywords = $product->product_name;
+                $meta_description = $product->product_name;
+                $meta_img = ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $product->product_image, CGlobal::sizeImage_200);
+                if($product->product_image_other != ''){
+                    $product_image_other = unserialize($product->product_image_other);
+                }
+            }
+        }
         FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+        //FunctionLib::debug($product);
+
+        $arrDepart = Department::getDepart();
+
+        $arrNumberBuy = array();
+        for ($i = 1; $i <= 10; $i++) {
+            $arrNumberBuy[$i] = $i;
+        }
+        $optionNumberBuy = FunctionLib::getOption($arrNumberBuy, 1);
 
         $this->header();
-        $this->layout->content = View::make('site.SiteLayouts.detailProduct');
+        $this->layout->content = View::make('site.SiteLayouts.detailProduct')
+            ->with('arrDepart', $arrDepart)
+            ->with('optionNumberBuy', $optionNumberBuy)
+            ->with('product_image_other', $product_image_other)
+            ->with('product', $product);
         $this->footer();
     }
 	public function offSite()
