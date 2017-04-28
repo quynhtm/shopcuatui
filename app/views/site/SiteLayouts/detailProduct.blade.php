@@ -87,7 +87,7 @@
                             {{$optionNumberBuy}}
                         </select>
                     </div>
-                    <div id="buttonFormBuySubmit" data-pid="{{$product->product_id}}" class="buynow btn">Mua ngay</div>
+                    <div id="btnBuy" dataid="{{$product->product_id}}" class="buynow btn">Mua ngay</div>
                 </div>
                 <div class="content-right-product">
                     <div class="order-number-phone">

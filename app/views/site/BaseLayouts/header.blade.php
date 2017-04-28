@@ -1,7 +1,7 @@
 <div class="link-top-head">
     <div class="container">
         <div class="box-login">
-            <a href="" class="btnLog cart" rel="nofollow"><i class="cart"></i>Giỏ hàng (<span>2</span>)</a>
+            <a href="{{URL::route('site.listCartOrder')}}" class="btnLog cart" rel="nofollow"><i class="cart"></i>Giỏ hàng (<span>@if(isset($numCart)) {{$numCart}} @endif </span>)</a>
         </div>
     </div>
 </div>

@@ -11,9 +11,9 @@ CART = {
 		jQuery('#btnBuy').click(function () {
 			var url = WEB_ROOT + '/them-vao-gio-hang.html';
 			var pid = jQuery(this).attr('dataid');
-			var pnum = 1;
+			var pnum = jQuery('#buy-num').val();
 			jQuery('body').append('<div class="loading"></div>');
-			if (pid > 0) {
+			if (pid > 0 && pnum > 0) {
 				jQuery.ajax({
 					type: "POST",
 					url: url,
@@ -90,19 +90,18 @@ CART = {
 				phone = jQuery('#txtFormPaymentCart input[name="txtMobile"]'),
 				address = jQuery('#txtFormPaymentCart input[name="txtAddress"]');
 
-			if (name.val() == '') {
+			if (phone.val() == '') {
+                phone.addClass('error').focus();
+                return false;
+            } else {
+                phone.removeClass('error');
+            }
+            if (name.val() == '') {
 				name.addClass('error').focus();
 				return false;
 			} else {
 				name.removeClass('error');
 			}
-			if (phone.val() == '') {
-				phone.addClass('error').focus();
-				return false;
-			} else {
-				phone.removeClass('error');
-			}
-
 			if (address.val() == '') {
 				address.addClass('error').focus();
 				return false;
