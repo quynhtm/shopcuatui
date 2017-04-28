@@ -16,7 +16,7 @@
                         @foreach($product_image_other as $key => $imgOther)
                         <div class="item-one-img-view">
                             <a href="#" title="{{$product->product_name}}" tabindex="0">
-                                <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $product->product_image, CGlobal::sizeImage_400)}}" title="{{$product->product_name}}" alt="{{$product->product_name}}">
+                                <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $imgOther, CGlobal::sizeImage_400)}}" title="{{$product->product_name}}" alt="{{$product->product_name}}">
                             </a>
                         </div>
                         @endforeach
