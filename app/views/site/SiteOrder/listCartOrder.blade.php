@@ -10,12 +10,12 @@
 					<table class="list-shop-cart-item" width="100%">
 						<tbody>
 						<tr class="first">
-							<th>STT</th>
-							<th>Tên sản phẩm</th>
-							<th>Số lượng</th>
-							<th>Giá / 1 sản phẩm</th>
-							<th>Thành tiền</th>
-							<th class="text-center">Thao tác</th>
+							<th width="5%">STT</th>
+							<th width="30%">Tên sản phẩm</th>
+							<th width="5%">Số lượng</th>
+							<th width="10%">Giá / 1 sản phẩm</th>
+							<th width="10%">Thành tiền</th>
+							<th class="text-center" width="5%">Thao tác</th>
 						</tr>
                         <?php $total = 0; ?>
 						@foreach($dataItem as $key => $item)
