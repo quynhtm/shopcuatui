@@ -1,47 +1,25 @@
 <div class="container">
     <div class="main-view-post">
         <h1 class="title-head">
-            <a title="Thời trang nữ" href="">Thời trang nữ</a>
+            <a title="Thời trang nữ" href="">@if(isset($arrDepart[$product->depart_id])) {{$arrDepart[$product->depart_id]}} @else Sản phẩm @endif</a>
         </h1>
         <div class="row">
             <div class="left-slider-img">
                 <div class="img-main-view">
-                    <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
-                        <img src="http://sanphamredep.com/uploads/thumbs/product/261/800x800/10-17-39-22-09-2016-1.jpg" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
+                    <a href="#" title="{{$product->product_name}}">
+                        <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $product->product_image, CGlobal::sizeImage_800)}}" alt="{{$product->product_name}}">
                     </a>
                 </div>
+                @if(isset($product_image_other) && !empty($product_image_other))
                 <div class="arr-img">
                     <div id="slick">
+                        @foreach($product_image_other as $key => $imgOther)
                         <div class="item-one-img-view">
-                            <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" tabindex="0">
-                                <img src="http://sanphamredep.com/uploads/thumbs/product/261/400x400/10-17-39-22-09-2016-1.jpg" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
+                            <a href="#" title="{{$product->product_name}}" tabindex="0">
+                                <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $imgOther, CGlobal::sizeImage_400)}}" title="{{$product->product_name}}" alt="{{$product->product_name}}">
                             </a>
                         </div>
-                        <div class="item-one-img-view">
-                            <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" tabindex="0">
-                                <img src="http://sanphamredep.com/uploads/thumbs/product/261/400x400/10-17-39-22-09-2016-1.jpg" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
-                            </a>
-                        </div>
-                        <div class="item-one-img-view">
-                            <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" tabindex="0">
-                                <img src="http://sanphamredep.com/uploads/thumbs/product/261/400x400/10-17-39-22-09-2016-1.jpg" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
-                            </a>
-                        </div>
-                        <div class="item-one-img-view">
-                            <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" tabindex="0">
-                                <img src="http://sanphamredep.com/uploads/thumbs/product/261/400x400/10-17-39-22-09-2016-1.jpg" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
-                            </a>
-                        </div>
-                        <div class="item-one-img-view">
-                            <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" tabindex="0">
-                                <img src="http://sanphamredep.com/uploads/thumbs/product/261/400x400/10-17-39-22-09-2016-1.jpg" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
-                            </a>
-                        </div>
-                        <div class="item-one-img-view">
-                            <a href="" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" tabindex="0">
-                                <img src="http://sanphamredep.com/uploads/thumbs/product/261/400x400/10-17-39-22-09-2016-1.jpg" title="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở" alt="Đồng hồ Fedylon FE-245- Phong cách chỉn chu sành điệu cho anh chàng công sở">
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
                     <script type="text/javascript">
                         $(document).ready(function(){
@@ -54,21 +32,37 @@
                         });
                     </script>
                 </div>
+                @endif
             </div>
             <div class="center-des-product">
-                <h1>Dầu óc chó Nga 100%</h1>
-                <div class="row-price">
-                    <div class="lbl-row">Giá thị trường:</div>
-                    <div class="price-origin">380.000đ</div>
-                </div>
-                <div class="row-price">
-                    <div class="lbl-row lbl-price-sale">Giá bán:</div>
-                    <div class="price-sale">330.000<span class="td-border">đ</span></div>
-                </div>
+                <h1>{{$product->product_name}}</h1>
+
+                @if($product->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $product->product_price_sell > 0)
+                    @if($product->product_price_market > 0 && $product->product_price_market > $product->product_price_sell)
+                        <div class="row-price">
+                            <div class="lbl-row">Giá thị trường:</div>
+                            <div class="price-origin">{{FunctionLib::numberFormat($product->product_price_market)}}đ</div>
+                        </div>
+                    @endif
+                    @if($product->product_price_sell > 0)
+                        <div class="row-price">
+                            <div class="lbl-row lbl-price-sale">Giá bán:</div>
+                            <div class="price-sale">{{FunctionLib::numberFormat($product->product_price_sell)}}<span class="td-border">đ</span></div>
+                        </div>
+                    @endif
+                @else
+                    <div class="row-price">
+                        <div class="lbl-row lbl-price-sale">Giá bán:</div>
+                        <div class="price-sale">Liên hệ</div>
+                    </div>
+                @endif
+
                 <div class="features-point">
                     <div class="lbl-point">Mô tả sản phẩm</div>
-                    <div class="des-point"><p>Dầu óc chó Nga 100% ép từ hạt óc chó, đóng chai thủy tinh và 100% không chất bảo quản.&nbsp;<br>rnChai 250ml&nbsp;<br>rnThành phần dinh dưỡng: 99.8% chất béo. Trong 100 gam chứa 89.8 calo. Hàm lượng Omega 3 và 6 cao nhất trong các loại hạt hay cá hồi. Giúp phát triển trí não, phát triển trí thông minh của trẻ, cho phụ nữ mang thai,tăng cường trí nhớ cho người cao tuổi.</p></div>
-                    <div class="box-promotion">
+                    <div class="des-point">
+                        {{$product->product_sort_desc}}
+                    </div>
+                    <div class="box-promotion" style="display: none">
                         <div class="lbl-point">Thông tin khuyến mãi</div>
                         <div class="box-content-promotion">Mua 2 chai giảm thêm 5%</div>
                     </div>
@@ -84,26 +78,17 @@
                             js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
                             fjs.parentNode.insertBefore(js, fjs);
                         }(document, 'script', 'facebook-jssdk'));</script>
-                    <div class="fb-like" data-href="http://shopcuatui.com.vn.ver2/tap-hoa/664-dau-oc-cho-nga-100.html" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true">
+                    <div class="fb-like" data-href="{{FunctionLib::buildLinkDetailProduct($product->product_id, $product->product_name, $product->category_name)}}" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true">
                     </div>
                 </div>
                 <div class="content-right-product">
                     <div class="order-number">
                         <label for="buy-number">Số lượng</label>
                         <select class="sl-num" id="buy-num" name="buy-num">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
+                            {{$optionNumberBuy}}
                         </select>
                     </div>
-                    <div id="buttonFormBuySubmit" data-pid="664" class="buynow btn">Mua ngay</div>
+                    <div id="buttonFormBuySubmit" data-pid="{{$product->product_id}}" class="buynow btn">Mua ngay</div>
                 </div>
                 <div class="content-right-product">
                     <div class="order-number-phone">
@@ -133,11 +118,7 @@
                 </div>
             </div>
             <div class="content-bottom-content-view">
-                Dầu óc chó Nga 100% ép từ hạt óc chó, đóng chai thủy tinh và 100% không chất bảo quản.
-                rnChai 250ml
-                rnHạn sử dụng 1 năm kể từ ngày sản xuất in trên bao bì, sau khi bóc bảo quản trong ngăn mát tủ lạnh không bảo quản bên ngoài bởi dầu óc chó 100% không có chất bảo quản không giống như một số hãng. Tuyệt đối không nấu, chiên xào, làm nóng dầu óc chó.
-                rn(Có thể có lắng cặn tự nhiên trong quá trình sử dụng)
-                rnThành phần dinh dưỡng: 99.8% chất béo. Trong 100 gam chứa 89.8 calo. Hàm lượng Omega 3 và 6 cao nhất trong các loại hạt hay cá hồi. Giúp phát triển trí não, phát triển trí thông minh của trẻ, cho phụ nữ mang thai,tăng cường trí nhớ cho người cao tuổi.
+                {{$product->product_content}}
             </div>
         </div>
     </div>
