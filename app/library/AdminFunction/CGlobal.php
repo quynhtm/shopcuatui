@@ -14,7 +14,7 @@ class CGlobal{
     public static $extraFooterJS = '';
     public static $extraMeta = '';
     public static $pageAdminTitle = 'Dashboard Admin';
-    public static $pageShopTitle = 'HaiChau Admin';
+    public static $pageShopTitle = 'Shopcuatui Admin';
 
     const web_name = 'shopcuatui.com.vn';
     const web_keywords= 'Shopcuatui';
@@ -275,5 +275,5 @@ class CGlobal{
     	'\r\n', '☎', '👉', '✈', '🍬', '🏃', '🏻', '😁','🍬', '🏃🏻', '💃🏽', '✅', '😜', '🌳', '🌴', '🌲', '🌱',
     	'🌻', '🐮', '🐃', '🐎', '🐎', '🐓', '🐔', '🐗', '💥'
     );
-    const linkMail = 'http://mail.cdsptw.edu.vn';
+    const linkMail = '';
 }

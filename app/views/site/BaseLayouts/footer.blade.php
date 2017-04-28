@@ -16,29 +16,39 @@
         <div class="midd-footer">
             <ul>
                 <li><span>Về chúng tôi</span></li>
-                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/10-gioi-thieu.html" title="Giới thiệu">Giới thiệu</a></li>
-                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/11-lien-he.html" title="Liên hệ">Liên hệ</a></li>
-                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/12-chinh-sach-bao-mat.html" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
-                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c3/13-huong-dan-dang-ky-tai-khoan.html" title="Hướng dẫn đăng ký tài khoản">Hướng dẫn đăng ký tài khoản</a></li>
+                <li><a rel="nofollow" href="" title="Giới thiệu">Giới thiệu</a></li>
+                <li><a rel="nofollow" href="" title="Liên hệ">Liên hệ</a></li>
+                <li><a rel="nofollow" href="" title="Chính sách bảo mật">Chính sách bảo mật</a></li>
             </ul>
             <ul>
                 <li><span>Dành cho người mua</span></li>
-                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c1/14-huong-dan-mua-hang.html" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>
+                <li><a rel="nofollow" href="" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a></li>
+                <li><a rel="nofollow" href="" title="Chính sách giao nhận hàng">Chính sách giao nhận hàng</a></li>
+                <li><a rel="nofollow" href="" title="Hình thức thanh toán">Hình thức thanh toán</a></li>
             </ul>
             <ul>
-                <li><span>Dành cho người bán</span></li>
-                <li><a rel="nofollow" target="_blank" href="/tin-tuc/c2/15-cac-quy-dinh.html" title="Các quy định">Các quy định</a></li>
-            </ul>
-            <ul>
+                <li><span>ĐĂNG KÝ NHẬN BẢN TIN</span></li>
                 <li>
+                    <div class="box-input-reg-title">Đăng ký nhận tin khuyến mãi, giảm giá!</div>
+                    <div class="box-input-reg-mail">
+                        <input name="" class="form-control inputRegMailGetPromotion" placeholder="Email của bạn:" type="text">
+                        <button class="btn inputSubscribe"><i class="fa fa-send-o"></i>Gửi</button>
+                    </div>
                 </li>
+                <li>
+                    <div class="box-des-reg-mail">
+                        (Bằng việc đăng ký nhận tin từ Shopcuatui bạn đã xác nhận đồng ý với chính sách bảo mật được cung cấp của chúng tôi.)
+                    </div>
+                </li>
+            </ul>
+            <ul>
                 <li><span>ShopCuaTui.com.vn</span></li>
                 <div class="address">
                     Địa chỉ: CT2A-Khu đô thị Nghĩa Đô-Cầu Giấy-Hà Nội<br>
                     <span class="phone">ĐT: 0985.10.10.26 - 0913.922.986</span><br>
                 </div>
                 <div class="note-footer">
-                    Chú ý: Shopcuatui.com.vn là một CHỢ ONLINE. Quý khách mua hàng vui lòng liên hệ trực tiếp với Shop đăng sản phẩm ở mục liên hệ để mua hàng.
+                    Chú ý: Shopcuatui.com.vn chuyên hàng xách tay từ nước ngoài về. Quý khách mua hàng vui lòng liên hệ trực tiếp với ban quản trị để mua hàng.
                 </div>
             </ul>
         </div>
