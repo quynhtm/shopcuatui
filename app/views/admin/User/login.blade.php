@@ -1,6 +1,3 @@
-<div class="bg-cover">
-    <img src="{{Config::get('config.WEB_ROOT')}}/assets/admin/img/login/login.jpg" alt="">
-</div>
 <div class="block_login_center">
     <div class="msg_support">
         <p class="title_support">Bạn cần hỗ trợ? Hãy gọi ngay:</p>
