@@ -12,10 +12,18 @@ class BaseSiteController extends BaseController
     protected $user = array();
     public function __construct(){
         FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
+        FunctionLib::site_js('frontend/js/cart.js', CGlobal::$POS_END);
     }
 
     public function header(){
-        $this->layout->header = View::make("site.BaseLayouts.header");
+        //Menu category
+        $dataCategory = Category::getCategoriessAll();
+        $arrCategory = $this->getTreeCategory($dataCategory);
+        $numCart = $this->countNumCart();
+
+        $this->layout->header = View::make("site.BaseLayouts.header")
+                                ->with('arrCategory', $arrCategory)
+                                ->with('numCart', $numCart);
     }
 
     public function footer(){

@@ -28,7 +28,7 @@ class SiteHomeController extends BaseSiteController{
         //Slider
         $arrSlider = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_BIG, CGlobal::BANNER_PAGE_HOME, 0, 0);
 
-        ////Menu category
+        //Menu category
         $dataCategory = Category::getCategoriessAll();
         $arrCategory = $this->getTreeCategory($dataCategory);
 
@@ -73,6 +73,9 @@ class SiteHomeController extends BaseSiteController{
     public function detailProduct($namCate, $id){
         FunctionLib::site_css('lib/slickslider/slick.css', CGlobal::$POS_HEAD);
         FunctionLib::site_js('lib/slickslider/slick.min.js', CGlobal::$POS_END);
+        FunctionLib::site_css('lib/slidermagnific/magnific-popup.css', CGlobal::$POS_HEAD);
+        FunctionLib::site_js('lib/slidermagnific/magnific-popup.min.js', CGlobal::$POS_END);
+
         $meta_title = $meta_keywords = $meta_description = $meta_img = '';
         $product = array();
         $product_image_other = array();

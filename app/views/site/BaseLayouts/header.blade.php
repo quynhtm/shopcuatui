@@ -1,17 +1,18 @@
 <div class="link-top-head">
     <div class="container">
         <div class="box-login">
-            <a href="" class="btnLog cart" rel="nofollow"><i class="cart"></i>Giỏ hàng (<span>2</span>)</a>
+            <a href="{{URL::route('site.listCartOrder')}}" class="btnLog cart" rel="nofollow"><i class="cart"></i>Giỏ hàng (<span>@if(isset($numCart)) {{$numCart}} @endif </span>)</a>
         </div>
     </div>
 </div>
 <div class="center-header">
     <div class="container">
         <div class="top-header">
-            <h1 id="logo"><a href="">
-                    <img src="{{Config::get('config.WEB_ROOT')}}/assets/frontend/img/logo.png" alt="ShopCuaTui">
-                </a>
-            </h1>
+            @if(Route::currentRouteName() == 'site.home')
+                <h1 id="logo"><a href="{{URL::route('site.home')}}"><img src="{{Config::get('config.WEB_ROOT')}}/assets/frontend/img/logo.png" alt="ShopCuaTui"></a></h1>
+            @else
+                <div id="logo"><a href="{{URL::route('site.home')}}"><img src="{{Config::get('config.WEB_ROOT')}}/assets/frontend/img/logo.png" alt="ShopCuaTui"></a></div>
+            @endif
             <div class="box-top-header-right">
                 <div class="search-top-center">
                     <div class="box-search">
@@ -55,7 +56,7 @@
             </div>
         </div>
         <div class="box-header-link">
-            <div class="box-menu-title box-menu-hover">
+            <div class="box-menu-title @if(Route::currentRouteName() != 'site.home') box-menu-hover @endif">
                 <div class="title-cat-menu">
                     <div class="icon-cat-title">
                         <span class="ic-line"></span>
@@ -64,61 +65,46 @@
                     </div>
                     Danh mục sản phẩm
                 </div>
-                <div class="content-box-menu header-menu-other">
+                @if(Route::currentRouteName() != 'site.home')
+                <div class="content-box-menu @if(Route::currentRouteName() != 'site.home') header-menu-other @endif">
+                    <?php if(isset($arrCategory) && !empty($arrCategory)){?>
                     <ul>
+                        <?php
+                        $i=0;
+                        foreach($arrCategory as $cat){
+                        $i++;
+                        if($i<=11){
+                        ?>
+                        <?php if(isset($cat['category_parent_name']) && $cat['category_parent_name'] != ''){ ?>
                         <li>
-                            <a href="" title="Dịch vụ">Dịch vụ</a>
-                            <div class="list-subcat" style="background:#fff">
+                            <a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($cat['category_parent_name'])),'id'=>$cat['category_id']))}}" title="<?php echo $cat['category_parent_name'] ?>"><?php echo $cat['category_parent_name'] ?></a>
+                            <?php if(isset($cat['arrSubCategory']) && !empty($cat['arrSubCategory'])) {?>
+                            <?php
+                            $url = '';
+                            if($cat['category_image_background'] != ''){
+                                $url = 'url('.FunctionLib::getThumbImage($cat['category_image_background'],$cat['category_id'],FOLDER_CATEGORY,735,428).') no-repeat bottom right';
+                            } ?>
+                            <div class="list-subcat" style="background: #fff <?php echo $url ?>">
+                                <?php
+                                $list_ul = array_chunk($cat['arrSubCategory'], 10);
+                                ?>
+                                <?php foreach($list_ul as $ul){?>
                                 <ul>
-                                    <li><a href="" title="Nấu cỗ">Nấu cỗ</a></li>
-                                    <li><a href="" title="Đám hỏi - Đám cưới">Đám hỏi - Đám cưới</a></li>
-                                    <li><a href="" title="Đám hiếu">Đám hiếu</a></li>
-                                    <li><a href="" title="Ô sin - giúp việc">Ô sin - giúp việc</a></li>
-                                    <li><a href="" title="Chụp ảnh">Chụp ảnh</a></li>
-                                    <li><a href="" title="Biên - phiên dịch">Biên - phiên dịch</a></li>
+                                    <?php foreach($ul as $sub){ ?>
+                                    <li><a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($sub['category_name'])),'id'=>$sub['category_id']))}}" title="<?php echo $sub['category_name'] ?>"><?php echo $sub['category_name'] ?></a></li>
+                                    <?php } ?>
                                 </ul>
-                                <img class="bg-absolute" src="{{Config::get('config.WEB_ROOT')}}/assets/frontend/img/bg-cat/dam-xoe.png">
+                                <?php } ?>
                             </div>
+                            <?php } ?>
                         </li>
-                        <li>
-                            <a href="" title="Dịch vụ">Mỹ phẩm</a>
-                            <div class="list-subcat" style="background:#fff">
-                                <ul>
-                                    <li><a href="" title="Trang điểm - phụ kiện">Trang điểm - phụ kiện</a></li>
-                                    <li><a href="" title="Chăm sóc cơ thể">Chăm sóc cơ thể</a></li>
-                                    <li><a href="" title="Chăm sóc tóc">Chăm sóc tóc</a></li>
-                                    <li><a href="" title="Chăm sóc mặt">Chăm sóc mặt</a></li>
-                                    <li><a href="" title="Thiết bị, phụ kiện làm đẹp">Thiết bị, phụ kiện làm đẹp</a></li>
-                                    <li><a href="" title="Nước hoa,chất tạo hương">Nước hoa,chất tạo hương</a></li>
-                                    <li><a href="" title="Mỹ phẩm cho nam giới">Mỹ phẩm cho nam giới</a></li>
-                                    <li><a href="" title="Chăm sóc móng, tay, chân">Chăm sóc móng, tay, chân</a></li>
-                                    <li><a href="" title="Chăm sóc da">Chăm sóc da</a></li>
-                                    <li><a href="" title="Chăm sóc sức khỏe">Chăm sóc sức khỏe</a></li>
-                                </ul>
-                                <ul>
-                                    <li><a href="" title="Mỹ phẩm cho trẻ em">Mỹ phẩm cho trẻ em</a></li>
-                                    <li><a href="" title="Mỹ phẩm xách tay">Mỹ phẩm xách tay</a></li>
-                                    <li><a href="" title="Mỹ phẩm tự chế">Mỹ phẩm tự chế</a></li>
-                                    <li><a href="" title="Spa &amp; Massage">Spa &amp; Massage</a></li>
-                                    <li><a href="" title="Dịch vụ trang điểm">Dịch vụ trang điểm</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="" title="Dịch vụ">Thời trang</a>
-                            <div class="list-subcat" style="background:#fff">
-                                <ul>
-                                    <li><a href="" title="Nấu cỗ">Nấu cỗ</a></li>
-                                    <li><a href="" title="Đám hỏi - Đám cưới">Đám hỏi - Đám cưới</a></li>
-                                    <li><a href="" title="Đám hiếu">Đám hiếu</a></li>
-                                    <li><a href="" title="Ô sin - giúp việc">Ô sin - giúp việc</a></li>
-                                    <li><a href="" title="Chụp ảnh">Chụp ảnh</a></li>
-                                    <li><a href="" title="Biên - phiên dịch">Biên - phiên dịch</a></li>
-                                </ul>
-                            </div>
-                        </li>
+                        <?php } ?>
+                        <?php } ?>
+                        <?php } ?>
                     </ul>
+                    <?php } ?>
                 </div>
+                @endif
             </div>
             <div class="right-ultity">
                 <div class="part1-right-ultity">

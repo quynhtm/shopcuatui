@@ -4,9 +4,9 @@
             <a title="Thời trang nữ" href="">@if(isset($arrDepart[$product->depart_id])) {{$arrDepart[$product->depart_id]}} @else Sản phẩm @endif</a>
         </h1>
         <div class="row">
-            <div class="left-slider-img">
+            <div class="left-slider-img" id="gallery">
                 <div class="img-main-view">
-                    <a href="#" title="{{$product->product_name}}">
+                    <a href="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $product->product_image, CGlobal::sizeImage_800)}}" title="{{$product->product_name}}">
                         <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $product->product_image, CGlobal::sizeImage_800)}}" alt="{{$product->product_name}}">
                     </a>
                 </div>
@@ -15,7 +15,7 @@
                     <div id="slick">
                         @foreach($product_image_other as $key => $imgOther)
                         <div class="item-one-img-view">
-                            <a href="#" title="{{$product->product_name}}" tabindex="0">
+                            <a href="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $imgOther, CGlobal::sizeImage_800)}}" title="{{$product->product_name}}" tabindex="0">
                                 <img src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $product->product_id, $imgOther, CGlobal::sizeImage_400)}}" title="{{$product->product_name}}" alt="{{$product->product_name}}">
                             </a>
                         </div>
@@ -36,7 +36,6 @@
             </div>
             <div class="center-des-product">
                 <h1>{{$product->product_name}}</h1>
-
                 @if($product->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $product->product_price_sell > 0)
                     @if($product->product_price_market > 0 && $product->product_price_market > $product->product_price_sell)
                         <div class="row-price">
@@ -60,11 +59,11 @@
                 <div class="features-point">
                     <div class="lbl-point">Mô tả sản phẩm</div>
                     <div class="des-point">
-                        {{$product->product_sort_desc}}
+                        {{stripslashes($product->product_sort_desc)}}
                     </div>
                     <div class="box-promotion" style="display: none">
                         <div class="lbl-point">Thông tin khuyến mãi</div>
-                        <div class="box-content-promotion">Mua 2 chai giảm thêm 5%</div>
+                        <div class="box-content-promotion"></div>
                     </div>
                 </div>
             </div>
@@ -88,23 +87,23 @@
                             {{$optionNumberBuy}}
                         </select>
                     </div>
-                    <div id="buttonFormBuySubmit" data-pid="{{$product->product_id}}" class="buynow btn">Mua ngay</div>
+                    <div id="btnBuy" dataid="{{$product->product_id}}" class="buynow btn">Mua ngay</div>
                 </div>
                 <div class="content-right-product">
                     <div class="order-number-phone">
                         <p><b>Đặt nhanh qua điện thoại</b></p>
                         <div class="number-phone">
                             <div class="fa fa-phone"></div>
-                            <span>0913922986</span>
+                            <span>0985.10.10.26 - 0913.922.986</span>
                         </div>
-                        <p><a href="" title="Shop: Siêu thị gia đình">Siêu thị gia đình</a></p>
+                        <p><a href="javascript:void(0)" title="Shopcuatui">Shopcuatui.com.vn</a></p>
                         <p><b>Thông tin liên hệ: </b></p>
                         <p>nguyenduypt86@gmail.com</p>
-                        <p>Việt Hưng - Long Biên - Hà Nội</p>
+                        <p>CT2A-Khu đô thị Nghĩa Đô-Cầu Giấy-Hà Nội</p>
                     </div>
                     <div class="link-fast">
-                        <p><a href="#gioi-thieu-shop">Giới thiệu Shop</a></p>
-                        <p><a href="#chinh-sach-van-chuyen">Chính sách vận chuyển</a></p>
+                        <p><a href="javascript:void(0)">Giới thiệu về chúng tôi</a></p>
+                        <p><a href="javascript:void(0)">Chính sách vận chuyển hàng</a></p>
                     </div>
                 </div>
             </div>
@@ -118,9 +117,30 @@
                 </div>
             </div>
             <div class="content-bottom-content-view">
-                {{$product->product_content}}
+                {{stripslashes($product->product_content)}}
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#gallery').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            tLoading: 'Tải ảnh...',
+            mainClass: 'mfp-img-mobile',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0,1],
+            },
+            image: {
+                tError: 'không thể tải ảnh!',
+                titleSrc: function(item) {
+                    return item.el.attr('title') + '<small>{{CGlobal::web_name}}</small>';
+                }
+            }
+        });
+    });
+</script>

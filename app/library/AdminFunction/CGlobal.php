@@ -14,7 +14,7 @@ class CGlobal{
     public static $extraFooterJS = '';
     public static $extraMeta = '';
     public static $pageAdminTitle = 'Dashboard Admin';
-    public static $pageShopTitle = 'HaiChau Admin';
+    public static $pageShopTitle = 'Shopcuatui Admin';
 
     const web_name = 'shopcuatui.com.vn';
     const web_keywords= 'Shopcuatui';
@@ -270,10 +270,10 @@ class CGlobal{
    
     //Duy bo sung
     const emailAdmin = 'nguyenduypt86@gmail.com';
-    
+    const phoneSupport='0985.10.10.26 - 0913.922.986';
     public static $arrIconSpecals = array(
     	'\r\n', '☎', '👉', '✈', '🍬', '🏃', '🏻', '😁','🍬', '🏃🏻', '💃🏽', '✅', '😜', '🌳', '🌴', '🌲', '🌱',
     	'🌻', '🐮', '🐃', '🐎', '🐎', '🐓', '🐔', '🐗', '💥'
     );
-    const linkMail = 'http://mail.cdsptw.edu.vn';
+    const linkMail = '';
 }
