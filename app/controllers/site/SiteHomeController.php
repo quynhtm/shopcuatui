@@ -109,6 +109,11 @@ class SiteHomeController extends BaseSiteController{
         }
         $optionNumberBuy = FunctionLib::getOption($arrNumberBuy, 1);
 
+        //Sản phầm cùng danh mục
+        $arrProductSame = array();
+        if(isset($product->category_id)){
+            return Redirect::route('site.home');
+        }
         $this->header();
         $this->layout->content = View::make('site.SiteLayouts.detailProduct')
             ->with('arrDepart', $arrDepart)
