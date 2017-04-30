@@ -83,7 +83,7 @@ class SiteHomeController extends BaseSiteController{
             $product = Product::getProductByID($id);
             //check sản phẩm lỗi
             if(!isset($product->product_id)){
-                return Redirect::route('site.home');
+                //return Redirect::route('site.home');
             }
             if(isset($product->product_status) && $product->product_status == CGlobal::status_hide){
                 return Redirect::route('site.home');
@@ -115,13 +115,21 @@ class SiteHomeController extends BaseSiteController{
         //Sản phầm cùng danh mục
         $arrProductSame = array();
         if(isset($product->category_id)){
-            return Redirect::route('site.home');
+            $limit = CGlobal::number_limit_show;
+            $offset = 0;
+            $search = $data = array();
+            $total = 0;
+            $search['category_id'] = $product->category_id;
+            $search['depart_id'] = $product->depart_id;
+            $search['not_product_id'] = $product->product_id;
+            $arrProductSame = Product::searchByCondition($search, $limit, $offset,$total);
         }
         $this->header();
         $this->layout->content = View::make('site.SiteLayouts.detailProduct')
             ->with('arrDepart', $arrDepart)
             ->with('optionNumberBuy', $optionNumberBuy)
             ->with('product_image_other', $product_image_other)
+            ->with('arrProductSame', $arrProductSame)
             ->with('product', $product);
         $this->footer();
     }

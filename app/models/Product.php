@@ -145,7 +145,7 @@ class Product extends Eloquent
                 }
             }
             $total = $query->count();
-            $query->orderBy('is_shop', 'desc')->orderBy('time_update', 'desc');
+            $query->orderBy('time_update', 'desc');
 
             //get field can lay du lieu
             $str_field_product_get = 'product_id,product_name,category_id,category_name,product_image,product_image_hover,product_status,product_price_sell,product_price_market,product_type_price,product_selloff,user_shop_id,user_shop_name,is_shop,is_block';//cac truong can lay
@@ -187,6 +187,9 @@ class Product extends Eloquent
             if (isset($dataSearch['depart_id']) && $dataSearch['depart_id'] > 0) {
                 $query->where('depart_id','=', $dataSearch['depart_id']);
             }
+            if (isset($dataSearch['not_product_id']) && $dataSearch['not_product_id'] > 0) {
+                $query->whereNotIn('product_id',array( $dataSearch['not_product_id']));
+            }
 
             if (isset($dataSearch['user_shop_id'])) {
             	if (is_array($dataSearch['user_shop_id'])) {
@@ -220,7 +223,7 @@ class Product extends Eloquent
                 if(isset($dataSearch['orderBy']) && $dataSearch['orderBy'] !=''){
                     $orderBy = $dataSearch['orderBy'];
                 }
-                $query->orderBy('product_id', $orderBy);
+                $query->orderBy('time_update', $orderBy);
             }
 
             $total = $query->count();
