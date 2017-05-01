@@ -1,7 +1,7 @@
 <div class="container">
     <div class="main-view-post">
         <h1 class="title-head">
-            <a title="Thời trang nữ" href="">Thời trang nữ</a>
+            <a title="Thời trang nữ" href="">{{$categoryName}}</a>
         </h1>
         <div class="list-link-cat">
             <ul>
@@ -20,116 +20,52 @@
             <div class="click-more-view-cat"><i class="fa fa-angle-down"></i></div>
         </div>
         <div class="content-list-item ">
-            <ul class="data-tab tab-0 act">
-                <li class="item">
-                    <span class="sale-off">
-                        -10%
-                    </span>
+            @if($dataProductCate != null)
+                <div class="content-list-item {{(FunctionLib::checkOS()) ? 'phone' : ''}}">
+                    <ul class="data-tab tab-0 act">
+                        @foreach($dataProductCate as $key=>$item)
+                            <li class="item @if(($key+1)%5 == 0) item-not-mg @endif">
+                                @if($item->product_type_price == 1)
+                                    @if((float)$item->product_price_market > (float)$item->product_price_sell)
+                                        <span class="sale-off">
+                                -{{ number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) }}%
+                            </span>
+                                    @endif
+                                @endif
+                                <div class="post-thumb">
+                                    <a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">
+                                        <img alt="{{$item->product_name}}" src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item['product_id'], $item['product_image'], CGlobal::sizeImage_300)}}"
+                                             data-other-src="{{ThumbImg::getImageThumb(CGlobal::FOLDER_PRODUCT, $item['product_id'], $item['product_image_hover'], CGlobal::sizeImage_300)}}">
+                                    </a>
+                                </div>
+                                <div class="item-content">
+                                    <div class="title-info">
+                                        <h4 class="post-title">
+                                            <a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">{{$item->product_name}}</a>
+                                        </h4>
+                                        <div class="item-price">
+                                            @if($item->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $item->product_price_sell > 0)
+                                                @if($item->product_price_sell > 0)
+                                                    <span class="amount-1">{{FunctionLib::numberFormat($item->product_price_sell)}}đ</span>
+                                                @endif
+                                                @if($item->product_price_market > 0 && $item->product_price_market > $item->product_price_sell)
+                                                    <span class="amount-2">{{FunctionLib::numberFormat($item->product_price_market)}}đ</span>
+                                                @endif
+                                            @else
+                                                <span class="amount-1">Liên hệ</span>
+                                            @endif
+                                        </div>
+                                    </div>
 
-
-                    <div class="post-thumb">
-                        <a title="" href="">
-                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="item-content">
-                        <div class="title-info">
-                            <h4 class="post-title">
-                                <a title="" href="">Sản phẩm demo</a>
-                            </h4>
-                            <div class="item-price">
-                                <span class="amount-1">200.000đ</span>
-                                <span class="amount-2">300.000đđ</span>
-                            </div>
-                        </div>
-                        <div class="mgt5 amount-call">
-                            <a title="" class="link-shop" href="">Shopcuatui</a>
-                        </div>
-
-                    </div>
-                </li>
-                <li class="item">
-                    <span class="sale-off">
-                        -10%
-                    </span>
-
-
-                    <div class="post-thumb">
-                        <a title="" href="">
-                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="item-content">
-                        <div class="title-info">
-                            <h4 class="post-title">
-                                <a title="" href="">Sản phẩm demo</a>
-                            </h4>
-                            <div class="item-price">
-                                <span class="amount-1">200.000đ</span>
-                                <span class="amount-2">300.000đđ</span>
-                            </div>
-                        </div>
-                        <div class="mgt5 amount-call">
-                            <a title="" class="link-shop" href="">Shopcuatui</a>
-                        </div>
-
-                    </div>
-                </li>
-                <li class="item">
-                    <span class="sale-off">
-                        -10%
-                    </span>
-
-
-                    <div class="post-thumb">
-                        <a title="" href="">
-                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="item-content">
-                        <div class="title-info">
-                            <h4 class="post-title">
-                                <a title="" href="">Sản phẩm demo</a>
-                            </h4>
-                            <div class="item-price">
-                                <span class="amount-1">200.000đ</span>
-                                <span class="amount-2">300.000đđ</span>
-                            </div>
-                        </div>
-                        <div class="mgt5 amount-call">
-                            <a title="" class="link-shop" href="">Shopcuatui</a>
-                        </div>
-
-                    </div>
-                </li>
-                <li class="item">
-                    <span class="sale-off">
-                        -10%
-                    </span>
-
-
-                    <div class="post-thumb">
-                        <a title="" href="">
-                            <img src="https://static11.muachungcdn.com/thumb,80/240_240/i:plaza/product/product/-0-unnamed%20(3)-147997308770751/nuoc-rua-tay-dang-bot-huong-cam-200ml.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="item-content">
-                        <div class="title-info">
-                            <h4 class="post-title">
-                                <a title="" href="">Sản phẩm demo</a>
-                            </h4>
-                            <div class="item-price">
-                                <span class="amount-1">200.000đ</span>
-                                <span class="amount-2">300.000đđ</span>
-                            </div>
-                        </div>
-                        <div class="mgt5 amount-call">
-                            <a title="" class="link-shop" href="">Shopcuatui</a>
-                        </div>
-
-                    </div>
-                </li>
-            </ul>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div style="clear: both">
+                    {{$paging}}
+                </div>
+            @endif
         </div>
     </div>
 </div>

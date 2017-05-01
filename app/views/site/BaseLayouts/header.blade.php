@@ -16,10 +16,10 @@
             <div class="box-top-header-right">
                 <div class="search-top-center">
                     <div class="box-search">
-                        <form method="GET" action="" accept-charset="UTF-8" id="frmsearch" class="frmsearch" name="frmsearch">
-                            <input type="text" name="title-search" value="Tìm kiếm" class="keyword">
+                        {{Form::open(array('method' => 'GET', 'id'=>'frmsearch', 'class'=>'frmsearch', 'name'=>'frmsearch', 'url'=>URL::route('site.search')))}}
+                            <input type="text" name="title-search" placeholder="Nhập tên sản phẩm cần tìm kiếm" value="" class="keyword">
                             <input class="btn-search" value="Tìm kiếm" type="submit">
-                        </form>
+                        {{Form::close()}}
                     </div>
                 </div>
                 <div class="box-right-focus">
@@ -109,7 +109,7 @@
             <div class="right-ultity">
                 <div class="part1-right-ultity">
                     <div class="list-product-new">
-                        <i class="icon-list-new"></i> <a href="" title="Hàng sale off"> Hàng giảm giá</a>
+                        <!--<i class="icon-list-new"></i> <a href="" title="Hàng sale off"> Hàng giảm giá</a>-->
                     </div>
                 </div>
                 <div class="part2-right-ultity">

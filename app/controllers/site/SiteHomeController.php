@@ -53,20 +53,80 @@ class SiteHomeController extends BaseSiteController{
 
         $this->footer();
     }
-	public function listProduct($catname, $caid){
+
+    public function searchProduct(){
+
+        $meta_title = $meta_keywords = $meta_description = 'Tìm kiếm sản phẩm';
+        $meta_img = '';
+        FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+        $this->header();
+
+        $catid = (int)Request::get('category_id', -1);
+        $provinceid = (int)Request::get('shop_province', -1);
+
+        $product = $arrCate = $arrProvince = array();
+        $paging = '';
+        $total = 0;
+        if ($catid > 0 || $provinceid > 0) {
+            $pageNo = (int)Request::get('page_no', 1);
+            $limit = CGlobal::number_show_20;
+            $offset = ($pageNo - 1) * $limit;
+            $pageScroll = CGlobal::num_scroll_page;
+
+            $search['category_id'] = $catid;
+            $search['shop_province'] = $provinceid;
+
+            $product = Product::getProductForSite($search, $limit, $offset, $total);
+            $paging = $total > 0 ? Pagging::getNewPager($pageScroll, $pageNo, $total, $limit, $search) : '';
+
+            if ($catid > 0) {
+                $arrCate = Category::getByID($catid);
+            }
+            if ($provinceid > 0) {
+                $arrProvince = Province::getByID($provinceid);
+            }
+        }
+
+        $arrBannerLeft = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_LEFT, CGlobal::BANNER_PAGE_LIST, 0, 0);
+
+        $this->layout->content = View::make('site.SiteLayouts.searchProduct')
+            ->with('product', $product)
+            ->with('paging', $paging)
+            ->with('total', $total)
+            ->with('arrCate', $arrCate)
+            ->with('arrProvince', $arrProvince)
+            ->with('arrBannerLeft', $arrBannerLeft);
+        $this->footer();
+    }
+
+	public function listProduct($caid, $catname){
         $meta_title = $meta_keywords = $meta_description = $meta_img = '';
+        $dataSearch = array();
+        $paging = '';
+        $categoryName = 'Danh mục';
         if($caid > 0) {
             $arrCat = Category::getByID($caid);
-            if (sizeof($arrCat) > 0) {
-                $meta_title = stripslashes($arrCat->category_name);
-                $meta_keywords = stripslashes($arrCat->category_meta_keywords);
-                $meta_description = stripslashes($arrCat->category_meta_description);
+            if (sizeof($arrCat) > 0 && isset($arrCat->category_id) && $arrCat->category_id > 0 && isset($arrCat->category_status) && $arrCat->category_status == CGlobal::status_show ) {
+                $categoryName = $arrCat->category_name;
+                $pageNo = (int) Request::get('page_no',1);
+                $limit = CGlobal::number_show_40;
+                $offset = ($pageNo - 1) * $limit;
+                $search = $data = array();
+                $total = 0;
+                $search['category_id'] = (int)$arrCat->category_id;
+                $search['category_name'] = $arrCat->category_name;
+                $dataSearch = Product::searchByConditionSite($search, $limit, $offset,$total);
+                $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
             }
         }
         FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
-        $this->header($caid);
-        $this->layout->content = View::make('site.SiteLayouts.listProduct');
+        $this->header();
+        $this->layout->content = View::make('site.SiteLayouts.listProduct')
+        ->with('paging',$paging)
+        ->with('categoryName',$categoryName)
+        ->with('dataProductCate',$dataSearch);
         $this->footer();
 	}
 
