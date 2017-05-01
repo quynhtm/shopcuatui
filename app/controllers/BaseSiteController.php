@@ -9,10 +9,11 @@
 class BaseSiteController extends BaseController
 {
     protected $layout = 'site.BaseLayouts.index';
-    protected $user = array();
+    protected $userAdmin = array();
     public function __construct(){
         FunctionLib::site_js('frontend/js/site.js', CGlobal::$POS_END);
         FunctionLib::site_js('frontend/js/cart.js', CGlobal::$POS_END);
+        $this->userAdmin = User::user_login();
     }
 
     public function header(){

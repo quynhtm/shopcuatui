@@ -47,6 +47,7 @@ class SiteHomeController extends BaseSiteController{
         }
 
         $this->layout->content = View::make('site.SiteLayouts.Home')
+            ->with('userAdmin', $this->userAdmin)
             ->with('arrProductHome', $arrProductHome)
             ->with('arrCategory', $arrCategory)
             ->with('arrSlider', $arrSlider);
@@ -91,6 +92,7 @@ class SiteHomeController extends BaseSiteController{
         $arrBannerLeft = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_LEFT, CGlobal::BANNER_PAGE_LIST, 0, 0);
 
         $this->layout->content = View::make('site.SiteLayouts.searchProduct')
+            ->with('userAdmin', $this->userAdmin)
             ->with('product', $product)
             ->with('paging', $paging)
             ->with('total', $total)
@@ -124,9 +126,10 @@ class SiteHomeController extends BaseSiteController{
 
         $this->header();
         $this->layout->content = View::make('site.SiteLayouts.listProduct')
-        ->with('paging',$paging)
-        ->with('categoryName',$categoryName)
-        ->with('dataProductCate',$dataSearch);
+            ->with('userAdmin', $this->userAdmin)
+            ->with('paging',$paging)
+            ->with('categoryName',$categoryName)
+            ->with('dataProductCate',$dataSearch);
         $this->footer();
 	}
 
@@ -186,6 +189,7 @@ class SiteHomeController extends BaseSiteController{
         }
         $this->header();
         $this->layout->content = View::make('site.SiteLayouts.detailProduct')
+            ->with('userAdmin', $this->userAdmin)
             ->with('arrDepart', $arrDepart)
             ->with('optionNumberBuy', $optionNumberBuy)
             ->with('product_image_other', $product_image_other)

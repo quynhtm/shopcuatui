@@ -1,7 +1,7 @@
 <div class="container">
     <div class="main-view-post">
         <h1 class="title-head">
-            <a title="Thời trang nữ" href="">@if(isset($arrDepart[$product->depart_id])) {{$arrDepart[$product->depart_id]}} @else Sản phẩm @endif</a>
+            <a title="@if(isset($arrDepart[$product->depart_id])) {{$arrDepart[$product->depart_id]}}@endif" href="">@if(isset($arrDepart[$product->depart_id])) {{$arrDepart[$product->depart_id]}} @else Sản phẩm @endif</a>
         </h1>
         <div class="row">
             <div class="left-slider-img" id="gallery">
@@ -36,6 +36,9 @@
             </div>
             <div class="center-des-product">
                 <h1>{{$product->product_name}}</h1>
+                @if(isset($userAdmin) && !empty($userAdmin))
+                    <a href="{{URL::route('admin.productEdit',array('id' => $product->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa sản phẩm này)</a>
+                @endif
                 @if($product->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $product->product_price_sell > 0)
                     @if($product->product_price_market > 0 && $product->product_price_market > $product->product_price_sell)
                         <div class="row-price">
@@ -151,6 +154,9 @@
                                         <h4 class="post-title">
                                             <a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">{{$item->product_name}}</a>
                                         </h4>
+                                        @if(isset($userAdmin) && !empty($userAdmin))
+                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa sản phẩm này)</a>
+                                        @endif
                                         <div class="item-price">
                                             @if($item->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $item->product_price_sell > 0)
                                                 @if($item->product_price_sell > 0)

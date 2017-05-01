@@ -307,7 +307,9 @@ class SiteOrderController extends BaseSiteController
 		$total = 0;
 		$arrProductSame = Product::searchByCondition($search, $limit, $offset,$total);
 
-    	$this->layout->content = View::make('site.SiteOrder.thanksBuy')->with('arrProductSame',$arrProductSame);
+    	$this->layout->content = View::make('site.SiteOrder.thanksBuy')
+			->with('userAdmin', $this->userAdmin)
+			->with('arrProductSame',$arrProductSame);
     	$this->footer();
     }
 }

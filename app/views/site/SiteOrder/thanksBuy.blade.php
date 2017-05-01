@@ -40,6 +40,9 @@
 									<h4 class="post-title">
 										<a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">{{$item->product_name}}</a>
 									</h4>
+									@if(isset($userAdmin) && !empty($userAdmin))
+										<a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa sản phẩm này)</a>
+									@endif
 									<div class="item-price">
 										@if($item->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $item->product_price_sell > 0)
 											@if($item->product_price_sell > 0)
