@@ -301,7 +301,13 @@ class SiteOrderController extends BaseSiteController
     	FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
     	
     	$this->header();
-    	$this->layout->content = View::make('site.SiteOrder.thanksBuy');
+		$limit = CGlobal::number_show_12;
+		$offset = 0;
+		$search = $data = array();
+		$total = 0;
+		$arrProductSame = Product::searchByCondition($search, $limit, $offset,$total);
+
+    	$this->layout->content = View::make('site.SiteOrder.thanksBuy')->with('arrProductSame',$arrProductSame);
     	$this->footer();
     }
 }

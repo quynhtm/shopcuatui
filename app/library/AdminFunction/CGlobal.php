@@ -30,6 +30,7 @@ class CGlobal{
     const number_show_10 = 10;
     const number_show_5 = 5;
     const number_show_8 = 8;
+    const number_show_12 = 12;
 
     const max_num_buy_item_product = 10;
     /**

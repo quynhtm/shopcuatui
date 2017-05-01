@@ -115,7 +115,7 @@ class SiteHomeController extends BaseSiteController{
         //Sản phầm cùng danh mục
         $arrProductSame = array();
         if(isset($product->category_id)){
-            $limit = CGlobal::number_limit_show;
+            $limit = CGlobal::number_show_8;
             $offset = 0;
             $search = $data = array();
             $total = 0;
