@@ -18,13 +18,14 @@ class BaseSiteController extends BaseController
 
     public function header(){
         //Menu category
-        $dataCategory = Category::getCategoriessAll();
-        $arrCategory = $this->getTreeCategory($dataCategory);
+        /*$dataCategory = Category::getCategoriessAll();
+        $arrCategory = $this->getTreeCategory($dataCategory);*/
         $numCart = $this->countNumCart();
         $arrDepart = Department::getDepart();
+        $product_name = Request::get('title-search', '');
 
         $this->layout->header = View::make("site.BaseLayouts.header")
-                                ->with('arrCategory', $arrCategory)
+                                ->with('product_name', $product_name)
                                 ->with('arrDepart', $arrDepart)
                                 ->with('numCart', $numCart);
     }

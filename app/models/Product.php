@@ -97,7 +97,9 @@ class Product extends Eloquent
             		$query->where('product_id','=', (int)$dataSearch['product_id']);
             	}
             }
-            
+            if (isset($dataSearch['product_name']) && $dataSearch['product_name'] != '') {
+                $query->where('product_name','LIKE', '%' . $dataSearch['product_name'] . '%');
+            }
             if (isset($dataSearch['category_id'])) {
                 if (is_array($dataSearch['category_id'])) {//tim theo m?ng id danh muc
                     $query->whereIn('category_id', $dataSearch['category_id']);

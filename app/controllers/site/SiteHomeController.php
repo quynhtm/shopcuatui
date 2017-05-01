@@ -3,7 +3,7 @@ class SiteHomeController extends BaseSiteController{
     public function __construct(){
         parent::__construct();
         FunctionLib::site_css('lib/font-awesome/4.2.0/css/font-awesome.min.css', CGlobal::$POS_HEAD);
-        return $this->offSite();
+        //return $this->offSite();
     }
 
     public function index(){
@@ -63,43 +63,38 @@ class SiteHomeController extends BaseSiteController{
         FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
 
         $this->header();
+        $product_name = Request::get('title-search', '');
 
-        $catid = (int)Request::get('category_id', -1);
-        $provinceid = (int)Request::get('shop_province', -1);
-
-        $product = $arrCate = $arrProvince = array();
-        $paging = '';
+        $dataCate = $dataSearch = $arrProvince = array();
+        $paging = '';$categoryName = 'Danh sách sản phẩm ';
         $total = 0;
-        if ($catid > 0 || $provinceid > 0) {
+        if (trim($product_name) !='') {
             $pageNo = (int)Request::get('page_no', 1);
-            $limit = CGlobal::number_show_20;
+            $limit = CGlobal::number_show_40;
             $offset = ($pageNo - 1) * $limit;
             $pageScroll = CGlobal::num_scroll_page;
 
-            $search['category_id'] = $catid;
-            $search['shop_province'] = $provinceid;
-
-            $product = Product::getProductForSite($search, $limit, $offset, $total);
+            $search['product_name'] = trim($product_name);
+            $dataSearch = Product::getProductForSite($search, $limit, $offset, $total);
+            if($total > 0){
+                foreach($dataSearch as $pro){
+                    if(isset($dataCate[$pro->category_id])){
+                        $dataCate[$pro->category_id]['count'] = $dataCate[$pro->category_id]['count'] +1;
+                    }else{
+                        $dataCate[$pro->category_id]['count'] = 1;
+                        $dataCate[$pro->category_id]['nameCat'] = $pro->category_name;
+                        $dataCate[$pro->category_id]['depart_id'] = $pro->depart_id;
+                    }
+                }
+            }
             $paging = $total > 0 ? Pagging::getNewPager($pageScroll, $pageNo, $total, $limit, $search) : '';
-
-            if ($catid > 0) {
-                $arrCate = Category::getByID($catid);
-            }
-            if ($provinceid > 0) {
-                $arrProvince = Province::getByID($provinceid);
-            }
         }
-
-        $arrBannerLeft = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_LEFT, CGlobal::BANNER_PAGE_LIST, 0, 0);
-
-        $this->layout->content = View::make('site.SiteLayouts.searchProduct')
+        $this->layout->content = View::make('site.SiteLayouts.listProduct')
             ->with('userAdmin', $this->userAdmin)
-            ->with('product', $product)
-            ->with('paging', $paging)
-            ->with('total', $total)
-            ->with('arrCate', $arrCate)
-            ->with('arrProvince', $arrProvince)
-            ->with('arrBannerLeft', $arrBannerLeft);
+            ->with('paging',$paging)
+            ->with('categoryName',$categoryName)
+            ->with('dataCate',$dataCate)
+            ->with('dataProductCate',$dataSearch);
         $this->footer();
     }
 

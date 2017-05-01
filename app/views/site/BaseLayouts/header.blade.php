@@ -17,7 +17,7 @@
                 <div class="search-top-center">
                     <div class="box-search">
                         {{Form::open(array('method' => 'GET', 'id'=>'frmsearch', 'class'=>'frmsearch', 'name'=>'frmsearch', 'url'=>URL::route('site.search')))}}
-                            <input type="text" name="title-search" placeholder="Nhập tên sản phẩm cần tìm kiếm" value="" class="keyword">
+                            <input type="text" name="title-search" placeholder="Nhập tên sản phẩm cần tìm kiếm" value="@if(isset($product_name)){{$product_name}}@endif" class="keyword">
                             <input class="btn-search" value="Tìm kiếm" type="submit">
                         {{Form::close()}}
                     </div>
