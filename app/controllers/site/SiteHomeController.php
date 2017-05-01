@@ -50,6 +50,7 @@ class SiteHomeController extends BaseSiteController{
             ->with('userAdmin', $this->userAdmin)
             ->with('arrProductHome', $arrProductHome)
             ->with('arrCategory', $arrCategory)
+            ->with('arrDepart', $arrDepart)
             ->with('arrSlider', $arrSlider);
 
         $this->footer();
@@ -102,7 +103,7 @@ class SiteHomeController extends BaseSiteController{
         $this->footer();
     }
 
-	public function listProduct($caid, $catname){
+	public function listProductCategory($caid, $catname){
         $meta_title = $meta_keywords = $meta_description = $meta_img = '';
         $dataSearch = array();
         $paging = '';
@@ -120,6 +121,8 @@ class SiteHomeController extends BaseSiteController{
                 $search['category_name'] = $arrCat->category_name;
                 $dataSearch = Product::searchByConditionSite($search, $limit, $offset,$total);
                 $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+            }else{
+                return Redirect::route('site.home');
             }
         }
         FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
@@ -129,6 +132,84 @@ class SiteHomeController extends BaseSiteController{
             ->with('userAdmin', $this->userAdmin)
             ->with('paging',$paging)
             ->with('categoryName',$categoryName)
+            ->with('dataProductCate',$dataSearch);
+        $this->footer();
+	}
+    public function listProductCatWithDepart($depart_id, $catid, $catname){
+        $meta_title = $meta_keywords = $meta_description = $meta_img = '';
+        $dataSearch = array();
+        $paging = '';
+        $categoryName = 'Danh mục';
+        if($depart_id > 0 && $catid > 0) {
+            $arrCat = Category::getByID($catid);
+            if (sizeof($arrCat) > 0 && isset($arrCat->category_id) && $arrCat->category_id > 0 && isset($arrCat->category_status) && $arrCat->category_status == CGlobal::status_show ) {
+                $categoryName = $arrCat->category_name;
+                $pageNo = (int) Request::get('page_no',1);
+                $limit = CGlobal::number_show_40;
+                $offset = ($pageNo - 1) * $limit;
+                $search = $data = array();
+                $total = 0;
+                $search['category_id'] = (int)$arrCat->category_id;
+                $search['category_name'] = $arrCat->category_name;
+                $search['depart_id'] = $depart_id;
+                $dataSearch = Product::searchByConditionSite($search, $limit, $offset,$total);
+                $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+            }else{
+                return Redirect::route('site.home');
+            }
+        }
+        FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+        $this->header();
+        $this->layout->content = View::make('site.SiteLayouts.listProduct')
+            ->with('userAdmin', $this->userAdmin)
+            ->with('paging',$paging)
+            ->with('categoryName',$categoryName)
+            ->with('dataProductCate',$dataSearch);
+        $this->footer();
+	}
+    public function listProductDepart($depart_id, $depart_name){
+        $meta_title = $meta_keywords = $meta_description = $meta_img = '';
+        $dataSearch = $dataCate = array();
+        $paging = '';
+        $categoryName = 'Danh mục';
+        if($depart_id > 0) {
+            $arrCat = Department::getByID($depart_id);
+            if (sizeof($arrCat) > 0 && isset($arrCat->department_id) && $arrCat->department_id > 0 && isset($arrCat->department_status) && $arrCat->department_status == CGlobal::status_show ) {
+                $categoryName = $arrCat->department_name;
+                $pageNo = (int) Request::get('page_no',1);
+                $limit = CGlobal::number_show_40;
+                $offset = ($pageNo - 1) * $limit;
+                $search = $data = array();
+                $total = 0;
+                $search['depart_id'] = (int)$arrCat->department_id;
+                $search['department_name'] = $arrCat->department_name;
+                $dataSearch = Product::searchByConditionSite($search, $limit, $offset,$total);
+                if($total > 0){
+                    foreach($dataSearch as $pro){
+                        if(isset($dataCate[$pro->category_id])){
+                            $dataCate[$pro->category_id]['count'] = $dataCate[$pro->category_id]['count'] +1;
+                        }else{
+                            $dataCate[$pro->category_id]['count'] = 1;
+                            $dataCate[$pro->category_id]['nameCat'] = $pro->category_name;
+                            $dataCate[$pro->category_id]['depart_id'] = $pro->depart_id;
+                        }
+                    }
+                }
+                $paging = $total > 0 ? Pagging::getNewPager(3, $pageNo, $total, $limit, $search) : '';
+            }
+            else{
+                return Redirect::route('site.home');
+            }
+        }
+        FunctionLib::SEO($meta_img, $meta_title, $meta_keywords, $meta_description);
+
+        $this->header();
+        $this->layout->content = View::make('site.SiteLayouts.listProduct')
+            ->with('userAdmin', $this->userAdmin)
+            ->with('paging',$paging)
+            ->with('categoryName',$categoryName)
+            ->with('dataCate',$dataCate)
             ->with('dataProductCate',$dataSearch);
         $this->footer();
 	}

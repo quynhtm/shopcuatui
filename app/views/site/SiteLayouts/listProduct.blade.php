@@ -3,22 +3,18 @@
         <h1 class="title-head">
             <a title="Thời trang nữ" href="">{{$categoryName}}</a>
         </h1>
+        @if(isset($dataCate) && !empty($dataCate))
         <div class="list-link-cat">
             <ul>
-                <li><a href="ao-so-mi-nu-483.html" title="Áo sơ mi nữ">Áo sơ mi nữ</a></li>
-                <li><a href="ao-khoac-nu-484.html" title="Áo khoác nữ">Áo khoác nữ</a></li>
-                <li><a href="quan-au-nu-485.html" title="Quần âu nữ">Quần âu nữ</a></li>
-                <li><a href="quan-jean-nu-486.html" title="Quần jean nữ">Quần jean nữ</a></li>
-                <li><a href="giay-dep-nu-487.html" title="Giày dép nữ">Giày dép nữ</a></li>
-                <li><a href="balo-tui-xach-nu-488.html" title="Balo, túi xách nữ">Balo, túi xách nữ</a></li>
-                <li><a href="dam-vay-nu-489.html" title="Đầm váy nữ">Đầm váy nữ</a></li>
-                <li><a href="do-ngu-nu-490.html" title="Đồ ngủ nữ">Đồ ngủ nữ</a></li>
-                <li><a href="ao-phong-nu-508.html" title="Áo phông nữ">Áo phông nữ</a></li>
-                <li><a href="quan-ao-the-thao-nu-510.html" title="Quần áo thể thao nữ">Quần áo thể thao nữ</a></li>
-                <li><a href="dong-ho-nu-519.html" title="Đồng hồ nữ">Đồng hồ nữ</a></li>
+                @foreach($dataCate as $cat_id=>$valu)
+                    <li>
+                        <a href="{{URL::route('site.listProductCatWithDepart', array('name'=>strtolower(FunctionLib::safe_title($valu['nameCat'])),'id'=>$cat_id,'depart_id'=>$valu['depart_id']))}}" title="{{$valu['nameCat']}}">{{$valu['nameCat']}}({{$valu['count']}})</a>
+                    </li>
+                @endforeach
             </ul>
             <div class="click-more-view-cat"><i class="fa fa-angle-down"></i></div>
         </div>
+        @endif
         <div class="content-list-item ">
             @if($dataProductCate != null)
                 <div class="content-list-item {{(FunctionLib::checkOS()) ? 'phone' : ''}}">
@@ -43,9 +39,6 @@
                                         <h4 class="post-title">
                                             <a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">{{$item->product_name}}</a>
                                         </h4>
-                                        @if(isset($userAdmin) && !empty($userAdmin))
-                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa sản phẩm này)</a>
-                                        @endif
                                         <div class="item-price">
                                             @if($item->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $item->product_price_sell > 0)
                                                 @if($item->product_price_sell > 0)
@@ -58,6 +51,10 @@
                                                 <span class="amount-1">Liên hệ</span>
                                             @endif
                                         </div>
+                                        <a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($item->category_name)),'id'=>$item->category_id))}}" title="{{$item->category_name}}">{{$item->category_name}}</a>
+                                        @if(!empty($userAdmin))
+                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa SP)</a>
+                                        @endif
                                     </div>
 
                                 </div>

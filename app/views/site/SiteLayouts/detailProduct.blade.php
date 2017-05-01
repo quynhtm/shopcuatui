@@ -58,6 +58,9 @@
                         <div class="price-sale">Liên hệ</div>
                     </div>
                 @endif
+                <div class="row-price" style="clear: both">
+                    <div class="lbl-row lbl-price-sale"><a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($product->category_name)),'id'=>$product->category_id))}}" title="{{$product->category_name}}">{{$product->category_name}}</a></div>
+                </div>
 
                 <div class="features-point">
                     <div class="lbl-point">Mô tả sản phẩm</div>
@@ -154,9 +157,6 @@
                                         <h4 class="post-title">
                                             <a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">{{$item->product_name}}</a>
                                         </h4>
-                                        @if(isset($userAdmin) && !empty($userAdmin))
-                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa sản phẩm này)</a>
-                                        @endif
                                         <div class="item-price">
                                             @if($item->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $item->product_price_sell > 0)
                                                 @if($item->product_price_sell > 0)
@@ -169,6 +169,10 @@
                                                 <span class="amount-1">Liên hệ</span>
                                             @endif
                                         </div>
+                                        <a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($item->category_name)),'id'=>$item->category_id))}}" title="{{$item->category_name}}">{{$item->category_name}}</a>
+                                        @if(!empty($userAdmin))
+                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa SP)</a>
+                                        @endif
                                     </div>
 
                                 </div>

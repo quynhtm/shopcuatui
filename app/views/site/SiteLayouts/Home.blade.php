@@ -2,36 +2,17 @@
     <div class="line-top">
         <div class="box-menu-list">
             <div class="content-box-menu">
-                <?php if(isset($arrCategory) && !empty($arrCategory)){?>
+                <?php if(isset($arrDepart) && !empty($arrDepart)){?>
                 <ul>
                     <?php
                     $i=0;
-                    foreach($arrCategory as $cat){
+                    foreach($arrDepart as $depart_id =>$depart_name){
                     $i++;
                     if($i<=11){
                     ?>
-                    <?php if(isset($cat['category_parent_name']) && $cat['category_parent_name'] != ''){ ?>
+                    <?php if(isset($depart_name) && $depart_name != ''){ ?>
                     <li>
-                        <a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($cat['category_parent_name'])),'id'=>$cat['category_id']))}}" title="<?php echo $cat['category_parent_name'] ?>"><?php echo $cat['category_parent_name'] ?></a>
-                        <?php if(isset($cat['arrSubCategory']) && !empty($cat['arrSubCategory'])) {?>
-                        <?php
-                        $url = '';
-                        if($cat['category_image_background'] != ''){
-                            $url = 'url('.FunctionLib::getThumbImage($cat['category_image_background'],$cat['category_id'],FOLDER_CATEGORY,735,428).') no-repeat bottom right';
-                        } ?>
-                        <div class="list-subcat" style="background: #fff <?php echo $url ?>">
-                            <?php
-                            $list_ul = array_chunk($cat['arrSubCategory'], 10);
-                            ?>
-                            <?php foreach($list_ul as $ul){?>
-                            <ul>
-                                <?php foreach($ul as $sub){ ?>
-                                <li><a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($sub['category_name'])),'id'=>$sub['category_id']))}}" title="<?php echo $sub['category_name'] ?>"><?php echo $sub['category_name'] ?></a></li>
-                                <?php } ?>
-                            </ul>
-                            <?php } ?>
-                        </div>
-                        <?php } ?>
+                        <a href="{{URL::route('site.listProductDepart', array('name'=>strtolower(FunctionLib::safe_title($depart_name)),'depart_id'=>$depart_id))}}" title="<?php echo $depart_name ?>"><?php echo $depart_name ?></a>
                     </li>
                     <?php } ?>
                     <?php } ?>
@@ -100,10 +81,9 @@
                                     <div class="title-info">
                                         <h4 class="post-title">
                                             <a title="{{$item->product_name}}" href="{{FunctionLib::buildLinkDetailProduct($item->product_id, $item->product_name, $item->category_name)}}">{{$item->product_name}}</a>
+
                                         </h4>
-                                        @if(!empty($userAdmin))
-                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa sản phẩm này)</a>
-                                        @endif
+
                                         <div class="item-price">
                                             @if($item->product_type_price == CGlobal::TYPE_PRICE_NUMBER && $item->product_price_sell > 0)
                                                 @if($item->product_price_sell > 0)
@@ -116,6 +96,10 @@
                                                 <span class="amount-1">Liên hệ</span>
                                             @endif
                                         </div>
+                                        <a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($item->category_name)),'id'=>$item->category_id))}}" title="{{$item->category_name}}">{{$item->category_name}}</a>
+                                        @if(!empty($userAdmin))
+                                            <a href="{{URL::route('admin.productEdit',array('id' => $item->product_id))}}" style="color: red;" title="Sửa sản phẩm" target="_blank">(Sửa SP)</a>
+                                        @endif
                                     </div>
 
                                 </div>

@@ -21,9 +21,11 @@ class BaseSiteController extends BaseController
         $dataCategory = Category::getCategoriessAll();
         $arrCategory = $this->getTreeCategory($dataCategory);
         $numCart = $this->countNumCart();
+        $arrDepart = Department::getDepart();
 
         $this->layout->header = View::make("site.BaseLayouts.header")
                                 ->with('arrCategory', $arrCategory)
+                                ->with('arrDepart', $arrDepart)
                                 ->with('numCart', $numCart);
     }
 
