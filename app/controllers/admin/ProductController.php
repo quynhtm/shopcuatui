@@ -254,6 +254,7 @@ class ProductController extends BaseAdminController
                 }
             } else {
                 //them moi
+                $dataSave['time_update'] = time();
                 $dataSave['time_created'] = time();
                 $dataSave['user_id_creater'] =  !empty($this->user)? $this->user['user_id']: 0;
                 $dataSave['user_name_creater'] =  !empty($this->user)? $this->user['user_name']: '';

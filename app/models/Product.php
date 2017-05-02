@@ -225,7 +225,7 @@ class Product extends Eloquent
                 if(isset($dataSearch['orderBy']) && $dataSearch['orderBy'] !=''){
                     $orderBy = $dataSearch['orderBy'];
                 }
-                $query->orderBy('time_update', $orderBy);
+                $query->orderBy('product_id', $orderBy);
             }
 
             $total = $query->count();
@@ -375,7 +375,7 @@ class Product extends Eloquent
             }
 
             $total = $query->count();
-            $query->orderBy('product_id', 'desc');
+            $query->orderBy('time_update', 'desc');
 
             $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
             if(!empty($fields)){

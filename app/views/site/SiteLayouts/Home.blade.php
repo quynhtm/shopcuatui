@@ -56,7 +56,7 @@
                 <div class="cate-box">
                     <div class="inner-cate-box hide-text-over">
                         <h2 class="parent-cate act">
-                            <a href="javascript:void(0)" datacatid="0" datatype="vip">{{$val_depart['depart_name']}}</a>
+                            <a href="{{URL::route('site.listProductDepart', array('name'=>strtolower(FunctionLib::safe_title($val_depart['depart_name'])),'depart_id'=>$depart_id))}}" title="{{$val_depart['depart_name']}}">{{$val_depart['depart_name']}}</a>
                         </h2>
                     </div>
                 </div>

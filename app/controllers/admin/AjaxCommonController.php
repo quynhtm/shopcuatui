@@ -51,6 +51,7 @@ class AjaxCommonController extends BaseSiteController
                         $item_id = News::addData($new_row);
                         break;
                     case 2://img Item
+                        $new_row['time_update'] = time();
                         $new_row['time_created'] = time();
                         $new_row['product_status'] = CGlobal::status_hide;
                         $new_row['user_id_creater'] =  !empty($this->userAdmin)? $this->userAdmin['user_id']: 0;

@@ -29,8 +29,8 @@ class SiteHomeController extends BaseSiteController{
         $arrSlider = FunctionLib::getBannerAdvanced(CGlobal::BANNER_TYPE_HOME_BIG, CGlobal::BANNER_PAGE_HOME, 0, 0);
 
         //Menu category
-        $dataCategory = Category::getCategoriessAll();
-        $arrCategory = $this->getTreeCategory($dataCategory);
+        //$dataCategory = Category::getCategoriessAll();
+        //$arrCategory = $this->getTreeCategory($dataCategory);
 
         //danh sach chuyen mục chính
         $arrProductHome = array();
@@ -49,7 +49,7 @@ class SiteHomeController extends BaseSiteController{
         $this->layout->content = View::make('site.SiteLayouts.Home')
             ->with('userAdmin', $this->userAdmin)
             ->with('arrProductHome', $arrProductHome)
-            ->with('arrCategory', $arrCategory)
+            ->with('arrCategory', array())
             ->with('arrDepart', $arrDepart)
             ->with('arrSlider', $arrSlider);
 
