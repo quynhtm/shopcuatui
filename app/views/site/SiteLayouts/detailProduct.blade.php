@@ -100,7 +100,15 @@
                         <p><b>Đặt nhanh qua điện thoại</b></p>
                         <div class="number-phone">
                             <div class="fa fa-phone"></div>
-                            <span>0985.10.10.26 - 0913.922.986</span>
+                            <span>0985.10.10.26 - gặp Giang</span>
+                        </div>
+                        <div class="number-phone">
+                            <div class="fa fa-phone"></div>
+                            <span>0903.187.988 - gặp Bình</span>
+                        </div>
+                        <div class="number-phone">
+                            <div class="fa fa-phone"></div>
+                            <span>0913.922.986 - gặp Duy</span>
                         </div>
                         <p><a href="javascript:void(0)" title="Shopcuatui">Shopcuatui.com.vn</a></p>
                         <p><b>Thông tin liên hệ: </b></p>

@@ -181,13 +181,20 @@ class SiteHomeController extends BaseSiteController{
                 $search['department_name'] = $arrCat->department_name;
                 $dataSearch = Product::searchByConditionSite($search, $limit, $offset,$total);
                 if($total > 0){
-                    foreach($dataSearch as $pro){
-                        if(isset($dataCate[$pro->category_id])){
-                            $dataCate[$pro->category_id]['count'] = $dataCate[$pro->category_id]['count'] +1;
-                        }else{
-                            $dataCate[$pro->category_id]['count'] = 1;
-                            $dataCate[$pro->category_id]['nameCat'] = $pro->category_name;
-                            $dataCate[$pro->category_id]['depart_id'] = $pro->depart_id;
+                    //get mảng thông tin danh mục
+                    $arrInforCat = Category::getOptionAllCategory();
+                    //buid lại tất cả cây danh mục nếu số lượng > $limit
+                    $total2 = 0;
+                    $dataBuildCate = ($total <= $limit)? $dataSearch : Product::searchByConditionSite($search, 1000, 0,$total2);
+                    if(!empty($dataBuildCate) && sizeof($dataBuildCate) > 0){
+                        foreach($dataBuildCate as $pro){
+                            if(isset($dataCate[$pro->category_id])){
+                                $dataCate[$pro->category_id]['count'] = $dataCate[$pro->category_id]['count'] +1;
+                            }else{
+                                $dataCate[$pro->category_id]['count'] = 1;
+                                $dataCate[$pro->category_id]['nameCat'] = (isset($arrInforCat[$pro->category_id]))? $arrInforCat[$pro->category_id]: $pro->category_name;
+                                $dataCate[$pro->category_id]['depart_id'] = $pro->depart_id;
+                            }
                         }
                     }
                 }
