@@ -58,7 +58,7 @@
                         <div class="price-sale">Liên hệ</div>
                     </div>
                 @endif
-                <div class="row-price" style="clear: both">
+                <div class="row-price" style="clear: both; width: 100%">
                     <div class="lbl-row lbl-price-sale"><a href="{{URL::route('site.listProduct', array('name'=>strtolower(FunctionLib::safe_title($product->category_name)),'id'=>$product->category_id))}}" title="{{$product->category_name}}">{{$product->category_name}}</a></div>
                 </div>
 
@@ -100,22 +100,22 @@
                         <p><b>Đặt nhanh qua điện thoại</b></p>
                         <div class="number-phone">
                             <div class="fa fa-phone"></div>
-                            <span>0985.10.10.26 - gặp Giang</span>
+                            <span>0985101026 - gặp Ms Giang</span>
                         </div>
                         <div class="number-phone">
                             <div class="fa fa-phone"></div>
-                            <span>0903.187.988 - gặp Bình</span>
+                            <span>0903187988 - gặp Ms Bình</span>
                         </div>
                         <div class="number-phone">
                             <div class="fa fa-phone"></div>
-                            <span>0913.922.986 - gặp Duy</span>
+                            <span>0913922986 - gặp Mr Duy</span>
                         </div>
-                        <p><a href="javascript:void(0)" title="Shopcuatui">Shopcuatui.com.vn</a></p>
                         <p><b>Thông tin liên hệ: </b></p>
-                        <p>nguyenduypt86@gmail.com</p>
-                        <p>CT2A-Khu đô thị Nghĩa Đô-Cầu Giấy-Hà Nội</p>
+                        <p>shoponlinecuatui@gmail.com</p>
+                        <p>-Việt Hưng - Long Biên - Hà Nội</p>
+                        <p>-Đại lý: Khu đô thị Nghĩa Đô, Cầu Giấy</p>
                     </div>
-                    <div class="link-fast">
+                    <div class="link-fast" style="display: none">
                         <p><a href="javascript:void(0)">Giới thiệu về chúng tôi</a></p>
                         <p><a href="javascript:void(0)">Chính sách vận chuyển hàng</a></p>
                     </div>
