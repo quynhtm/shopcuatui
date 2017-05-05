@@ -12,10 +12,9 @@ class Banner extends Eloquent
     //cac truong trong DB
     protected $fillable = array('banner_id','banner_name', 'banner_link',
         'banner_image', 'banner_image_temp', 'banner_total_click',
-        'banner_is_target', 'banner_is_rel', 'banner_type','banner_position','banner_parent_id',
+        'banner_is_target', 'banner_is_rel', 'banner_type',
         'banner_order',//thứ tụ hiển thị
         'banner_page',// thuoc page nao
-        'banner_province_id',//tỉnh thành
         'banner_category_id', //danh mục
         'banner_status', 'banner_is_run_time','banner_start_time','banner_end_time',
         'banner_time_click', 'banner_update_time', 'banner_create_time');
@@ -77,9 +76,6 @@ class Banner extends Eloquent
             }
             if (isset($dataSearch['string_banner_page']) && $dataSearch['string_banner_page'] !='') {
                 $query->whereIn('banner_page', explode(',',$dataSearch['string_banner_page']));
-            }
-            if (isset($dataSearch['banner_parent_id']) && $dataSearch['banner_parent_id'] > 0) {
-                $query->where('banner_parent_id', $dataSearch['banner_parent_id']);
             }
             if (isset($dataSearch['banner_position']) && $dataSearch['banner_position'] > 0) {
                 $query->where('banner_position', $dataSearch['banner_position']);
@@ -159,6 +155,7 @@ class Banner extends Eloquent
             DB::connection()->getPdo()->commit();
             return true;
         } catch (PDOException $e) {
+            return $e->getMessage();
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
         }

@@ -172,9 +172,8 @@ class BannerController extends BaseAdminController
         $data['banner_image'] = addslashes(Request::get('image_primary'));//ảnh chính
         $data['banner_order'] = addslashes(Request::get('banner_order'));
 
-        $data['banner_position'] = (int)Request::get('banner_position', 1);
         $data['banner_is_target'] = (int)Request::get('banner_is_target', 0);
-        $data['banner_parent_id'] = (int)Request::get('banner_parent_id', 0);
+        //$data['banner_parent_id'] = (int)Request::get('banner_parent_id', 0);
         $data['banner_is_rel'] = (int)Request::get('banner_is_rel', 0);
         $data['banner_type'] = (int)Request::get('banner_type',0);
         $data['banner_page'] = (int)Request::get('banner_page',0);
@@ -183,7 +182,6 @@ class BannerController extends BaseAdminController
         $data['banner_start_time'] = Request::get('banner_start_time');
         $data['banner_end_time'] = Request::get('banner_end_time');
         $data['banner_status'] = (int)Request::get('banner_status', 0);
-        $data['banner_province_id'] = (int)Request::get('banner_province_id', 0);
         $id_hiden = (int)Request::get('id_hiden', 0);
 
         $action = $this->getControllerAction();
