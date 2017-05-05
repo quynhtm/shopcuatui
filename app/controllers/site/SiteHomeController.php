@@ -7,7 +7,10 @@ class SiteHomeController extends BaseSiteController{
     }
 
     public function index(){
-    	//Meta title
+        FunctionLib::site_css('lib/bxslider/bxslider.css', CGlobal::$POS_HEAD);
+        FunctionLib::site_js('lib/bxslider/bxslider.js', CGlobal::$POS_END);
+        
+        //Meta title
     	$meta_title='';
     	$meta_keywords='';
     	$meta_description='';
