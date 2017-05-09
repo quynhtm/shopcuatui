@@ -12,7 +12,8 @@ class CronjobsController extends BaseSiteController
         $action = Request::get('action', 0);//kiểu chạy joib
         switch( $action ){
             case 1://cập nhật link ảnh trong sản phẩm
-			case 2://cập nhật link ảnh trong tin tức
+            case 2://cập nhật link ảnh trong sản phẩm
+            case 4://replace /r/n
                 $this->updateLinkInContent($action);
                 break;
 			case 3://cập nhật email NCC
@@ -33,10 +34,10 @@ class CronjobsController extends BaseSiteController
         			if($data){
         				foreach($data as $k=>$product){
         					$content = stripcslashes($product->item_content);
-        					
+
         					$url_old = '600x600';
         					$content = str_replace($url_old, '500x300',$content);
-        					
+
         					$dataUpdate['item_content'] = $content;
         					Items::updateData($product->item_id,$dataUpdate);
         				}
@@ -61,6 +62,28 @@ class CronjobsController extends BaseSiteController
         					}
         				}
         				break;
+                case 4://replace /r/n
+                    $dataSearch['field_get'] = 'product_id,product_sort_desc,product_content';
+                    $data = Product::searchByCondition($dataSearch,500,0,$total);
+                    if($data){
+                        foreach($data as $k=>$product){
+
+                            $intro = stripcslashes($product->product_sort_desc);
+                            $intro = str_replace('\r', '',$intro);
+                            $intro = str_replace('\n', '',$intro);
+                            $intro = str_replace('\\', '',$intro);
+
+                            $content = stripcslashes($product->product_content);
+                            $content = str_replace('\r', '',$content);
+                            $content = str_replace('\n', '',$content);
+                            $content = str_replace('\\', '',$content);
+
+                            $dataUpdate['product_sort_desc'] = $intro;
+                            $dataUpdate['product_content'] = $content;
+                            Product::updateData($product->product_id, $dataUpdate);
+                        }
+                    }
+                    break;
         		default:
         			break;
         	}
