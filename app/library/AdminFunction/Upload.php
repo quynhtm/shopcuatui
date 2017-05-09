@@ -1,6 +1,38 @@
 <?php
 
 class Upload{
+
+	public static function uploadImage($id, $objFile, $folder='files') {
+		try {
+			//Upload to server local;
+			if($objFile['filedata'] != '' ) {
+				$fileType = strrchr(basename($objFile['filedata']), '.');
+				if(in_array(strtolower($fileType), array('.jpg', '.png', '.gif'))) {
+					return json_encode(array('status'=>0, 'filename'=>$objFile['filename'], 'message'=>'File bạn upload lên không đúng định dạng file ảnh')) ;
+				}
+
+				if($folder!=''){
+					$upload_dir = Config::get('config.DIR_ROOT').'uploads/'.$folder.'/';
+				}else{
+					$upload_dir = Config::get('config.DIR_ROOT').'uploads/';
+				}
+
+				if(!is_dir($upload_dir)){
+					@mkdir($upload_dir,0777,true);
+					chmod($upload_dir,0777);
+				}
+
+				$rand = rand(11111, 99999);
+				if (move_uploaded_file($objFile['filedata'], $upload_dir . md5($id.$folder.$rand).strrchr(basename($objFile['filename']), '.'))) {
+					return json_encode(array('status'=>1, 'filename'=>md5($id.$folder.$rand).strrchr(basename($objFile['filename']), '.'), 'message'=>'Upload thành công')) ;
+				}
+				return json_encode(array('status'=>-1, 'message'=>'Upload ảnh không thành công')) ;
+			}
+
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
 	
 	public static function uploadFile($_name='', $_file_ext='', $_max_file_size='50*1024*1024', $_folder=''){
 

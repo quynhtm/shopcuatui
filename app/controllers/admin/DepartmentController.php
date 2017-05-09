@@ -14,22 +14,15 @@ class DepartmentController extends BaseAdminController
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $arrTypeDepart = array();
     private $arrLayoutsDepart = array();
+    private $dir_image = '';
 
     public function __construct()
     {
         parent::__construct();
 
-        /*//Include style.
-        FunctionLib::link_css(array(
-            'lib/cssUpload.css',
-        ));
-
-        //Include javascript.
-        FunctionLib::link_js(array(
-            'lib/jquery.uploadfile.js',
-        ));*/
         $this->arrTypeDepart = TypeSetting::getTypeSettingWithGroup('group_type');
         $this->arrLayoutsDepart = TypeSetting::getTypeSettingWithGroup('group_layouts');
+        $this->dir_image = str_replace('/index.php','' ,url('/')).'/uploads/'.CGlobal::FOLDER_CATEGORY.'/';
     }
 
     public function view() {
@@ -93,6 +86,7 @@ class DepartmentController extends BaseAdminController
             ->with('optionTypeDepart', $optionTypeDepart)
             ->with('optionLayoutsDepart', $optionLayoutsDepart)
             ->with('optionStatusHome', $optionStatusHome)
+            ->with('dir_image', $this->dir_image)
             ->with('optionStatus', $optionStatus);
     }
 
@@ -113,13 +107,42 @@ class DepartmentController extends BaseAdminController
             if($id > 0) {
                 //cap nhat
                 if(Department::updateData($id, $dataSave)) {
+                    if(isset($_FILES) && $_FILES['department_logo']['name'] != '') {
+                        $aryDataImg = [
+                            'filename' => $_FILES['department_logo']['name'],
+                            'filedata' => $_FILES['department_logo']['tmp_name'],
+                            'filesize' => $_FILES['department_logo']['size'],
+                        ];
+                        $response = Upload::uploadImage($id, $aryDataImg,CGlobal::FOLDER_CATEGORY);
+                        if($response != '') {
+                            $aryResponse = json_decode($response, 1);
+                            if(isset($aryResponse['status']) && $aryResponse['status'] == 1) {
+                                Department::updateData($id, ['department_logo'=>$aryResponse['filename']]);
+                            }
+                        }
+                    }
                     return Redirect::route('admin.department_list');
                 }
             } else {
                 //them moi
                 /*$abc = Department::addData($dataSave);
                 FunctionLib::debug($abc);*/
-                if(Department::addData($dataSave)) {
+                $id = Department::addData($dataSave);
+                if($id > 0) {
+                    if(isset($_FILES) && $_FILES['department_logo']['name'] != '') {
+                        $aryDataImg = [
+                            'filename' => $_FILES['department_logo']['name'],
+                            'filedata' => $_FILES['department_logo']['tmp_name'],
+                            'filesize' => $_FILES['department_logo']['size'],
+                        ];
+                        $response = Upload::uploadImage($id, $aryDataImg,CGlobal::FOLDER_CATEGORY);
+                        if($response != '') {
+                            $aryResponse = json_decode($response, 1);
+                            if(isset($aryResponse['status']) && $aryResponse['status'] == 1) {
+                                Department::updateData($id, ['department_logo'=>$aryResponse['filename']]);
+                            }
+                        }
+                    }
                     return Redirect::route('admin.department_list');
                 }
             }
@@ -136,6 +159,7 @@ class DepartmentController extends BaseAdminController
             ->with('optionStatusHome', $optionStatusHome)
             ->with('optionTypeDepart', $optionTypeDepart)
             ->with('optionLayoutsDepart', $optionLayoutsDepart)
+            ->with('dir_image', $this->dir_image)
             ->with('error', $this->error);
     }
 

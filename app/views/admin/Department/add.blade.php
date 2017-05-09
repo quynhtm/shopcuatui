@@ -40,6 +40,19 @@
                     @endif
 
                     <div class="clearfix"></div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Ảnh Logo</label>
+                            <input type="file" id="department_logo" name="department_logo" placeholder="">
+                            @if(isset($data['department_id']) && trim($data['department_logo']) != '')
+                                <div class="col-lg-8">
+                                    <img src="{{$dir_image.$data['department_logo']}}" height="40" width="80">
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="name" class="control-label">Kiểu</label>
