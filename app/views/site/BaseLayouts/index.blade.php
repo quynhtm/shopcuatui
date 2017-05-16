@@ -27,6 +27,30 @@
             ga('create', 'UA-76848213-1', 'auto');
             ga('send', 'pageview');
 		</script>
+		
+		<script rel="nofollow" type="application/ld+json">
+		{
+		  "@context": "http://schema.org/",
+		  "@type": "Review",
+		  "itemReviewed": {
+			"@type": "Thing",
+			"name": "Super Book"
+		  },
+		  "author": {
+			"@type": "Person",
+			"name": "Google"
+		  },
+		  "reviewRating": {
+			"@type": "Rating",
+			"ratingValue": "9",
+			"bestRating": "10"
+		  },
+		  "publisher": {
+			"@type": "Organization",
+			"name": "Washington Times"
+		  }
+		}
+		</script>
 	@endif
 </head>
 <body>
