@@ -273,7 +273,7 @@ class SiteOrderController extends BaseSiteController
 							'txtMessage'=>$txtMessage,
 							'dataItem'=>$dataOrder,
 						);
-						$emailsCustomerShop = [$txtEmail, CGlobal::emailAdmin];
+						$emailsCustomerShop = [$txtEmail, CGlobal::emailAdmin, CGlobal::emailAdminSub1, CGlobal::emailAdminSub2];
 						Mail::send('emails.SendOrderToMailCustomer', array('data'=>$dataCustomer), function($message) use ($emailsCustomerShop){
 							$message->to($emailsCustomerShop, 'OrderToCustomer')
 									->subject(CGlobal::web_name.' - Bạn đã đặt mua sản phẩm '.date('d/m/Y h:i',  time()));

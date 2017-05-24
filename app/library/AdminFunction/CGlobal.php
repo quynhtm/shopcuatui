@@ -271,6 +271,8 @@ class CGlobal{
    
     //Duy bo sung
     const emailAdmin = 'nguyenduypt86@gmail.com';
+    const emailAdminSub1 = 'manhquynh1984@gmail.com';
+    const emailAdminSub2 = 'tthgiang0206@gmail.com';
     const phoneSupport='0985.10.10.26 - 0913.922.986';
     public static $arrIconSpecals = array(
     	'\r\n', '☎', '👉', '✈', '🍬', '🏃', '🏻', '😁','🍬', '🏃🏻', '💃🏽', '✅', '😜', '🌳', '🌴', '🌲', '🌱',
