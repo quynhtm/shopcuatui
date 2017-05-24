@@ -67,10 +67,10 @@
                     <div class="des-point">
                         {{stripslashes($product->product_sort_desc)}}
                     </div>
-                    <div class="box-promotion" style="display: none">
-                        <div class="lbl-point">Thông tin khuyến mãi</div>
-                        <div class="box-content-promotion"></div>
-                    </div>
+                    {{--<div class="box-promotion" style="display: none">--}}
+                        {{--<div class="lbl-point">Thông tin khuyến mãi</div>--}}
+                        {{--<div class="box-content-promotion"></div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
             <div class="right-des-product">

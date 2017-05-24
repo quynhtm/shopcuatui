@@ -19,13 +19,15 @@ class ManagerOrderController extends BaseAdminController
         CGlobal::order_cod_da_gan => 'Cod đang giữ hàng',//1
         CGlobal::order_cod_danggiao => 'Đang giao hàng',//2
         CGlobal::order_cod_da_giaohang => 'Đã giao hàng',//3
-        CGlobal::order_cod_hoantra => 'Cod hoàn trả');//4
+        CGlobal::order_cod_hoantra => 'Cod hoàn trả',//4
+        CGlobal::order_hangdat => 'Hàng đặt - Order');//5
         //
     private $arrStatusOder = array(
         CGlobal::order_status_new => 'Đơn hàng mới',//1
         CGlobal::order_status_confirm => 'Đơn hàng đã xác nhận',//2
         CGlobal::order_status_succes => 'Đơn hàng hoàn thành',//3
         CGlobal::order_status_remove => 'Đơn hàng hủy');//4
+
 
     private $arrTypeOder = array(
         CGlobal::order_type_site => 'Đặt mua từ site',//0
@@ -63,7 +65,7 @@ class ManagerOrderController extends BaseAdminController
         $search['order_customer_email'] = addslashes(Request::get('order_customer_email',''));
         $search['time_start_time'] = addslashes(Request::get('time_start_time',''));
         $search['time_end_time'] = addslashes(Request::get('time_end_time',''));
-        $search['order_status'] = (int)Request::get('order_status',-1);
+        $search['order_status'] = (int)Request::get('order_status', -1);
         $search['order_user_shop_id'] = (int)Request::get('order_user_shop_id',-1);
 
         $data = Order::searchByCondition($search, $limit, $offset,$total);

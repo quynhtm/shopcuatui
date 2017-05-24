@@ -110,6 +110,7 @@ class CGlobal{
     const order_status_confirm = 2;// đơn hàng đã xác nhận
     const order_status_succes = 3;//đơn hàng hoàn thành
     const order_status_remove = 4;// đơn hàng bị hủy
+    const order_hangdat = 5;//5: Hàng đặt - order
 
     const order_type_site = 0;// đặt hàng từ site
     const order_type_shop = 1;// đặt hàng từ hệ thống

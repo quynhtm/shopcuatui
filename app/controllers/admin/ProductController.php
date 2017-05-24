@@ -205,6 +205,7 @@ class ProductController extends BaseAdminController
         $dataSave['product_code'] = addslashes(Request::get('product_code'));
         $dataSave['product_is_hot'] = addslashes(Request::get('product_is_hot',CGlobal::PRODUCT_NOMAL));
         $dataSave['provider_id'] = addslashes(Request::get('provider_id'));
+        $dataSave['product_note'] = addslashes(Request::get('product_note'));
 
         //mac dinh
         $dataSave['is_shop'] = 1; //0: sp của shop thường, 1: sản phẩm của shop vip

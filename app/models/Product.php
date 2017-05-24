@@ -16,7 +16,7 @@ class Product extends Eloquent
         'product_order', 'quality_input','quality_out','product_status','is_block','is_sale',
         'user_shop_id', 'user_shop_name', 'is_shop','province_id',
         'time_created','user_id_creater','user_name_creater',
-        'time_update','user_id_update','user_name_update');
+        'time_update','user_id_update','user_name_update', 'product_note');
 
     /**
      * @param $product_id

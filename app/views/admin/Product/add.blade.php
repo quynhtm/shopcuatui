@@ -138,6 +138,13 @@
                             <textarea rows="5" cols="8" name="product_selloff" class="form-control input-sm">@if(isset($data['product_selloff'])){{$data['product_selloff']}}@endif</textarea>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Ghi chú nhập hàng</label>
+                            <div class="clearfix"></div>
+                            <textarea rows="5" cols="8" name="product_note" class="form-control input-sm">@if(isset($data['product_note'])){{$data['product_note']}}@endif</textarea>
+                        </div>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
 
