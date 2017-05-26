@@ -82,6 +82,9 @@ class Memcache{
     const CACHE_INFO_ID    = 'cache_info_id_';
     const CACHE_INFO_KEYWORD    = 'cache_info_keyword_';
     const CACHE_INFO_TYPEINFO_TYPELANGUAGE    = 'cache_info_typeinfo_typelanguage_';
+
+    //Info salte
+    const CACHE_INFO_SALE_ID = 'cache_info_sale_id_';
     //Lang
     const CACHE_LANG_ID    = 'cache_lang_id_';
     const CACHE_LANG_KEYWORD_LANGUAGE    = 'cache_info_keyword_language_';

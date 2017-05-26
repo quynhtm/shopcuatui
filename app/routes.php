@@ -200,6 +200,12 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function()
     Route::post('info/edit/{id?}', array('as' => 'admin.infoEdit','uses' => 'InfoController@postItem'))->where('id', '[0-9]+');
     Route::post('info/deleteInfor', array('as' => 'admin.infoDelete','uses' => 'InfoController@deleteInfor'));
 
+    Route::get('infosale/view', array('as' => 'admin.infosale','uses' => 'InfoSaleController@listView'));
+    Route::get('infosale/edit/{id?}', array('as' => 'admin.infosaleEdit','uses' => 'InfoSaleController@getItem'))->where('id', '[0-9]+');
+    Route::post('infosale/edit/{id?}', array('as' => 'admin.infosaleEdit','uses' => 'InfoSaleController@postItem'))->where('id', '[0-9]+');
+    Route::post('infosale/deleteInforSale', array('as' => 'admin.deleteInforSale','uses' => 'InfoSaleController@deleteInforSale'));
+
+
     //Thung rac
     Route::get('trash', array('as' => 'admin.trash','uses' => 'TrashController@listView'));
     Route::get('trash/edit/{id?}', array('as' => 'admin.trash_edit','uses' => 'TrashController@getItem'))->where('id', '[0-9]+');

@@ -30,6 +30,8 @@ var Admin = {
                 url_ajax = 'deleteVideo';
             }else if(type == 15){
                 url_ajax = 'deleteLibraryImage';
+            }else if(type == 16){
+                url_ajax = 'deleteInforSale';
             }
             if(url_ajax != ''){
                 $.ajax({
