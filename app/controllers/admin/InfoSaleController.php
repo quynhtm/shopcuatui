@@ -82,7 +82,7 @@ class InfoSaleController extends BaseAdminController{
 				'infor_sale_phone'=>array('value'=>addslashes(Request::get('infor_sale_phone')),'require'=>1, 'messages'=>'SĐT không được trống!'),
 				'infor_sale_mail'=>array('value'=>addslashes(Request::get('infor_sale_mail')),'require'=>0),
 				'infor_sale_skype'=>array('value'=>addslashes(Request::get('infor_sale_skype')),'require'=>0),
-				'infor_sale_address'=>array('value'=>(int)addslashes(Request::get('infor_sale_address')),'require'=>0),
+				'infor_sale_address'=>array('value'=>addslashes(Request::get('infor_sale_address')),'require'=>0),
 				'infor_sale_uid'=>array('value'=>addslashes(Request::get('infor_sale_uid')),'require'=>1, 'messages'=>'UID gán không được trống!'),
 				'infor_sale_sotaikhoan'=>array('value'=>addslashes(Request::get('infor_sale_sotaikhoan')),'require'=>0),
 				'infor_sale_vanchuyen'=>array('value'=>addslashes(Request::get('infor_sale_vanchuyen')),'require'=>0),
