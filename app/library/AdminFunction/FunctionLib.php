@@ -899,4 +899,11 @@ class FunctionLib {
         }
         return '#';
     }
+	public static function writeLogs($path='', $name='', $content=''){
+        if($path == ''){$path = 'logs';}
+        $folder_logs = str_replace('\\', '/', getcwd().'/'.$path);
+        if(!is_dir($folder_logs)){@mkdir($folder_logs,0777,true);@chmod($folder_logs,0777);}
+        if($name == ''){$name_file = 'sys.txt';}else{$name_file = $name.'.txt';}
+        $fp = fopen($folder_logs.'/'.$name_file, 'a+');fwrite($fp,$content);fclose($fp);
+    }
 }

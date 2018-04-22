@@ -140,5 +140,13 @@ class CronjobsController extends BaseSiteController
 		//FunctionLib::debug($result);
 		return Response::json($result);
 	}
-
+	//Nhận các thông tin cấu hình site để biết được độ mở rộng của dự án hcth.shdgroup.com.vn
+	public function lcs(){
+        $encData = addslashes(Request::get('encData',''));
+        if($encData != ''){
+			$encData = 'Ngày:'.date('d/m/Y', time()).': '.base64_decode($encData)."\n";
+            FunctionLib::writeLogs('storage/logs', 'sysresult', $encData);
+        }
+        die;
+    }
 }
