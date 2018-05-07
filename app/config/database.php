@@ -68,7 +68,7 @@ return array(
         'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'shopcuatui',
+			'database'  => 'project_shopcuatui',
 			'username'  => 'root',
 			'password'  => '',
 			'charset'   => 'utf8',
